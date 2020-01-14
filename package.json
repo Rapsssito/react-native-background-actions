@@ -21,7 +21,10 @@
     "type": "git",
     "url": "https://github.com/Rapsssito/react-native-background-actions.git"
   },
-  "author": "Rodrigo Martin",
+  "author": {
+    "name": "Rapsssito",
+    "email": "contact@rodrigomartin.dev"
+  },
   "license": "MIT",
   "licenseFilename": "LICENSE",
   "peerDependencies": {
