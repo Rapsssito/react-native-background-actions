@@ -33,7 +33,7 @@ Linking the package manually is not required anymore with [Autolinking](https://
   `$ cd ios && pod install && cd ..` # CocoaPods on iOS needs this extra step
   
   The background support requires you to activate the background capability in Xcode.
-  
+  <img width="688" alt="screenBack" src="https://user-images.githubusercontent.com/44206249/72381524-d2490e00-3717-11ea-959c-f95d94e6ae26.png">
 
 - **Android Platform:**
   TODO: Register the service
