@@ -1,0 +1,28 @@
+{   
+    "plugins": [
+        "prettier"
+    ],
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "extends": [
+        "eslint:recommended",
+        "prettier"
+    ],
+    "rules": {
+        "prefer-const": ["error", {
+            "destructuring": "any",
+            "ignoreReadBeforeAssign": false
+        }],
+        "curly": ["error", "multi", "consistent"],
+        "no-var": "error",
+        "prefer-template": 2,
+        "require-atomic-updates": "off",
+        "prettier/prettier": ["error"]        
+    }
+}
