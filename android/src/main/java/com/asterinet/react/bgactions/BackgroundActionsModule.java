@@ -1,5 +1,6 @@
 package com.asterinet.react.bgactions;
 
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -22,12 +23,11 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
 
     @SuppressWarnings("unused")
     @ReactMethod
-    public void start() {
+    public void start(final Promise promise) {
     }
 
     @SuppressWarnings("unused")
     @ReactMethod
-    public void stop() {
-
+    public void stop(final Promise promise) {
     }
 }
