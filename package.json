@@ -14,7 +14,8 @@
   "scripts": {
     "eslint": "eslint *.js",
     "eslint:fix": "yarn eslint --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pods": "cd ios && pod install"
   },
   "repository": {
     "type": "git",
