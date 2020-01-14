@@ -31,6 +31,9 @@ Linking the package manually is not required anymore with [Autolinking](https://
 - **iOS Platform:**
 
   `$ cd ios && pod install && cd ..` # CocoaPods on iOS needs this extra step
+  
+  The background support requires you to activate the background capability in Xcode.
+  
 
 - **Android Platform:**
   TODO: Register the service
