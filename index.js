@@ -1,16 +1,16 @@
 import { NativeModules } from 'react-native';
 
-const { RNBackgroundTimer } = NativeModules;
+const { RNBackgroundActions } = NativeModules;
 
 class BackgroundTimer {
     constructor() {}
 
     start() {
-        return RNBackgroundTimer.start();
+        return RNBackgroundActions.start();
     }
 
     stop() {
-        return RNBackgroundTimer.stop();
+        return RNBackgroundActions.stop();
     }
 }
 

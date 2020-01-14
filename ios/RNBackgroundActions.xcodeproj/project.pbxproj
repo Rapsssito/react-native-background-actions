@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		379852B93950BCF4EB85ADA5 /* Pods_RNBackgroundTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12CAC3D778A2077AE84799FE /* Pods_RNBackgroundTimer.framework */; };
-		6419269B1ECB4266009CF731 /* RNBackgroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNBackgroundTimer.m */; };
-		B3E7B58A1CC2AC0600A0062D /* RNBackgroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNBackgroundTimer.m */; };
+		379852B93950BCF4EB85ADA5 /* Pods_RNBackgroundActions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12CAC3D778A2077AE84799FE /* Pods_RNBackgroundActions.framework */; };
+		6419269B1ECB4266009CF731 /* RNBackgroundActions.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNBackgroundActions.m */; };
+		B3E7B58A1CC2AC0600A0062D /* RNBackgroundActions.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNBackgroundActions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,13 +34,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		12CAC3D778A2077AE84799FE /* Pods_RNBackgroundTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNBackgroundTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		134814201AA4EA6300B7C361 /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNBackgroundTimer.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5694935E99A79F9E84DE86A2 /* Pods-RNBackgroundTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNBackgroundTimer.release.xcconfig"; path = "Target Support Files/Pods-RNBackgroundTimer/Pods-RNBackgroundTimer.release.xcconfig"; sourceTree = "<group>"; };
-		641926921ECB4257009CF731 /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNBackgroundTimer.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		71DD9836C50E2FFD2D98ADD0 /* Pods-RNBackgroundTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNBackgroundTimer.debug.xcconfig"; path = "Target Support Files/Pods-RNBackgroundTimer/Pods-RNBackgroundTimer.debug.xcconfig"; sourceTree = "<group>"; };
-		B3E7B5881CC2AC0600A0062D /* RNBackgroundTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNBackgroundTimer.h; sourceTree = "<group>"; };
-		B3E7B5891CC2AC0600A0062D /* RNBackgroundTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNBackgroundTimer.m; sourceTree = "<group>"; };
+		12CAC3D778A2077AE84799FE /* Pods_RNBackgroundActions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNBackgroundActions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		134814201AA4EA6300B7C361 /* libRNBackgroundActions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNBackgroundActions.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5694935E99A79F9E84DE86A2 /* Pods-RNBackgroundActions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNBackgroundActions.release.xcconfig"; path = "Target Support Files/Pods-RNBackgroundActions/Pods-RNBackgroundActions.release.xcconfig"; sourceTree = "<group>"; };
+		641926921ECB4257009CF731 /* libRNBackgroundActions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNBackgroundActions.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		71DD9836C50E2FFD2D98ADD0 /* Pods-RNBackgroundActions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNBackgroundActions.debug.xcconfig"; path = "Target Support Files/Pods-RNBackgroundActions/Pods-RNBackgroundActions.debug.xcconfig"; sourceTree = "<group>"; };
+		B3E7B5881CC2AC0600A0062D /* RNBackgroundActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNBackgroundActions.h; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* RNBackgroundActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNBackgroundActions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				379852B93950BCF4EB85ADA5 /* Pods_RNBackgroundTimer.framework in Frameworks */,
+				379852B93950BCF4EB85ADA5 /* Pods_RNBackgroundActions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,7 +65,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libRNBackgroundTimer.a */,
+				134814201AA4EA6300B7C361 /* libRNBackgroundActions.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,7 +73,7 @@
 		1CF73046BC523C646FA05356 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				12CAC3D778A2077AE84799FE /* Pods_RNBackgroundTimer.framework */,
+				12CAC3D778A2077AE84799FE /* Pods_RNBackgroundActions.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -81,10 +81,10 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				B3E7B5881CC2AC0600A0062D /* RNBackgroundTimer.h */,
-				B3E7B5891CC2AC0600A0062D /* RNBackgroundTimer.m */,
+				B3E7B5881CC2AC0600A0062D /* RNBackgroundActions.h */,
+				B3E7B5891CC2AC0600A0062D /* RNBackgroundActions.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
-				641926921ECB4257009CF731 /* libRNBackgroundTimer.a */,
+				641926921ECB4257009CF731 /* libRNBackgroundActions.a */,
 				62EDDBCED6A5B89493EF0704 /* Pods */,
 				1CF73046BC523C646FA05356 /* Frameworks */,
 			);
@@ -93,8 +93,8 @@
 		62EDDBCED6A5B89493EF0704 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				71DD9836C50E2FFD2D98ADD0 /* Pods-RNBackgroundTimer.debug.xcconfig */,
-				5694935E99A79F9E84DE86A2 /* Pods-RNBackgroundTimer.release.xcconfig */,
+				71DD9836C50E2FFD2D98ADD0 /* Pods-RNBackgroundActions.debug.xcconfig */,
+				5694935E99A79F9E84DE86A2 /* Pods-RNBackgroundActions.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -102,9 +102,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* RNBackgroundTimer */ = {
+		58B511DA1A9E6C8500147676 /* RNBackgroundActions */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNBackgroundTimer" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNBackgroundActions" */;
 			buildPhases = (
 				9E63BEA3B70BEBF00C883285 /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
@@ -115,14 +115,14 @@
 			);
 			dependencies = (
 			);
-			name = RNBackgroundTimer;
+			name = RNBackgroundActions;
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libRNBackgroundTimer.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libRNBackgroundActions.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		641926911ECB4257009CF731 /* RNBackgroundTimer-tvOS */ = {
+		641926911ECB4257009CF731 /* RNBackgroundActions-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6419269A1ECB4257009CF731 /* Build configuration list for PBXNativeTarget "RNBackgroundTimer-tvOS" */;
+			buildConfigurationList = 6419269A1ECB4257009CF731 /* Build configuration list for PBXNativeTarget "RNBackgroundActions-tvOS" */;
 			buildPhases = (
 				6419268E1ECB4257009CF731 /* Sources */,
 				6419268F1ECB4257009CF731 /* Frameworks */,
@@ -132,9 +132,9 @@
 			);
 			dependencies = (
 			);
-			name = "RNBackgroundTimer-tvOS";
-			productName = "RNBackgroundTimer-tvOS";
-			productReference = 641926921ECB4257009CF731 /* libRNBackgroundTimer.a */;
+			name = "RNBackgroundActions-tvOS";
+			productName = "RNBackgroundActions-tvOS";
+			productReference = 641926921ECB4257009CF731 /* libRNBackgroundActions.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -155,7 +155,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNBackgroundTimer" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNBackgroundActions" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -168,8 +168,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* RNBackgroundTimer */,
-				641926911ECB4257009CF731 /* RNBackgroundTimer-tvOS */,
+				58B511DA1A9E6C8500147676 /* RNBackgroundActions */,
+				641926911ECB4257009CF731 /* RNBackgroundActions-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -190,7 +190,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RNBackgroundTimer-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-RNBackgroundActions-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -204,7 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E7B58A1CC2AC0600A0062D /* RNBackgroundTimer.m in Sources */,
+				B3E7B58A1CC2AC0600A0062D /* RNBackgroundActions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6419269B1ECB4266009CF731 /* RNBackgroundTimer.m in Sources */,
+				6419269B1ECB4266009CF731 /* RNBackgroundActions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +320,7 @@
 		};
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71DD9836C50E2FFD2D98ADD0 /* Pods-RNBackgroundTimer.debug.xcconfig */;
+			baseConfigurationReference = 71DD9836C50E2FFD2D98ADD0 /* Pods-RNBackgroundActions.debug.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -330,14 +330,14 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNBackgroundTimer;
+				PRODUCT_NAME = RNBackgroundActions;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5694935E99A79F9E84DE86A2 /* Pods-RNBackgroundTimer.release.xcconfig */;
+			baseConfigurationReference = 5694935E99A79F9E84DE86A2 /* Pods-RNBackgroundActions.release.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -347,7 +347,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNBackgroundTimer;
+				PRODUCT_NAME = RNBackgroundActions;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -364,7 +364,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNBackgroundTimer;
+				PRODUCT_NAME = RNBackgroundActions;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TVOS_DEPLOYMENT_TARGET = 10.2;
@@ -383,7 +383,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNBackgroundTimer;
+				PRODUCT_NAME = RNBackgroundActions;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TVOS_DEPLOYMENT_TARGET = 10.2;
@@ -393,7 +393,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNBackgroundTimer" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNBackgroundActions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -402,7 +402,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNBackgroundTimer" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNBackgroundActions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,
@@ -411,7 +411,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6419269A1ECB4257009CF731 /* Build configuration list for PBXNativeTarget "RNBackgroundTimer-tvOS" */ = {
+		6419269A1ECB4257009CF731 /* Build configuration list for PBXNativeTarget "RNBackgroundActions-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				641926981ECB4257009CF731 /* Debug */,

@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.version      = package["version"]
   s.summary      = package["description"]
   s.description  = <<-DESC
-                  react-native-background-service
+                  react-native-background-actions
                    DESC
   s.homepage     = package['repository']['url']
   s.license      = "MIT"

@@ -1,7 +1,7 @@
 @import UIKit;
-#import "RNBackgroundTimer.h"
+#import "RNBackgroundActions.h"
 
-@implementation RNBackgroundTimer {
+@implementation RNBackgroundActions {
     UIBackgroundTaskIdentifier bgTask;
 }
 
@@ -10,7 +10,7 @@ RCT_EXPORT_MODULE()
 - (void) _start
 {
     [self _stop];
-    bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"RNBackgroundTimer" expirationHandler:^{
+    bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"RNBackgroundActions" expirationHandler:^{
         // Clean up any unfinished task business by marking where you
         // stopped or ending the task outright.
         [[UIApplication sharedApplication] endBackgroundTask: self->bgTask];
