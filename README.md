@@ -1,4 +1,4 @@
-# react-native-background-service
+# react-native-background-actions
 React Native background service library for running background tasks forever in Android & iOS.
 
 ## WARNING: Only works on iOS, right now
@@ -16,13 +16,13 @@ React Native background service library for running background tasks forever in 
 Install the library using either Yarn:
 
 ```
-yarn add react-native-background-service
+yarn add react-native-background-actions
 ```
 
 or npm:
 
 ```
-npm install --save react-native-background-service
+npm install --save react-native-background-actions
 ```
 
 #### Using React Native >= 0.60
@@ -48,7 +48,7 @@ Linking the package manually is not required anymore with [Autolinking](https://
 
 You then need to link the native parts of the library for the platforms you are using. The easiest way to link the library is using the CLI tool by running this command from the root of your project:
 
-`$ react-native link react-native-background-service`
+`$ react-native link react-native-background-actions`
 
 If you can't or don't want to use the CLI tool, you can also manually link the library using the instructions below (click on the arrow to show them):
 
@@ -56,7 +56,7 @@ If you can't or don't want to use the CLI tool, you can also manually link the l
 <summary>Manually link the library on iOS</summary>
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-background-service` and add `TcpSocket.xcodeproj`
+2. Go to `node_modules` ➜ `react-native-background-actions` and add `TcpSocket.xcodeproj`
 3. In XCode, in the project navigator, select your project. Add `libTcpSocket.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 4. Run your project (`Cmd+R`)<
 </details>
@@ -69,12 +69,12 @@ If you can't or don't want to use the CLI tool, you can also manually link the l
   - Add `new TcpSocketPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
   	```
-  	include ':react-native-background-service'
-  	project(':react-native-background-service').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-background-service/android')
+  	include ':react-native-background-actions'
+  	project(':react-native-background-actions').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-background-actions/android')
   	```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
-      compile project(':react-native-background-service')
+      compile project(':react-native-background-actions')
   	```
 </details>
 
@@ -83,11 +83,11 @@ To use this library you need to ensure you are using the correct version of Reac
 
 ## Usage
 ```js
-import BackgroundService from 'react-native-background-service';
+import BackgroundService from 'react-native-background-actions';
 
-BackgroundService.start();
+await BackgroundService.start();
 // Do whatever you want, incuding setTimeout();
-BackgroundService.stop();
+await BackgroundService.stop();
 ```
 > If you call stop() on background no new tasks will be able to be started!
 > Don't call .start() twice, as it will stop performing previous background tasks and start a new one. 
