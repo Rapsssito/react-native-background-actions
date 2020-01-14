@@ -26,7 +26,7 @@ RCT_EXPORT_MODULE()
     }
 }
 
-RCT_EXPORT_METHOD(resolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(start:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
     [self _start];

@@ -85,9 +85,9 @@ To use this library you need to ensure you are using the correct version of Reac
 ```js
 import BackgroundService from 'react-native-background-actions';
 
-BackgroundService.start();
+await BackgroundService.start();
 // Do whatever you want, incuding setTimeout();
-BackgroundService.stop();
+await BackgroundService.stop();
 ```
 > If you call stop() on background no new tasks will be able to be started!
 > Don't call .start() twice, as it will stop performing previous background tasks and start a new one. 
