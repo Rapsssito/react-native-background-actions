@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "16.9.0",
-    "react-native": "0.61.5"
+    "react-native": "0.61.5",
+    "react-native-background-actions": "https://github.com/Rapsssito/react-native-background-actions#android-headless"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
