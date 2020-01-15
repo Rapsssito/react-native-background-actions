@@ -46,6 +46,7 @@ Linking the package manually is not required anymore with [Autolinking](https://
             ...
             <service android:name="com.asterinet.react.bgactions.RNBackgroundActionsTask" />
         </application>
+      </manifest>
   ```
   
   
