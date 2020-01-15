@@ -15,7 +15,7 @@ class BackgroundTimer {
         this.runnedTasks++;
         const finalOptions = this.normalizeOptions(options);
         if (Platform.OS === 'android') {
-            AppRegistry.registerHeadlessTask(finalOptions.taskName + this.runnedTasks, () => task);
+            AppRegistry.registerHeadlessTask(finalOptions.taskName, () => task);
             RNBackgroundActions.start(finalOptions);
         } else {
             RNBackgroundActions.start(finalOptions);

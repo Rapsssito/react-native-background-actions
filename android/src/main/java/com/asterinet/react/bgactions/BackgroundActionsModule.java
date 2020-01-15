@@ -66,7 +66,7 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
 
     // RNBackgroundActionsTask
 
-    final private class RNBackgroundActionsTask extends HeadlessJsTaskService {
+    final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
         private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
         private static final int SERVICE_NOTIFICATION_ID = 92901;

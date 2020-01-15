@@ -45,8 +45,8 @@ Linking the package manually is not required anymore with [Autolinking](https://
         <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
         ...
         <application ... >
-            <service android:name=".RNBackgroundActionsTask" />
             ...
+            <service android:name="com.asterinet.react.bgactions.BackgroundActionsModule$RNBackgroundActionsTask" />
         </application>
   ```
   
