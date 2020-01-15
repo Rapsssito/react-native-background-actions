@@ -39,8 +39,15 @@ Linking the package manually is not required anymore with [Autolinking](https://
   TODO: Register the service
 
   Modify your **`android/app/src/main/AndroidManifest.xml`** and add the following:
-  ```
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  ```xml
+    <manifest ... >
+        ...
+        <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+        ...
+        <application ... >
+            <service android:name=".RNBackgroundActionsTask" />
+            ...
+        </application>
   ```
   
   
@@ -85,9 +92,21 @@ To use this library you need to ensure you are using the correct version of Reac
 ```js
 import BackgroundService from 'react-native-background-actions';
 
-await BackgroundService.start();
-// Do whatever you want, incuding setTimeout();
-await BackgroundService.stop();
+const veryIntensiveTask = async () => {
+    // Must be a Promise
+    // You can do anything in your task such as network requests, timers and so on, as long as it doesn't touch UI.
+    // Once your task completes (i.e. the promise is resolved), React Native will go into "paused" mode (unless
+    // there are other tasks running, or there is a foreground app).
+};
+
+const options = {
+    taskTitle: 'Downloading large images',
+    taskDesc: 'Downloading images for a better UX',
+}
+
+BackgroundService.start(veryIntensiveTask, options);
+// iOS will also run everything here in the background until .stop() is called
+BackgroundService.stop();
 ```
 > If you call stop() on background no new tasks will be able to be started!
 > Don't call .start() twice, as it will stop performing previous background tasks and start a new one. 
