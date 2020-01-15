@@ -25,10 +25,11 @@ import androidx.core.app.NotificationCompat;
 @SuppressWarnings("WeakerAccess")
 public class BackgroundActionsModule extends ReactContextBaseJavaModule {
 
-    private final ReactContext reactContext;
-    private Intent currentServiceIntent;
-
     private static final String TAG = "RNBackgroundActions";
+
+    private final ReactContext reactContext;
+
+    private Intent currentServiceIntent;
 
     public BackgroundActionsModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -59,7 +60,8 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
     @SuppressWarnings("unused")
     @ReactMethod
     public void stop() {
-        reactContext.stopService(currentServiceIntent);
+        if (currentServiceIntent != null)
+            reactContext.stopService(currentServiceIntent);
     }
 
     // RNBackgroundActionsTask
