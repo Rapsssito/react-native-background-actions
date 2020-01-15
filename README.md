@@ -1,8 +1,6 @@
 # react-native-background-actions
 React Native background service library for running background tasks forever in Android & iOS.
 
-## WARNING: Only works on iOS, right now
-
 ## Table of Contents
 
 - [Getting started](#getting-started)
