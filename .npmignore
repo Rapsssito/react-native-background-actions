@@ -57,7 +57,6 @@ android/.idea/scopes/scope_settings.xml
 android/.idea/vcs.xml
 android/*.iml
 android/.settings
-android/res
 
 # iOS
 ios/*.xcodeproj/xcuserdata
