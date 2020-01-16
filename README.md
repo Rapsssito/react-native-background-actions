@@ -1,5 +1,7 @@
 # react-native-background-actions
-React Native background service library for running background tasks forever in Android & iOS.
+React Native background service library for running **background tasks forever in Android & iOS**. Schedule a background job that will run your JavaScript when your app is in the background or foreground.
+
+The jobs will run even if the app has been closed.
 
 ## Table of Contents
 
@@ -89,6 +91,8 @@ If you can't or don't want to use the CLI tool, you can also manually link the l
 To use this library you need to ensure you are using the correct version of React Native. If you are using a version of React Native that is lower than `0.47` you will need to upgrade before attempting to use this library latest version.
 
 ## Usage
+WARNING: This library relies on React Native's [`HeadlessJS`](https://facebook.github.io/react-native/docs/headless-js-android.html) for Android. Before building your JS task, make sure to read all the [documentation](https://facebook.github.io/react-native/docs/headless-js-android.html).
+
 ```js
 import BackgroundService from 'react-native-background-actions';
 
