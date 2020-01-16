@@ -1,8 +1,6 @@
 # react-native-background-actions
 React Native background service library for running background tasks forever in Android & iOS.
 
-## WARNING: Only works on iOS, right now
-
 ## Table of Contents
 
 - [Getting started](#getting-started)
@@ -37,7 +35,6 @@ Linking the package manually is not required anymore with [Autolinking](https://
   <img width="688" alt="screenBack" src="https://user-images.githubusercontent.com/44206249/72381524-d2490e00-3717-11ea-959c-f95d94e6ae26.png">
 
 - **Android Platform:**
-  TODO: Register the service
 
   Modify your **`android/app/src/main/AndroidManifest.xml`** and add the following:
   ```xml
@@ -50,6 +47,7 @@ Linking the package manually is not required anymore with [Autolinking](https://
             ...
             <service android:name="com.asterinet.react.bgactions.RNBackgroundActionsTask" />
         </application>
+      </manifest>
   ```
   
   
