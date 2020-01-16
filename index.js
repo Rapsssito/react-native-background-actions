@@ -19,7 +19,7 @@ class BackgroundTimer {
             RNBackgroundActions.start(finalOptions);
         } else {
             RNBackgroundActions.start(finalOptions);
-            task();
+            task(finalOptions);
         }
     }
 
