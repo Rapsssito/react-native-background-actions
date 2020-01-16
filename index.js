@@ -11,14 +11,14 @@ class BackgroundTimer {
      * @param {Promise<void>} task
      * @param {{taskName: string, taskTitle: string, taskDesc: string}} options
      */
-    start(task, options) {
+    async start(task, options) {
         this.runnedTasks++;
         const finalOptions = this.normalizeOptions(options);
         if (Platform.OS === 'android') {
             AppRegistry.registerHeadlessTask(finalOptions.taskName, () => task);
-            RNBackgroundActions.start(finalOptions);
+            await RNBackgroundActions.start(finalOptions);
         } else {
-            RNBackgroundActions.start(finalOptions);
+            await RNBackgroundActions.start(finalOptions);
             task(finalOptions);
         }
     }
@@ -26,21 +26,15 @@ class BackgroundTimer {
     /**
      * @param {{taskName: string, taskTitle: string, taskDesc: string}} options
      */
-    normalizeOptions(options = {}) {
+    normalizeOptions(options) {
         return {
             ...options,
-            taskName: options.taskName
-                ? options.taskName + this.runnedTasks
-                : `RNBackgroundActionsTask${this.runnedTasks}`,
-            taskTitle: options.taskTitle ? options.taskTitle : 'RNBackgroundActionsTaskTitle',
+            taskName: options.taskName + this.runnedTasks,
         };
     }
 
-    /**
-     * @returns {void}
-     */
-    stop() {
-        RNBackgroundActions.stop();
+    async stop() {
+        await RNBackgroundActions.stop();
     }
 }
 
