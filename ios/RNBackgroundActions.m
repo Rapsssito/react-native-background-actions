@@ -26,7 +26,8 @@ RCT_EXPORT_MODULE()
     }
 }
 
-RCT_EXPORT_METHOD(start:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(start:(NSDictionary *)options
+                  resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
     [self _start];
