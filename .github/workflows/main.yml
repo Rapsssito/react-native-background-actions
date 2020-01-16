@@ -1,0 +1,21 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: CI
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile --network-concurrency 1
+
+    - name: ESLint
+      run: yarn lint
+
+    - name: Tests
+      run: yarn test
