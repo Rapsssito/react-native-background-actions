@@ -23,23 +23,42 @@ import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
 
 const sleep = time => new Promise(resolve => setTimeout(() => resolve(), time));
 
-const taskRandom = async () => {
+const taskRandom = async taskData => {
+  const args = taskData.arguments;
   for (let i = 0; i < 1000; i++) {
-    console.log('hello there', i);
-    await sleep(1000);
+    console.log('Runned -> ', i);
+    await sleep(args.delay);
   }
+};
+
+const options = {
+  taskName: 'Example',
+  taskTitle: 'ExampleTask title',
+  taskDesc: 'ExampleTask desc',
+  taskIcon: {
+    name: 'ic_launcher',
+    type: 'mipmap',
+  },
+  arguments: {
+    delay: 1000,
+  },
 };
 
 class App extends React.Component {
   playing = false;
 
-  initBackground = () => {
+  initBackground = async () => {
     this.playing = !this.playing;
     if (this.playing) {
-      console.log('------------------------goooooooooing in');
-      BackgroundJob.start(taskRandom);
+      try {
+        console.log('Trying to start background service');
+        await BackgroundJob.start(taskRandom, options);
+        console.log('Successful start!');
+      } catch (e) {
+        console.log('Error', e);
+      }
     } else {
-      BackgroundJob.stop();
+      await BackgroundJob.stop();
     }
   };
   render() {
