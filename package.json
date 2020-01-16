@@ -12,7 +12,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint *.js",
+    "lint": "eslint *",
     "eslint:fix": "yarn eslint --fix",
     "test": "jest ./__tests__/",
     "pods": "cd ios && pod install"
