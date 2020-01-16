@@ -13,7 +13,7 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.5",
-    "react-native-background-actions": "https://github.com/Rapsssito/react-native-background-actions"
+    "react-native-background-actions": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
