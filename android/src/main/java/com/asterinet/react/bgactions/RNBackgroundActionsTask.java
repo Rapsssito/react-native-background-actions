@@ -13,6 +13,7 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
@@ -34,30 +35,36 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         final Bundle extras = intent.getExtras();
+        if (extras == null) {
+            throw new IllegalArgumentException("Extras cannot be null");
+        }
+        // Get info
+        final String taskTitle = extras.getString("taskTitle", "RNBackgroundActionsTaskTitle");
+        final String taskDesc = extras.getString("taskDesc", "RNBackgroundActionsTaskDesc");
+        final int iconInt = extras.getInt("iconInt");
         // Turning into a foreground service
-        createNotificationChannel(extras); // Necessary creating channel for API 26+
+        createNotificationChannel(taskTitle, taskDesc); // Necessary creating channel for API 26+
         // Create the notification
         final Intent notificationIntent = new Intent(this, ReactActivity.class);
         final PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
         final Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle(extras != null ? extras.getString("taskTitle", "RNBackgroundActionTask") : "RNBackgroundActionTask")
-                .setContentText(extras != null ? extras.getString("taskDesc", "RNBackgroundActionDesc") : "RNBackgroundActionDesc")
-                .setSmallIcon(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()))
+                .setContentTitle(taskTitle)
+                .setContentText(taskDesc)
+                .setSmallIcon(iconInt)
                 .setContentIntent(contentIntent)
                 .setOngoing(true)
                 .setPriority(NotificationCompat.PRIORITY_MIN)
                 .build();
         startForeground(SERVICE_NOTIFICATION_ID, notification);
         return super.onStartCommand(intent, flags, startId);
-        // return START_STICKY;
     }
 
 
-    private void createNotificationChannel(@Nullable final Bundle extras) {
+    private void createNotificationChannel(@NonNull final String taskTitle, @NonNull final String taskDesc) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             final int importance = NotificationManager.IMPORTANCE_LOW;
-            final NotificationChannel channel = new NotificationChannel(CHANNEL_ID, extras != null ? extras.getString("taskTitle", "RNBackgroundActionTask") : "RNBackgroundActionTask", importance);
-            channel.setDescription(extras != null ? extras.getString("taskDesc", "RNBackgroundActionDesc") : "RNBackgroundActionDesc");
+            final NotificationChannel channel = new NotificationChannel(CHANNEL_ID, taskTitle, importance);
+            channel.setDescription(taskDesc);
             final NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }

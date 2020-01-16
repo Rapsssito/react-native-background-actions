@@ -6,6 +6,7 @@ React Native background service library for running background tasks forever in 
 - [Getting started](#getting-started)
 - [Compatibility](#react-native-compatibility)
 - [Usage](#usage)
+    - [Options](#options)
 - [Maintainers](#maintainers)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
@@ -62,7 +63,7 @@ If you can't or don't want to use the CLI tool, you can also manually link the l
 <summary>Manually link the library on iOS</summary>
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-background-actions` and add `RNBackgroundActions..xcodeproj`
+2. Go to `node_modules` ➜ `react-native-background-actions` and add `RNBackgroundActions.xcodeproj`
 3. In XCode, in the project navigator, select your project. Add `libRNBackgroundActions.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 4. Run your project (`Cmd+R`)<
 </details>
@@ -91,24 +92,56 @@ To use this library you need to ensure you are using the correct version of Reac
 ```js
 import BackgroundService from 'react-native-background-actions';
 
-const veryIntensiveTask = async () => {
+const veryIntensiveTask = async (taskData) => {
+    const args = taskData.arguments;
     // You can do anything in your task such as network requests, timers and so on, as long as it doesn't touch UI.
     // Once your task completes (i.e. the promise is resolved), React Native will go into "paused" mode (unless
     // there are other tasks running, or there is a foreground app).
 };
 
 const options = {
-    taskTitle: 'Downloading large images',
-    taskDesc: 'Downloading images for a better UX',
-}
+    taskName: 'Example',
+    taskTitle: 'ExampleTask title',
+    taskDesc: 'ExampleTask desc',
+    taskIcon: {
+        name: 'ic_launcher',
+        type: 'mipmap',
+    },
+    arguments: {
+        delay: 1000,
+    },
+};
 
-BackgroundService.start(veryIntensiveTask, options);
+
+await BackgroundService.start(veryIntensiveTask, options);
 // iOS will also run everything here in the background until .stop() is called
-BackgroundService.stop();
+await BackgroundService.stop();
 ```
 > If you call stop() on background no new tasks will be able to be started!
 > Don't call .start() twice, as it will stop performing previous background tasks and start a new one. 
 > If .start() is called on the backgound, it will not have any effect.
+
+### Options
+```javascript
+options
+```
+| Property    | Type       | Description                                    |
+| ----------- | ---------- | ------------------------------------------------ |
+| `taskName`  | `<string>` | Task name for identification.                     |
+| `taskTitle` | `<string>` |  **Android Required**. Notification title.       |
+| `taskDesc`  | `<string>` | **Android Required**. Notification description. |
+| `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
+| `arguments` | `<object>` | Extra parameters to pass to the task. |
+
+#### taskIconOptions
+```javascript
+taskIconOptions
+```
+| Property    | Type       | Description                                                    |
+| ----------- | ---------- | -------------------------------------------------------------- |
+| `name`  | `<string>` | **Required**. Icon name in res/ folder. Ex: `ic_launcher`.         |
+| `type` | `<string>` |  **Required**. Icon type in res/ folder. Ex: `mipmap`.              |
+| `package`  | `<string>` | Icon package where to search the icon. Ex: `com.example.package`. **It defaults to the app's package. It is higly recommended to leave like that.** |
 
 ## Maintainers
 
