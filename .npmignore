@@ -89,7 +89,11 @@ Thumbs.dbandroid/gradle
 docs
 .idea
 tests/
+__tests__/
 bin/test.js
 codorials
 .vscode
 .nyc_output
+
+# Tests
+coverage

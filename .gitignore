@@ -47,3 +47,6 @@ buck-out/
 
 # Editor config
 .vscode
+
+# Tests
+coverage

@@ -12,9 +12,9 @@
   ],
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint *.js",
+    "lint": "eslint .",
     "eslint:fix": "yarn eslint --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest ./__tests__/",
     "pods": "cd ios && pod install"
   },
   "repository": {
@@ -31,11 +31,14 @@
     "react-native": ">=0.47.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
+    "@babel/core": "^7.8.3",
+    "babel-jest": "^24.9.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-jest": "^23.6.0",
     "eslint-plugin-prettier": "^3.1.1",
     "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.56.4",
     "prettier": "^1.18.2",
     "react": "16.9.0",
     "react-native": "^0.61.4"

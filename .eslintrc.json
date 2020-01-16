@@ -1,6 +1,7 @@
 {   
     "plugins": [
-        "prettier"
+        "prettier",
+        "jest"
     ],
     "env": {
         "es6": true,
@@ -12,7 +13,9 @@
     },
     "extends": [
         "eslint:recommended",
-        "prettier"
+        "prettier",
+        "plugin:jest/recommended",
+        "plugin:jest/style"
     ],
     "rules": {
         "prefer-const": ["error", {
