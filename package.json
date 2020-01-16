@@ -1,6 +1,6 @@
 {
   "name": "react-native-background-actions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React Native background service library for running background tasks forever in Android & iOS",
   "keywords": [
     "react-native",
