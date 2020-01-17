@@ -161,7 +161,6 @@
 				2BE7F171FFCE3B4673B44F15 /* Pods-backgroundExampleTests.debug.xcconfig */,
 				68505F78D1AE775DFAB97B94 /* Pods-backgroundExampleTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -308,6 +307,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

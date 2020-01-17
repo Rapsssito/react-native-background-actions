@@ -15,6 +15,7 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 
 import BackgroundJob from 'react-native-background-actions';
@@ -24,6 +25,8 @@ import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
 const sleep = time => new Promise(resolve => setTimeout(() => resolve(), time));
 
 const taskRandom = async taskData => {
+  if (Platform.OS === 'ios') 
+    console.warn('This task will not keep your app alive in the background by itself, use other library like react-native-track-player that use audio, geolocalization, etc. to keep your app alive in the background while you excute the JS from this library.');
   const args = taskData.arguments;
   for (let i = 0; i < 1000; i++) {
     console.log('Runned -> ', i);
