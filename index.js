@@ -19,7 +19,7 @@ class BackgroundTimer {
             await RNBackgroundActions.start(finalOptions);
         } else {
             await RNBackgroundActions.start(finalOptions);
-            task(finalOptions);
+            task(finalOptions).then(() => this.stop());
         }
     }
 
