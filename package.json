@@ -12,6 +12,7 @@
   ],
   "main": "index.js",
   "scripts": {
+    "ci": "yarn install --frozen-lockfile",
     "lint": "eslint .",
     "eslint:fix": "yarn eslint --fix",
     "test": "jest ./__tests__/",
@@ -32,6 +33,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
+    "@semantic-release/changelog": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.0.0",
+    "@semantic-release/npm": "^7.0.0",
     "babel-jest": "^24.9.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
@@ -41,7 +46,8 @@
     "metro-react-native-babel-preset": "^0.56.4",
     "prettier": "^1.18.2",
     "react": "16.9.0",
-    "react-native": "^0.61.4"
+    "react-native": "^0.61.4",
+    "semantic-release": "^17.0.1"
   },
   "dependencies": {}
 }
