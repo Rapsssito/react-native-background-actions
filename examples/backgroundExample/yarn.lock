@@ -5032,10 +5032,10 @@ react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
 
-react-native-background-actions@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-background-actions/-/react-native-background-actions-1.0.2.tgz#d53bbd3bb28ee89333ae58c7806c1a02da39721a"
-  integrity sha512-L2z2A+ED4jq6TYUIJ2qDeReUiVOiKlafOyd8RUXtC73HTSR8FoqitSt9Sp8HOjm/b6bOrf/Olm+rn1OuEyX2Eg==
+react-native-background-actions@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/react-native-background-actions/-/react-native-background-actions-1.1.0.tgz#24b543e494f12ff4320e0615799b6bc237012a83"
+  integrity sha512-H7cNZksbKXELvYqZXHJ0U3DUYBL6pHjB1hPyR1IWMaPcu2j+UkjK/Xwd89Cv74hqgfWIusBUjVTFAmUewalHtA==
 
 react-native@0.61.5:
   version "0.61.5"
