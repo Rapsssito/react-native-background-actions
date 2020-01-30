@@ -1,6 +1,7 @@
 package com.asterinet.react.bgactions;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.facebook.react.bridge.Arguments;
@@ -103,6 +104,13 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
                 throw new IllegalArgumentException();
         } catch (Exception e) {
             throw new IllegalArgumentException("Task icon not found");
+        }
+        // Get color
+        try {
+            final String color = options.getString("color");
+            extras.putInt("color", Color.parseColor(color));
+        } catch (Exception e) {
+            extras.putInt("color", Color.parseColor("#ffffff"));
         }
         return extras;
     }

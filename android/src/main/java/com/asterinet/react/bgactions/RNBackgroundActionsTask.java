@@ -42,6 +42,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         final String taskTitle = extras.getString("taskTitle", "RNBackgroundActionsTaskTitle");
         final String taskDesc = extras.getString("taskDesc", "RNBackgroundActionsTaskDesc");
         final int iconInt = extras.getInt("iconInt");
+        final int color = extras.getInt("color");
         // Turning into a foreground service
         createNotificationChannel(taskTitle, taskDesc); // Necessary creating channel for API 26+
         // Create the notification
@@ -54,6 +55,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
                 .setContentIntent(contentIntent)
                 .setOngoing(true)
                 .setPriority(NotificationCompat.PRIORITY_MIN)
+                .setColor(color)
                 .build();
         startForeground(SERVICE_NOTIFICATION_ID, notification);
         return super.onStartCommand(intent, flags, startId);
