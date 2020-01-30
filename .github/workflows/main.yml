@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
-      run: yarn install --frozen-lockfile --network-concurrency 1
+      run: yarn ci
 
     - name: ESLint
       run: yarn lint
