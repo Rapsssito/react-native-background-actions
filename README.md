@@ -116,6 +116,7 @@ const options = {
         name: 'ic_launcher',
         type: 'mipmap',
     },
+    color: '#ff00ff',
     arguments: {
         delay: 1000,
     },
@@ -140,6 +141,7 @@ options
 | `taskTitle` | `<string>` |  **Android Required**. Notification title.       |
 | `taskDesc`  | `<string>` | **Android Required**. Notification description. |
 | `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
+| `color`  | `<string>` | Notification color. **Default**: `"#ffffff"` |
 | `arguments` | `<object>` | Extra parameters to pass to the task. |
 
 #### taskIconOptions
