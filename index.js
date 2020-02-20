@@ -51,8 +51,11 @@ class BackgroundTimer {
      */
     _normalizeOptions(options) {
         return {
-            ...options,
             taskName: options.taskName + this._runnedTasks,
+            taskTitle: options.taskTitle,
+            taskDesc: options.taskDesc,
+            taskIcon: { ...options.taskIcon },
+            color: options.color || '#ffffff',
         };
     }
 
