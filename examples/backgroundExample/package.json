@@ -11,6 +11,7 @@
     "pods": "cd ios && pod install"
   },
   "dependencies": {
+    "events": "^3.1.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-background-actions": "^1.1.0"
