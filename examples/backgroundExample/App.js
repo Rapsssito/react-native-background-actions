@@ -34,12 +34,12 @@ const taskRandom = async taskData => {
     );
   }
   await new Promise(async resolve => {
-    let keepRunning = true;
+    // let keepRunning = true;
     // We add a listener to stop running
-    eventEmitter.addListener('close', () => (keepRunning = false));
+    // eventEmitter.addListener('close', () => (keepRunning = false));
     // For loop with a delay
-    const {delay} = taskData.arguments;
-    for (let i = 0; keepRunning; i++) {
+    const {delay} = taskData;
+    for (let i = 0; BackgroundJob.isRunning(); i++) {
       console.log('Runned -> ', i);
       await sleep(delay);
     }
@@ -55,13 +55,13 @@ const options = {
     type: 'mipmap',
   },
   color: '#ff00ff',
-  arguments: {
+  parameters: {
     delay: 1000,
   },
 };
 
 class App extends React.Component {
-  playing = false;
+  playing = BackgroundJob.isRunning();
 
   /**
    * Toggles the background task
@@ -78,7 +78,8 @@ class App extends React.Component {
       }
     } else {
       console.log('Stop background service');
-      eventEmitter.emit('close');
+      await BackgroundJob.stop();
+    //   eventEmitter.emit('close');
     }
   };
   render() {

@@ -101,11 +101,19 @@ To use this library you need to ensure you are using the correct version of Reac
 ```js
 import BackgroundService from 'react-native-background-actions';
 
+// You can do anything in your task such as network requests, timers and so on,
+// as long as it doesn't touch UI. Once your task completes (i.e. the promise is resolved),
+// React Native will go into "paused" mode (unless there are other tasks running,
+// or there is a foreground app).
 const veryIntensiveTask = async (taskDataArguments) => {
+    // Example of an infinite loop task
     const { delay } = taskDataArguments;
-    // You can do anything in your task such as network requests, timers and so on, as long as it doesn't touch UI.
-    // Once your task completes (i.e. the promise is resolved), React Native will go into "paused" mode (unless
-    // there are other tasks running, or there is a foreground app).
+    await new Promise((resolve) => {
+        for (let i = 0; BackgroundService.isRunning(); i++) {
+            console.log(i);
+            await sleep(delay);
+        }
+    });
 };
 
 const options = {
