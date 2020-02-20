@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/Rapsssito/react-native-background-actions/compare/v1.1.0...v2.0.0) (2020-02-20)
+
+
+### Features
+
+* Allow non-serializable parameters ([#12](https://github.com/Rapsssito/react-native-background-actions/issues/12)) ([e3ccbbe](https://github.com/Rapsssito/react-native-background-actions/commit/e3ccbbe7e3f3be819ff0952271e95f3cf4e1dff7))
+
+
+### BREAKING CHANGES
+
+* This breaks compatibility with the old parameters handling
+
 # [1.2.0](https://github.com/Rapsssito/react-native-background-actions/compare/v1.1.0...v1.2.0) (2020-02-20)
 
 
