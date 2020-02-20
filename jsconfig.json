@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "checkJs": true,
+    },
+    "exclude": ["node_modules", "coverage", ".github", "examples", "ios", "android"],
+}

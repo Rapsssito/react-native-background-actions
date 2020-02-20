@@ -29,6 +29,7 @@ codecov.yml
 __tests__/
 jest.config.js
 jest.setup.js
+coverage
 
 # Example
 examples/
@@ -94,6 +95,3 @@ bin/test.js
 codorials
 .vscode
 .nyc_output
-
-# Tests
-coverage

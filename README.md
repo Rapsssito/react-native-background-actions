@@ -101,8 +101,8 @@ To use this library you need to ensure you are using the correct version of Reac
 ```js
 import BackgroundService from 'react-native-background-actions';
 
-const veryIntensiveTask = async (taskData) => {
-    const args = taskData.arguments;
+const veryIntensiveTask = async (taskDataArguments) => {
+    const { delay } = taskDataArguments;
     // You can do anything in your task such as network requests, timers and so on, as long as it doesn't touch UI.
     // Once your task completes (i.e. the promise is resolved), React Native will go into "paused" mode (unless
     // there are other tasks running, or there is a foreground app).
@@ -117,7 +117,7 @@ const options = {
         type: 'mipmap',
     },
     color: '#ff00ff',
-    arguments: {
+    parameters: {
         delay: 1000,
     },
 };
@@ -142,7 +142,7 @@ options
 | `taskDesc`  | `<string>` | **Android Required**. Notification description. |
 | `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
 | `color`  | `<string>` | Notification color. **Default**: `"#ffffff"` |
-| `arguments` | `<object>` | Extra parameters to pass to the task. |
+| `parameters` | `<any>` | Parameters to pass to the task. |
 
 #### taskIconOptions
 ```javascript

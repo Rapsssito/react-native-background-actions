@@ -1,39 +1,66 @@
-import { NativeModules, Platform, AppRegistry } from 'react-native';
+import { Platform, AppRegistry } from 'react-native';
+import RNBackgroundActions from './RNBackgroundActionsModule';
 
-const { RNBackgroundActions } = NativeModules;
-
+/**
+ * @typedef {{taskName: string,
+ *            taskTitle: string,
+ *            taskDesc: string,
+ *            taskIcon: {name: string, type: string, package?: string},
+ *            color?: string,
+ *            parameters?: any}} BackgroundTaskOptions
+ */
 class BackgroundTimer {
     constructor() {
-        this.runnedTasks = 0;
+        this._runnedTasks = 0;
+        this._stopTask = () => {};
     }
 
     /**
-     * @param {Promise<void>} task
-     * @param {{taskName: string, taskTitle: string, taskDesc: string}} options
+     * @param {(taskData: any) => Promise<void>} task
+     * @param {BackgroundTaskOptions} options
      */
     async start(task, options) {
-        this.runnedTasks++;
-        const finalOptions = this.normalizeOptions(options);
+        this._runnedTasks++;
+        const finalOptions = this._normalizeOptions(options);
+        const finalTask = this._generateTask(task, options.parameters);
         if (Platform.OS === 'android') {
-            AppRegistry.registerHeadlessTask(finalOptions.taskName, () => task);
+            AppRegistry.registerHeadlessTask(finalOptions.taskName, () => finalTask);
             await RNBackgroundActions.start(finalOptions);
         } else {
             await RNBackgroundActions.start(finalOptions);
-            task(finalOptions).then(() => this.stop());
+            finalTask();
         }
     }
 
     /**
-     * @param {{taskName: string, taskTitle: string, taskDesc: string}} options
+     * @param {(taskData: any) => Promise<void>} task
+     * @param {any} [parameters]
      */
-    normalizeOptions(options) {
+    _generateTask(task, parameters) {
+        const self = this;
+        return async () => {
+            await new Promise((resolve) => {
+                self._stopTask = resolve;
+                task(parameters).then(() => resolve());
+            });
+        };
+    }
+
+    /**
+     * @param {BackgroundTaskOptions} options
+     */
+    _normalizeOptions(options) {
         return {
-            ...options,
-            taskName: options.taskName + this.runnedTasks,
+            taskName: options.taskName + this._runnedTasks,
+            taskTitle: options.taskTitle,
+            taskDesc: options.taskDesc,
+            taskIcon: { ...options.taskIcon },
+            color: options.color || '#ffffff',
         };
     }
 
     async stop() {
+        this._stopTask();
         await RNBackgroundActions.stop();
     }
 }
