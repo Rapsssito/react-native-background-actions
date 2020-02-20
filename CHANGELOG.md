@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.0.0...v2.1.0) (2020-02-20)
+
+
+### Features
+
+* Know the task's state with isRunning() method ([#13](https://github.com/Rapsssito/react-native-background-actions/issues/13)) ([d3954dd](https://github.com/Rapsssito/react-native-background-actions/commit/d3954dd3504973b19ed386d10ca2a31174375b20))
+
 # [2.0.0](https://github.com/Rapsssito/react-native-background-actions/compare/v1.1.0...v2.0.0) (2020-02-20)
 
 
