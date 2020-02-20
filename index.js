@@ -9,10 +9,22 @@ import RNBackgroundActions from './RNBackgroundActionsModule';
  *            color?: string,
  *            parameters?: any}} BackgroundTaskOptions
  */
-class BackgroundTimer {
+class BackgroundServer {
     constructor() {
         this._runnedTasks = 0;
         this._stopTask = () => {};
+        this._isRunning = false;
+    }
+
+    /**
+     * Returns if the current background task is running.
+     *
+     * It returns `true` if `start()` has been called and the task has not finished.
+     *
+     * It returns `false` if `stop()` has been called, **even if the task has not finished**.
+     */
+    isRunning() {
+        return this._isRunning;
     }
 
     /**
@@ -30,6 +42,7 @@ class BackgroundTimer {
             await RNBackgroundActions.start(finalOptions);
             finalTask();
         }
+        this._isRunning = true;
     }
 
     /**
@@ -41,7 +54,7 @@ class BackgroundTimer {
         return async () => {
             await new Promise((resolve) => {
                 self._stopTask = resolve;
-                task(parameters).then(() => resolve());
+                task(parameters).then(() => self.stop());
             });
         };
     }
@@ -62,7 +75,10 @@ class BackgroundTimer {
     async stop() {
         this._stopTask();
         await RNBackgroundActions.stop();
+        this._isRunning = false;
     }
 }
 
-export default new BackgroundTimer();
+const backgroundServer = new BackgroundServer();
+
+export default backgroundServer;
