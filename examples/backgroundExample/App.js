@@ -17,21 +17,33 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-
-import BackgroundJob from 'react-native-background-actions';
-
 import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
+
+import EventEmitter from 'events';
+import BackgroundJob from 'react-native-background-actions';
 
 const sleep = time => new Promise(resolve => setTimeout(() => resolve(), time));
 
+const eventEmitter = new EventEmitter();
+
 const taskRandom = async taskData => {
-  if (Platform.OS === 'ios') 
-    console.warn('This task will not keep your app alive in the background by itself, use other library like react-native-track-player that use audio, geolocalization, etc. to keep your app alive in the background while you excute the JS from this library.');
-  const args = taskData.arguments;
-  for (let i = 0; i < 1000; i++) {
-    console.log('Runned -> ', i);
-    await sleep(args.delay);
+  if (Platform.OS === 'ios') {
+    console.warn(
+      'This task will not keep your app alive in the background by itself, use other library like react-native-track-player that use audio,',
+      'geolocalization, etc. to keep your app alive in the background while you excute the JS from this library.',
+    );
   }
+  await new Promise(async resolve => {
+    let keepRunning = true;
+    // We add a listener to stop running
+    eventEmitter.addListener('close', () => (keepRunning = false));
+    // For loop with a delay
+    const {delay} = taskData.arguments;
+    for (let i = 0; keepRunning; i++) {
+      console.log('Runned -> ', i);
+      await sleep(delay);
+    }
+  });
 };
 
 const options = {
@@ -51,7 +63,10 @@ const options = {
 class App extends React.Component {
   playing = false;
 
-  initBackground = async () => {
+  /**
+   * Toggles the background task
+   */
+  toggleBackground = async () => {
     this.playing = !this.playing;
     if (this.playing) {
       try {
@@ -62,7 +77,8 @@ class App extends React.Component {
         console.log('Error', e);
       }
     } else {
-      await BackgroundJob.stop();
+      console.log('Stop background service');
+      eventEmitter.emit('close');
     }
   };
   render() {
@@ -82,7 +98,7 @@ class App extends React.Component {
             <View style={styles.body}>
               <TouchableOpacity
                 style={{height: 100, width: 100, backgroundColor: 'red'}}
-                onPress={this.initBackground}></TouchableOpacity>
+                onPress={this.toggleBackground}></TouchableOpacity>
             </View>
           </ScrollView>
         </SafeAreaView>
@@ -101,24 +117,6 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
   },
   footer: {
     color: Colors.dark,
