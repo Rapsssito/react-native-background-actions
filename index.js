@@ -1,6 +1,5 @@
-import { NativeModules, Platform, AppRegistry } from 'react-native';
-
-const { RNBackgroundActions } = NativeModules;
+import { Platform, AppRegistry } from 'react-native';
+import RNBackgroundActions from './RNBackgroundActionsModule';
 
 /**
  * @typedef {{taskName: string,

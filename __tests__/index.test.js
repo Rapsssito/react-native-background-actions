@@ -1,10 +1,6 @@
-import { NativeModules, Platform, AppRegistry } from 'react-native';
+import { Platform, AppRegistry } from 'react-native';
 import BackgroundActions from '../index';
-
-NativeModules.RNBackgroundActions = {
-    start: jest.fn(),
-    stop: jest.fn(),
-};
+import RNBackgroundActionsModule from '../RNBackgroundActionsModule';
 
 Platform.OS = 'android';
 
@@ -23,30 +19,38 @@ const defaultOptions = {
     },
 };
 
+test('stop-empty', async () => {
+    RNBackgroundActionsModule.stop.mockClear();
+    await BackgroundActions.stop();
+    expect(RNBackgroundActionsModule.stop).toHaveBeenCalledTimes(1);
+});
+
 test('start-android', async () => {
     const defaultTask = jest.fn(async () => {});
     Platform.OS = 'android';
     AppRegistry.registerHeadlessTask.mockClear();
-    NativeModules.RNBackgroundActions.start.mockClear();
+    RNBackgroundActionsModule.start.mockClear();
     await BackgroundActions.start(defaultTask, defaultOptions);
     expect(defaultTask).toHaveBeenCalledTimes(1);
+    expect(defaultTask).toHaveBeenCalledWith(defaultOptions.parameters);
     expect(AppRegistry.registerHeadlessTask).toHaveBeenCalledTimes(1);
-    expect(NativeModules.RNBackgroundActions.start).toHaveBeenCalledTimes(1);
+    expect(RNBackgroundActionsModule.start).toHaveBeenCalledTimes(1);
 });
 
 test('start-ios', async () => {
     const defaultTask = jest.fn(async () => {});
     AppRegistry.registerHeadlessTask.mockClear();
     Platform.OS = 'ios';
-    NativeModules.RNBackgroundActions.start.mockClear();
+    RNBackgroundActionsModule.start.mockClear();
     await BackgroundActions.start(defaultTask, defaultOptions);
     expect(defaultTask).toHaveBeenCalledTimes(1);
+    expect(defaultTask).toHaveBeenCalledWith(defaultOptions.parameters);
     expect(AppRegistry.registerHeadlessTask).toHaveBeenCalledTimes(0);
-    expect(NativeModules.RNBackgroundActions.start).toHaveBeenCalledTimes(1);
+    expect(RNBackgroundActionsModule.start).toHaveBeenCalledTimes(1);
 });
 
 test('stop', async () => {
-    NativeModules.RNBackgroundActions.stop.mockClear();
+    RNBackgroundActionsModule.stop.mockClear();
     await BackgroundActions.stop();
-    expect(NativeModules.RNBackgroundActions.stop).toHaveBeenCalledTimes(1);
+    expect(RNBackgroundActionsModule.stop).toHaveBeenCalledTimes(1);
 });
