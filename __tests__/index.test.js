@@ -1,20 +1,14 @@
 import { NativeModules, Platform, AppRegistry } from 'react-native';
 import BackgroundActions from '../index';
 
-jest.mock('react-native', () => ({
-    NativeModules: {
-        RNBackgroundActions: {
-            start: jest.fn(),
-            stop: jest.fn(),
-        },
-    },
-    Platform: {
-        OS: 'android',
-    },
-    AppRegistry: {
-        registerHeadlessTask: jest.fn((taskName, task) => task()()),
-    },
-}));
+NativeModules.RNBackgroundActions = {
+    start: jest.fn(),
+    stop: jest.fn(),
+};
+
+Platform.OS = 'android';
+
+AppRegistry.registerHeadlessTask = jest.fn((taskName, task) => task()());
 
 const defaultOptions = {
     taskName: 'Example',
@@ -24,7 +18,7 @@ const defaultOptions = {
         name: 'ic_launcher',
         type: 'mipmap',
     },
-    arguments: {
+    parameters: {
         delay: 1000,
     },
 };
