@@ -16,6 +16,7 @@
     "lint": "eslint .",
     "eslint:fix": "yarn eslint --fix",
     "test": "jest ./__tests__/",
+    "checkjs": "tsc --noEmit",
     "pods": "cd ios && pod install"
   },
   "repository": {
@@ -48,7 +49,8 @@
     "prettier": "^1.18.2",
     "react": "16.9.0",
     "react-native": "^0.61.4",
-    "semantic-release": "^17.0.1"
+    "semantic-release": "^17.0.1",
+    "typescript": "^3.8.2"
   },
   "dependencies": {}
 }

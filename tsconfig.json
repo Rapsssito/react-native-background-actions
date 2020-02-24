@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "checkJs": true,
+    },
+    "include": ["index.js", "__tests__", "__mocks__"],
+}
