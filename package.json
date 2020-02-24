@@ -10,13 +10,27 @@
     "android",
     "ios"
   ],
-  "main": "index.js",
+  "files": [
+    "/android/src/",
+    "/android/build.gradle",
+    "/ios",
+    "!Podfile*",
+    "/windows",
+    "/src",
+    "/lib",
+    "/*.podspec",
+    "/jest"
+  ],
+  "types": "src/index.d.ts",
+  "main": "src/index.js",
   "scripts": {
-    "ci": "yarn install --frozen-lockfile",
+    "ci": "yarn install --frozen-lockfile && yarn lint && yarn checkjs && yarn test",
     "lint": "eslint .",
+    "checkjs": "tsc",
     "eslint:fix": "yarn eslint --fix",
     "test": "jest ./__tests__/",
-    "checkjs": "tsc",
+    "declaration:build": "tsc -p ./declaration.tsconfig.json && yarn checkjs",
+    "prepublishOnly": "yarn declaration:build",
     "pods": "cd ios && pod install"
   },
   "repository": {
