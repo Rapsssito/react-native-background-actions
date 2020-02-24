@@ -21,7 +21,7 @@
     "/*.podspec",
     "/jest"
   ],
-  "types": "src/index.d.ts",
+  "types": "lib/types/index.d.ts",
   "main": "src/index.js",
   "scripts": {
     "ci": "yarn install --frozen-lockfile && yarn lint && yarn declaration:build && yarn checkjs && yarn test",

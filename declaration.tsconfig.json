@@ -3,7 +3,8 @@
     "compilerOptions": {
         "declaration": true,
         "noEmit": false,
-        "emitDeclarationOnly": true
+        "emitDeclarationOnly": true,
+        "outDir": "./lib/types"
     },
     "exclude": ["__tests__", "__mocks__"]
 }
