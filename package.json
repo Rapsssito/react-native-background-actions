@@ -16,7 +16,7 @@
     "lint": "eslint .",
     "eslint:fix": "yarn eslint --fix",
     "test": "jest ./__tests__/",
-    "checkjs": "tsc --noEmit",
+    "checkjs": "tsc",
     "pods": "cd ios && pod install"
   },
   "repository": {

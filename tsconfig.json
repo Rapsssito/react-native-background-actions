@@ -2,6 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "checkJs": true,
+        "noEmit": true,
     },
     "include": ["index.js", "__tests__", "__mocks__"],
 }
