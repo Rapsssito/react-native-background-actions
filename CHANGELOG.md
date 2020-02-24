@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.1.0...v2.2.0) (2020-02-24)
+
+
+### Features
+
+* Add TypeScript declaration files ([#15](https://github.com/Rapsssito/react-native-background-actions/issues/15)) ([1c9f9b1](https://github.com/Rapsssito/react-native-background-actions/commit/1c9f9b133e80a741a13c6c2d1bbc524907a6ee72))
+
 # [2.1.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.0.0...v2.1.0) (2020-02-20)
 
 
