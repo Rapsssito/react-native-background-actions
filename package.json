@@ -24,13 +24,13 @@
   "types": "src/index.d.ts",
   "main": "src/index.js",
   "scripts": {
-    "ci": "yarn install --frozen-lockfile && yarn lint && yarn checkjs && yarn test",
+    "ci": "yarn install --frozen-lockfile && yarn lint && yarn declaration:build && yarn checkjs && yarn test",
     "lint": "eslint .",
     "checkjs": "tsc",
     "eslint:fix": "yarn eslint --fix",
     "test": "jest ./__tests__/",
-    "declaration:build": "tsc -p ./declaration.tsconfig.json && yarn checkjs",
-    "prepublishOnly": "yarn declaration:build",
+    "declaration:build": "tsc -p ./declaration.tsconfig.json",
+    "prepublishOnly": "yarn declaration:build && yarn checkjs",
     "pods": "cd ios && pod install"
   },
   "repository": {
