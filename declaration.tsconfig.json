@@ -5,6 +5,5 @@
         "noEmit": false,
         "emitDeclarationOnly": true
     },
-    "include": ["index.js"],
     "exclude": ["__tests__", "__mocks__"]
 }
