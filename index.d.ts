@@ -6,9 +6,9 @@ export type BackgroundTaskOptions = {
     taskIcon: {
         name: string;
         type: string;
-        package?: string;
+        package?: string | undefined;
     };
-    color?: string;
+    color?: string | undefined;
     parameters?: any;
 };
 declare const backgroundServer: BackgroundServer;
@@ -35,6 +35,7 @@ declare class BackgroundServer {
     /**
      * @param {(taskData: any) => Promise<void>} task
      * @param {BackgroundTaskOptions} options
+     * @returns {Promise<void>}
      */
     async start(task: (taskData: any) => Promise<void>, options: {
         taskName: string;
@@ -43,40 +44,26 @@ declare class BackgroundServer {
         taskIcon: {
             name: string;
             type: string;
-            package?: string;
+            package?: string | undefined;
         };
-        color?: string;
+        color?: string | undefined;
         parameters?: any;
     }): Promise<void>;
     /**
+     * @private
      * @param {(taskData: any) => Promise<void>} task
      * @param {any} [parameters]
      */
-    _generateTask(task: (taskData: any) => Promise<void>, parameters?: any): () => Promise<void>;
+    private _generateTask;
     /**
+     * @private
      * @param {BackgroundTaskOptions} options
      */
-    _normalizeOptions(options: {
-        taskName: string;
-        taskTitle: string;
-        taskDesc: string;
-        taskIcon: {
-            name: string;
-            type: string;
-            package?: string;
-        };
-        color?: string;
-        parameters?: any;
-    }): {
-        taskName: string;
-        taskTitle: string;
-        taskDesc: string;
-        taskIcon: {
-            name: string;
-            type: string;
-            package?: string;
-        };
-        color: string;
-    };
+    private _normalizeOptions;
+    /**
+     * Stops the background task.
+     *
+     * @returns {Promise<void>}
+     */
     async stop(): Promise<void>;
 }

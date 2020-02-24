@@ -3,6 +3,8 @@
         "allowJs": true,
         "checkJs": true,
         "noEmit": true,
+        "strict": true,
+        "skipLibCheck": true,
     },
-    "include": ["index.js", "__tests__", "__mocks__"],
+    "include": ["index.js", "__tests__/", "__mocks__/"],
 }

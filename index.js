@@ -30,6 +30,7 @@ class BackgroundServer {
     /**
      * @param {(taskData: any) => Promise<void>} task
      * @param {BackgroundTaskOptions} options
+     * @returns {Promise<void>}
      */
     async start(task, options) {
         this._runnedTasks++;
@@ -46,6 +47,7 @@ class BackgroundServer {
     }
 
     /**
+     * @private
      * @param {(taskData: any) => Promise<void>} task
      * @param {any} [parameters]
      */
@@ -60,6 +62,7 @@ class BackgroundServer {
     }
 
     /**
+     * @private
      * @param {BackgroundTaskOptions} options
      */
     _normalizeOptions(options) {
@@ -72,6 +75,11 @@ class BackgroundServer {
         };
     }
 
+    /**
+     * Stops the background task.
+     *
+     * @returns {Promise<void>}
+     */
     async stop() {
         this._stopTask();
         await RNBackgroundActions.stop();

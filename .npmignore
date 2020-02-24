@@ -26,6 +26,7 @@ jsconfig.json
 codecov.yml
 
 # Tests
+__mocks__/
 __tests__/
 jest.config.js
 jest.setup.js
