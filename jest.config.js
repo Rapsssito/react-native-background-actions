@@ -6,7 +6,7 @@ module.exports = {
         'node_modules/(?!(react-native|react-navigation|@react-navigation|@react-native-community))',
     ],
     modulePathIgnorePatterns: ['examples/'],
-    collectCoverageFrom: ['index.js'],
+    collectCoverageFrom: ['src/index.js'],
     globals: {
         __DEV__: true,
     },
