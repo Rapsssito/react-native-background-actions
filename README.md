@@ -132,7 +132,7 @@ const options = {
 
 
 await BackgroundService.start(veryIntensiveTask, options);
-await BackgroundService.updateNotification({taskDesc: 'New ExampleTask description'})
+await BackgroundService.updateNotification({taskDesc: 'New ExampleTask description'}); // Only Android, iOS will ignore this call
 // iOS will also run everything here in the background until .stop() is called
 await BackgroundService.stop();
 ```
