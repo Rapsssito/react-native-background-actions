@@ -1,5 +1,5 @@
 # `react-native-background-actions`
-![](https://github.com/Rapsssito/react-native-background-actions/workflows/Tests/badge.svg)
+![](https://github.com/Rapsssito/react-native-background-actions/workflows/Release/badge.svg)
 
 
 React Native background service library for running **background tasks forever in Android & iOS**. Schedule a background job that will run your JavaScript when your app is in the background or foreground.
