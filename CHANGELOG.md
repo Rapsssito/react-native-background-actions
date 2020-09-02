@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.2.0...v2.3.0) (2020-09-02)
+
+
+### Features
+
+* **Android:** Add updateNotification() method ([#37](https://github.com/Rapsssito/react-native-background-actions/issues/37)) ([7582ed7](https://github.com/Rapsssito/react-native-background-actions/commit/7582ed7141c9d65b08038cbe5f7946413027b8b9))
+
 # [2.2.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.1.0...v2.2.0) (2020-02-24)
 
 

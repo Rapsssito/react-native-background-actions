@@ -9,7 +9,6 @@ export type BackgroundTaskOptions = {
         package?: string | undefined;
     };
     color?: string | undefined;
-    parameters?: any;
 };
 declare const backgroundServer: BackgroundServer;
 /**
@@ -17,13 +16,39 @@ declare const backgroundServer: BackgroundServer;
  *            taskTitle: string,
  *            taskDesc: string,
  *            taskIcon: {name: string, type: string, package?: string},
- *            color?: string,
- *            parameters?: any}} BackgroundTaskOptions
+ *            color?: string}} BackgroundTaskOptions
  */
 declare class BackgroundServer {
-    _runnedTasks: number;
-    _stopTask: () => void;
-    _isRunning: boolean;
+    /** @private */
+    private _runnedTasks;
+    /** @private */
+    private _stopTask;
+    /** @private */
+    private _isRunning;
+    /** @private @type {BackgroundTaskOptions} */
+    private _currentOptions;
+    /**
+     * **ANDROID ONLY**
+     *
+     * Updates the task notification.
+     *
+     * *On iOS this method will return immediately*
+     *
+     * @param {{taskTitle?: string,
+     *          taskDesc?: string,
+     *          taskIcon?: {name: string, type: string, package?: string},
+     *          color?: string}} taskData
+     */
+    async updateNotification(taskData: {
+        taskTitle?: string | undefined;
+        taskDesc?: string | undefined;
+        taskIcon?: {
+            name: string;
+            type: string;
+            package?: string | undefined;
+        } | undefined;
+        color?: string | undefined;
+    }): Promise<void>;
     /**
      * Returns if the current background task is running.
      *
@@ -34,7 +59,7 @@ declare class BackgroundServer {
     isRunning(): boolean;
     /**
      * @param {(taskData: any) => Promise<void>} task
-     * @param {BackgroundTaskOptions} options
+     * @param {BackgroundTaskOptions & {parameters?: any}} options
      * @returns {Promise<void>}
      */
     async start(task: (taskData: any) => Promise<void>, options: {
@@ -47,6 +72,7 @@ declare class BackgroundServer {
             package?: string | undefined;
         };
         color?: string | undefined;
+    } & {
         parameters?: any;
     }): Promise<void>;
     /**
