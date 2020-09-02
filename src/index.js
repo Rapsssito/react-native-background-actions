@@ -23,12 +23,11 @@ class BackgroundServer {
     /**
      * **ANDROID ONLY**
      *
-     * Updates the task's notification.
+     * Updates the task notification.
      *
      * *On iOS this method will return immediately*
      *
-     * @param {{taskName?: string,
-     *          taskTitle?: string,
+     * @param {{taskTitle?: string,
      *          taskDesc?: string,
      *          taskIcon?: {name: string, type: string, package?: string},
      *          color?: string}} taskData
@@ -36,7 +35,7 @@ class BackgroundServer {
     async updateNotification(taskData) {
         if (Platform.OS !== 'android') return;
         if (!this.isRunning())
-            throw new Error('A BackgroundTask must be running before updating the notification');
+            throw new Error('A BackgroundAction must be running before updating the notification');
         this._currentOptions = this._normalizeOptions({ ...this._currentOptions, ...taskData });
         await RNBackgroundActions.updateNotification(this._currentOptions);
     }

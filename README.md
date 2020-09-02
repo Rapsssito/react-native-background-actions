@@ -119,7 +119,7 @@ const veryIntensiveTask = async (taskDataArguments) => {
 const options = {
     taskName: 'Example',
     taskTitle: 'ExampleTask title',
-    taskDesc: 'ExampleTask desc',
+    taskDesc: 'ExampleTask description',
     taskIcon: {
         name: 'ic_launcher',
         type: 'mipmap',
@@ -132,6 +132,7 @@ const options = {
 
 
 await BackgroundService.start(veryIntensiveTask, options);
+await BackgroundService.updateNotification({taskDesc: 'New ExampleTask description'})
 // iOS will also run everything here in the background until .stop() is called
 await BackgroundService.stop();
 ```
@@ -167,7 +168,7 @@ taskIconOptions
 
 ## Maintainers
 
-* [Rapsssito](https://github.com/rapsssito)
+* [Rapsssito](https://github.com/rapsssito) [[Support me :heart:](https://github.com/sponsors/Rapsssito)]
 
 ## Acknowledgments
 
