@@ -35,6 +35,7 @@ const taskRandom = async taskData => {
     const {delay} = taskData;
     for (let i = 0; BackgroundJob.isRunning(); i++) {
       console.log('Runned -> ', i);
+      await BackgroundJob.updateNotification({taskDesc: 'Runned -> ' + i});
       await sleep(delay);
     }
   });
