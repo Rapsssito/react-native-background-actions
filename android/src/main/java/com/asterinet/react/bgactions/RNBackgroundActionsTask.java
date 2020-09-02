@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -20,7 +22,22 @@ import androidx.core.app.NotificationCompat;
 final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
     private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
-    private static final int SERVICE_NOTIFICATION_ID = 92901;
+    public static final int SERVICE_NOTIFICATION_ID = 92901;
+
+    @NonNull
+    public static Notification buildNotification(@NonNull final Context context, @NonNull final String taskTitle, @NonNull final String taskDesc, final int iconInt, @ColorInt int color) {
+        final Intent notificationIntent = new Intent(context, ReactActivity.class);
+        final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        return new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentTitle(taskTitle)
+                .setContentText(taskDesc)
+                .setSmallIcon(iconInt)
+                .setContentIntent(contentIntent)
+                .setOngoing(true)
+                .setPriority(NotificationCompat.PRIORITY_MIN)
+                .setColor(color)
+                .build();
+    }
 
     @Override
     protected @Nullable
@@ -46,17 +63,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         // Turning into a foreground service
         createNotificationChannel(taskTitle, taskDesc); // Necessary creating channel for API 26+
         // Create the notification
-        final Intent notificationIntent = new Intent(this, ReactActivity.class);
-        final PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-        final Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle(taskTitle)
-                .setContentText(taskDesc)
-                .setSmallIcon(iconInt)
-                .setContentIntent(contentIntent)
-                .setOngoing(true)
-                .setPriority(NotificationCompat.PRIORITY_MIN)
-                .setColor(color)
-                .build();
+        final Notification notification = buildNotification(this, taskTitle, taskDesc, iconInt, color);
         startForeground(SERVICE_NOTIFICATION_ID, notification);
         return super.onStartCommand(intent, flags, startId);
     }

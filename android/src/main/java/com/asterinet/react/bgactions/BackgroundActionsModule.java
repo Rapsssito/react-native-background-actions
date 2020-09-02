@@ -1,5 +1,8 @@
 package com.asterinet.react.bgactions;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -59,6 +62,27 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
     public void stop(@NonNull final Promise promise) {
         if (currentServiceIntent != null)
             reactContext.stopService(currentServiceIntent);
+        promise.resolve(null);
+    }
+
+    @SuppressWarnings("unused")
+    @ReactMethod
+    public void updateNotification(@NonNull final ReadableMap options, @NonNull final Promise promise) {
+        // Get the task info from the options
+        try {
+            final Bundle extras = getExtrasFromOptions(options);
+            // Get info
+            final String taskTitle = extras.getString("taskTitle", "RNBackgroundActionsTaskTitle");
+            final String taskDesc = extras.getString("taskDesc", "RNBackgroundActionsTaskDesc");
+            final int iconInt = extras.getInt("iconInt");
+            final int color = extras.getInt("color");
+            final Notification notification = RNBackgroundActionsTask.buildNotification(reactContext, taskTitle, taskDesc, iconInt, color);
+            final NotificationManager notificationManager = (NotificationManager) reactContext.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(RNBackgroundActionsTask.SERVICE_NOTIFICATION_ID, notification);
+        } catch (Exception e) {
+            promise.reject(e);
+            return;
+        }
         promise.resolve(null);
     }
 
