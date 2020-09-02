@@ -6,14 +6,38 @@ import RNBackgroundActions from './RNBackgroundActionsModule';
  *            taskTitle: string,
  *            taskDesc: string,
  *            taskIcon: {name: string, type: string, package?: string},
- *            color?: string,
- *            parameters?: any}} BackgroundTaskOptions
+ *            color?: string}} BackgroundTaskOptions
  */
 class BackgroundServer {
     constructor() {
+        /** @private */
         this._runnedTasks = 0;
+        /** @private */
         this._stopTask = () => {};
+        /** @private */
         this._isRunning = false;
+        /** @private @type {BackgroundTaskOptions} */
+        this._currentOptions;
+    }
+
+    /**
+     * **ANDROID ONLY**
+     *
+     * Updates the task notification.
+     *
+     * *On iOS this method will return immediately*
+     *
+     * @param {{taskTitle?: string,
+     *          taskDesc?: string,
+     *          taskIcon?: {name: string, type: string, package?: string},
+     *          color?: string}} taskData
+     */
+    async updateNotification(taskData) {
+        if (Platform.OS !== 'android') return;
+        if (!this.isRunning())
+            throw new Error('A BackgroundAction must be running before updating the notification');
+        this._currentOptions = this._normalizeOptions({ ...this._currentOptions, ...taskData });
+        await RNBackgroundActions.updateNotification(this._currentOptions);
     }
 
     /**
@@ -29,18 +53,18 @@ class BackgroundServer {
 
     /**
      * @param {(taskData: any) => Promise<void>} task
-     * @param {BackgroundTaskOptions} options
+     * @param {BackgroundTaskOptions & {parameters?: any}} options
      * @returns {Promise<void>}
      */
     async start(task, options) {
         this._runnedTasks++;
-        const finalOptions = this._normalizeOptions(options);
+        this._currentOptions = this._normalizeOptions(options);
         const finalTask = this._generateTask(task, options.parameters);
         if (Platform.OS === 'android') {
-            AppRegistry.registerHeadlessTask(finalOptions.taskName, () => finalTask);
-            await RNBackgroundActions.start(finalOptions);
+            AppRegistry.registerHeadlessTask(this._currentOptions.taskName, () => finalTask);
+            await RNBackgroundActions.start(this._currentOptions);
         } else {
-            await RNBackgroundActions.start(finalOptions);
+            await RNBackgroundActions.start(this._currentOptions);
             finalTask();
         }
         this._isRunning = true;
