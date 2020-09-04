@@ -16,6 +16,7 @@ import {
   StatusBar,
   TouchableOpacity,
   Platform,
+  Linking,
 } from 'react-native';
 import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
 
@@ -50,10 +51,19 @@ const options = {
     type: 'mipmap',
   },
   color: '#ff00ff',
+  linkingURI: 'exampleScheme://chat/jane',
   parameters: {
     delay: 1000,
   },
 };
+
+
+function handleOpenURL(evt) {
+  console.log(evt.url);
+  // do something with the url
+}
+
+Linking.addEventListener('url', handleOpenURL);
 
 class App extends React.Component {
   playing = BackgroundJob.isRunning();
