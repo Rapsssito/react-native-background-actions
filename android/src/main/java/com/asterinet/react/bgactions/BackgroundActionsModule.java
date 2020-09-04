@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.facebook.react.bridge.Arguments;
@@ -76,7 +77,8 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
             final String taskDesc = extras.getString("taskDesc", "RNBackgroundActionsTaskDesc");
             final int iconInt = extras.getInt("iconInt");
             final int color = extras.getInt("color");
-            final Notification notification = RNBackgroundActionsTask.buildNotification(reactContext, taskTitle, taskDesc, iconInt, color);
+            final String linkingURI = extras.getString("linkingURI");
+            final Notification notification = RNBackgroundActionsTask.buildNotification(reactContext, taskTitle, taskDesc, iconInt, color, linkingURI);
             final NotificationManager notificationManager = (NotificationManager) reactContext.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(RNBackgroundActionsTask.SERVICE_NOTIFICATION_ID, notification);
         } catch (Exception e) {
@@ -135,6 +137,13 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
             extras.putInt("color", Color.parseColor(color));
         } catch (Exception e) {
             extras.putInt("color", Color.parseColor("#ffffff"));
+        }
+        // Get linkingURI
+        try {
+            final String linkingURI = options.getString("linkingURI");
+            extras.putString("linkingURI", linkingURI);
+        } catch (Exception e) {
+            extras.putString("linkingURI", null);
         }
         return extras;
     }

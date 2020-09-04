@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -25,8 +26,8 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
     public static final int SERVICE_NOTIFICATION_ID = 92901;
 
     @NonNull
-    public static Notification buildNotification(@NonNull final Context context, @NonNull final String taskTitle, @NonNull final String taskDesc, final int iconInt, @ColorInt int color) {
-        final Intent notificationIntent = new Intent(context, ReactActivity.class);
+    public static Notification buildNotification(@NonNull final Context context, @NonNull final String taskTitle, @NonNull final String taskDesc, final int iconInt, @ColorInt int color, @Nullable final String linkingURI) {
+        final Intent notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkingURI));
         final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
         return new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentTitle(taskTitle)
@@ -60,10 +61,11 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         final String taskDesc = extras.getString("taskDesc", "RNBackgroundActionsTaskDesc");
         final int iconInt = extras.getInt("iconInt");
         final int color = extras.getInt("color");
+        final String linkingURI = extras.getString("linkingURI");
         // Turning into a foreground service
         createNotificationChannel(taskTitle, taskDesc); // Necessary creating channel for API 26+
         // Create the notification
-        final Notification notification = buildNotification(this, taskTitle, taskDesc, iconInt, color);
+        final Notification notification = buildNotification(this, taskTitle, taskDesc, iconInt, color, linkingURI);
         startForeground(SERVICE_NOTIFICATION_ID, notification);
         return super.onStartCommand(intent, flags, startId);
     }
