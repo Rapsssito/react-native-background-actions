@@ -9,20 +9,20 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.facebook.react.HeadlessJsTaskService;
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.jstasks.HeadlessJsTaskConfig;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.facebook.react.HeadlessJsTaskService;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.jstasks.HeadlessJsTaskConfig;
+
 final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
-    private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
     public static final int SERVICE_NOTIFICATION_ID = 92901;
+    private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
 
     @NonNull
     public static Notification buildNotification(@NonNull final ReactContext context, @NonNull final String taskTitle, @NonNull final String taskDesc, final int iconInt, @ColorInt int color, @Nullable final String linkingURI) {
