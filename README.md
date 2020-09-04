@@ -143,9 +143,6 @@ await BackgroundService.stop();
 > If .start() is called on the backgound, it will not have any effect.
 
 ### Options
-```javascript
-options
-```
 | Property    | Type       | Description                                    |
 | ----------- | ---------- | ------------------------------------------------ |
 | `taskName`  | `<string>` | Task name for identification.                     |
@@ -157,9 +154,6 @@ options
 | `parameters` | `<any>` | Parameters to pass to the task. |
 
 #### taskIconOptions
-```javascript
-taskIconOptions
-```
 | Property    | Type       | Description                                                    |
 | ----------- | ---------- | -------------------------------------------------------------- |
 | `name`  | `<string>` | **Required**. Icon name in res/ folder. Ex: `ic_launcher`.         |
