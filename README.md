@@ -152,8 +152,8 @@ options
 | `taskTitle` | `<string>` |  **Android Required**. Notification title.       |
 | `taskDesc`  | `<string>` | **Android Required**. Notification description. |
 | `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
-| `color`  | `<string>` | Notification color. **Default**: `"#ffffff"` |
-| `linkingURI`  | `<string>` | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined` |
+| `color`  | `<string>` | Notification color. **Default**: `"#ffffff"`. |
+| `linkingURI`  | `<string>` | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
 | `parameters` | `<any>` | Parameters to pass to the task. |
 
 #### taskIconOptions
