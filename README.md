@@ -170,7 +170,7 @@ taskIconOptions
 ![photo5837026843969041365](https://user-images.githubusercontent.com/44206249/72532521-de49e280-3873-11ea-8bf6-00618bcb82ab.jpg)
 
 ### Deep Linking
-**Android only**. To handle incoming links when the notification is clicked by the user, first you need to modify your **`android/app/src/main/AndroidManifest.xml`** and add an ´<intent-filter>´ (fill `yourSchemeHere` with the scheme you prefer):
+**Android only**. To handle incoming links when the notification is clicked by the user, first you need to modify your **`android/app/src/main/AndroidManifest.xml`** and add an ´intent-filter´ (fill `yourSchemeHere` with the scheme you prefer):
 ```xml
   <manifest ... >
       ...
