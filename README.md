@@ -16,6 +16,7 @@ React Native background service library for running **background tasks forever i
 - [Compatibility](#react-native-compatibility)
 - [Usage](#usage)
     - [Options](#options)
+    - [Deep Linking](#deep-linking)
 - [Maintainers](#maintainers)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
@@ -125,6 +126,7 @@ const options = {
         type: 'mipmap',
     },
     color: '#ff00ff',
+    linkingURI: 'yourSchemeHere://chat/jane', // See Deep Linking for more info
     parameters: {
         delay: 1000,
     },
@@ -141,22 +143,17 @@ await BackgroundService.stop();
 > If .start() is called on the backgound, it will not have any effect.
 
 ### Options
-```javascript
-options
-```
 | Property    | Type       | Description                                    |
 | ----------- | ---------- | ------------------------------------------------ |
 | `taskName`  | `<string>` | Task name for identification.                     |
 | `taskTitle` | `<string>` |  **Android Required**. Notification title.       |
 | `taskDesc`  | `<string>` | **Android Required**. Notification description. |
 | `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
-| `color`  | `<string>` | Notification color. **Default**: `"#ffffff"` |
+| `color`  | `<string>` | Notification color. **Default**: `"#ffffff"`. |
+| `linkingURI`  | `<string>` | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
 | `parameters` | `<any>` | Parameters to pass to the task. |
 
 #### taskIconOptions
-```javascript
-taskIconOptions
-```
 | Property    | Type       | Description                                                    |
 | ----------- | ---------- | -------------------------------------------------------------- |
 | `name`  | `<string>` | **Required**. Icon name in res/ folder. Ex: `ic_launcher`.         |
@@ -165,6 +162,60 @@ taskIconOptions
 
 
 ![photo5837026843969041365](https://user-images.githubusercontent.com/44206249/72532521-de49e280-3873-11ea-8bf6-00618bcb82ab.jpg)
+
+### Deep Linking
+**Android only**. To handle incoming links when the notification is clicked by the user, first you need to modify your **`android/app/src/main/AndroidManifest.xml`** and add an `<intent-filter>` (fill `yourSchemeHere` with the name you prefer):
+```xml
+  <manifest ... >
+      ...
+      <application ... >
+          <activity
+              ...
+              android:launchMode="singleTask"> // Add this if not present
+                  ...
+                  <intent-filter android:label="filter_react_native">
+                      <action android:name="android.intent.action.VIEW" />
+                      <category android:name="android.intent.category.DEFAULT" />
+                      <category android:name="android.intent.category.BROWSABLE" />
+                      <data android:scheme="yourSchemeHere" />
+                  </intent-filter>
+      </application>
+    </manifest>
+```
+
+You must provide a `linkingURI` in the BackgroundService's [options](#options) that matches the scheme you just added to **`android/app/src/main/AndroidManifest.xml`**:
+```js
+const options = {
+    taskName: 'Example',
+    taskTitle: 'ExampleTask title',
+    taskDesc: 'ExampleTask description',
+    taskIcon: {
+        name: 'ic_launcher',
+        type: 'mipmap',
+    },
+    color: '#ff00ff',
+    linkingURI: 'yourSchemeHere://chat/jane', // Add this
+    parameters: {
+        delay: 1000,
+    },
+};
+
+
+await BackgroundService.start(veryIntensiveTask, options);
+```
+
+React Native provides a `Linking` class to get notified of incoming links. Your JavaScript code must then listen to the url using React Native `Linking` class:
+```js
+import { Linking } from 'react-native';
+
+Linking.addEventListener('url', handleOpenURL);
+
+function handleOpenURL(evt) {
+    // Will be called when the notification is pressed
+    console.log(evt.url);
+    // do something
+}
+```
 
 ## Maintainers
 

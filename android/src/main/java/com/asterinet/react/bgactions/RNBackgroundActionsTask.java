@@ -4,30 +4,35 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import com.facebook.react.HeadlessJsTaskService;
-import com.facebook.react.ReactActivity;
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.facebook.react.HeadlessJsTaskService;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.jstasks.HeadlessJsTaskConfig;
+
 final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
-    private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
     public static final int SERVICE_NOTIFICATION_ID = 92901;
+    private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
 
     @NonNull
-    public static Notification buildNotification(@NonNull final Context context, @NonNull final String taskTitle, @NonNull final String taskDesc, final int iconInt, @ColorInt int color) {
-        final Intent notificationIntent = new Intent(context, ReactActivity.class);
-        final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+    public static Notification buildNotification(@NonNull final ReactContext context, @NonNull final String taskTitle, @NonNull final String taskDesc, final int iconInt, @ColorInt int color, @Nullable final String linkingURI) {
+        Intent notificationIntent;
+        if (linkingURI != null) {
+            notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkingURI));
+        } else {
+            notificationIntent = new Intent(context, context.getCurrentActivity().getClass());
+        }
+        final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         return new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentTitle(taskTitle)
                 .setContentText(taskDesc)
@@ -60,10 +65,11 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         final String taskDesc = extras.getString("taskDesc", "RNBackgroundActionsTaskDesc");
         final int iconInt = extras.getInt("iconInt");
         final int color = extras.getInt("color");
+        final String linkingURI = extras.getString("linkingURI");
         // Turning into a foreground service
         createNotificationChannel(taskTitle, taskDesc); // Necessary creating channel for API 26+
         // Create the notification
-        final Notification notification = buildNotification(this, taskTitle, taskDesc, iconInt, color);
+        final Notification notification = buildNotification(getReactNativeHost().getReactInstanceManager().getCurrentReactContext(), taskTitle, taskDesc, iconInt, color, linkingURI);
         startForeground(SERVICE_NOTIFICATION_ID, notification);
         return super.onStartCommand(intent, flags, startId);
     }
