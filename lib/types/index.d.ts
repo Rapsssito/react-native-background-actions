@@ -9,6 +9,7 @@ export type BackgroundTaskOptions = {
         package?: string | undefined;
     };
     color?: string | undefined;
+    linkingURI?: string | undefined;
 };
 declare const backgroundServer: BackgroundServer;
 /**
@@ -16,7 +17,8 @@ declare const backgroundServer: BackgroundServer;
  *            taskTitle: string,
  *            taskDesc: string,
  *            taskIcon: {name: string, type: string, package?: string},
- *            color?: string}} BackgroundTaskOptions
+ *            color?: string
+ *            linkingURI?: string}} BackgroundTaskOptions
  */
 declare class BackgroundServer {
     /** @private */
@@ -37,7 +39,8 @@ declare class BackgroundServer {
      * @param {{taskTitle?: string,
      *          taskDesc?: string,
      *          taskIcon?: {name: string, type: string, package?: string},
-     *          color?: string}} taskData
+     *          color?: string,
+     *          linkingURI?: string}} taskData
      */
     async updateNotification(taskData: {
         taskTitle?: string | undefined;
@@ -48,6 +51,7 @@ declare class BackgroundServer {
             package?: string | undefined;
         } | undefined;
         color?: string | undefined;
+        linkingURI?: string | undefined;
     }): Promise<void>;
     /**
      * Returns if the current background task is running.
@@ -72,6 +76,7 @@ declare class BackgroundServer {
             package?: string | undefined;
         };
         color?: string | undefined;
+        linkingURI?: string | undefined;
     } & {
         parameters?: any;
     }): Promise<void>;

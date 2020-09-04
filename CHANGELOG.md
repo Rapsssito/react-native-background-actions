@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.3.0...v2.4.0) (2020-09-04)
+
+
+### Features
+
+* **Android:** Add deep linking support when clicking on notification ([#40](https://github.com/Rapsssito/react-native-background-actions/issues/40)) ([c0849e3](https://github.com/Rapsssito/react-native-background-actions/commit/c0849e3ec31c0f6c8ceb43df7730ed84e2b4c17d))
+
 # [2.3.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.2.0...v2.3.0) (2020-09-02)
 
 
