@@ -7,7 +7,9 @@ import RNBackgroundActions from './RNBackgroundActionsModule';
  *            taskDesc: string,
  *            taskIcon: {name: string, type: string, package?: string},
  *            color?: string
- *            linkingURI?: string}} BackgroundTaskOptions
+ *            linkingURI?: string,
+ *            progressBar?: {max: number, value: number}
+ *            }} BackgroundTaskOptions
  */
 class BackgroundServer {
     constructor() {
@@ -32,7 +34,8 @@ class BackgroundServer {
      *          taskDesc?: string,
      *          taskIcon?: {name: string, type: string, package?: string},
      *          color?: string,
-     *          linkingURI?: string}} taskData
+     *          linkingURI?: string,
+     *          progressBar?: {max: number, value: number}}} taskData
      */
     async updateNotification(taskData) {
         if (Platform.OS !== 'android') return;
@@ -99,6 +102,7 @@ class BackgroundServer {
             taskIcon: { ...options.taskIcon },
             color: options.color || '#ffffff',
             linkingURI: options.linkingURI,
+            progressBar: options.progressBar,
         };
     }
 

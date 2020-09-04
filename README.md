@@ -151,6 +151,7 @@ await BackgroundService.stop();
 | `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
 | `color`  | `<string>` | Notification color. **Default**: `"#ffffff"`. |
 | `linkingURI`  | `<string>` | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
+| `taskIcon`  | [`<taskProgressOptions>`](#taskProgressOptions) | Notification progress bar values. |
 | `parameters` | `<any>` | Parameters to pass to the task. |
 
 #### taskIconOptions
@@ -162,6 +163,13 @@ await BackgroundService.stop();
 
 
 ![photo5837026843969041365](https://user-images.githubusercontent.com/44206249/72532521-de49e280-3873-11ea-8bf6-00618bcb82ab.jpg)
+
+#### taskProgressOptions
+| Property    | Type       | Description                                                    |
+| ----------- | ---------- | -------------------------------------------------------------- |
+| `max`       | `<number>` | **Required**. Icon name in res/ folder. Ex: `ic_launcher`.     |
+| `value`     | `<number>` |  **Required**. Icon type in res/ folder. Ex: `mipmap`.         |
+
 
 ### Deep Linking
 **Android only**. To handle incoming links when the notification is clicked by the user, first you need to modify your **`android/app/src/main/AndroidManifest.xml`** and add an `<intent-filter>` (fill `yourSchemeHere` with the name you prefer):
