@@ -102,7 +102,7 @@ class BackgroundServer {
             taskIcon: { ...options.taskIcon },
             color: options.color || '#ffffff',
             linkingURI: options.linkingURI,
-            progressBar: options.progressBar,
+            progressBar: { ...options.progressBar },
         };
     }
 

@@ -49,8 +49,8 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
         final Bundle progressBarBundle = bgOptions.getProgressBar();
         if (progressBarBundle != null) {
-            final int progressMax = progressBarBundle.getInt("max");
-            final int progressCurrent = progressBarBundle.getInt("value");
+            final int progressMax = (int) Math.floor(progressBarBundle.getDouble("max"));
+            final int progressCurrent = (int) Math.floor(progressBarBundle.getDouble("value"));
             final boolean progressIndeterminate = progressBarBundle.getBoolean("indeterminate");
             builder.setProgress(progressMax, progressCurrent, progressIndeterminate);
         }
