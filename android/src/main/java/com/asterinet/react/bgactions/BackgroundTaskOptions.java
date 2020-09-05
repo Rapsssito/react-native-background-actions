@@ -68,13 +68,6 @@ public final class BackgroundTaskOptions {
         } catch (Exception e) {
             extras.putInt("color", Color.parseColor("#ffffff"));
         }
-        // Get linkingURI
-        try {
-            final String linkingURI = options.getString("linkingURI");
-            extras.putString("linkingURI", linkingURI);
-        } catch (Exception e) {
-            extras.putString("linkingURI", null);
-        }
     }
 
     public Bundle getExtras() {
@@ -96,11 +89,16 @@ public final class BackgroundTaskOptions {
 
     @ColorInt
     public int getColor() {
-       return extras.getInt("color");
+        return extras.getInt("color");
     }
 
     @Nullable
     public String getLinkingURI() {
         return extras.getString("linkingURI");
+    }
+
+    @Nullable
+    public Bundle getProgressBar() {
+        return extras.getBundle("progressBar");
     }
 }

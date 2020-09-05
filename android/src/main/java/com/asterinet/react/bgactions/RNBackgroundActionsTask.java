@@ -38,15 +38,24 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
             notificationIntent = new Intent(context, context.getCurrentActivity().getClass());
         }
         final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        return new NotificationCompat.Builder(context, CHANNEL_ID)
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentTitle(taskTitle)
                 .setContentText(taskDesc)
                 .setSmallIcon(iconInt)
                 .setContentIntent(contentIntent)
                 .setOngoing(true)
                 .setPriority(NotificationCompat.PRIORITY_MIN)
-                .setColor(color)
-                .build();
+                .setColor(color);
+
+        final Bundle progressBarBundle = bgOptions.getProgressBar();
+        if (progressBarBundle != null) {
+            final int progressMax = progressBarBundle.getInt("max");
+            final int progressCurrent = progressBarBundle.getInt("value");
+            final boolean progressIndeterminate = progressBarBundle.getBoolean("indeterminate");
+            builder.setProgress(progressMax, progressCurrent, progressIndeterminate);
+        }
+
+        return builder.build();
     }
 
     @Override
