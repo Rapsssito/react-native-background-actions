@@ -151,7 +151,7 @@ await BackgroundService.stop();
 | `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
 | `color`  | `<string>` | Notification color. **Default**: `"#ffffff"`. |
 | `linkingURI`  | `<string>` | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
-| `progressBar`  | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar values. |
+| `progressBar`  | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar. |
 | `parameters` | `<any>` | Parameters to pass to the task. |
 
 #### taskIconOptions
