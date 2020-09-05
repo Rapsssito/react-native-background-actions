@@ -162,6 +162,7 @@ await BackgroundService.stop();
 | `type` | `<string>` |  **Required**. Icon type in res/ folder. Ex: `mipmap`.              |
 | `package`  | `<string>` | Icon package where to search the icon. Ex: `com.example.package`. **It defaults to the app's package. It is higly recommended to leave like that.** |
 
+Example:
 
 ![photo5837026843969041365](https://user-images.githubusercontent.com/44206249/72532521-de49e280-3873-11ea-8bf6-00618bcb82ab.jpg)
 
@@ -173,6 +174,9 @@ await BackgroundService.stop();
 | `value`     | `<number>` |  **Required**. Current value.         |
 | `indeterminate`     | `<boolean>` |  Display the progress status as indeterminate.         |
 
+Example:
+
+![ProgressBar](https://developer.android.com/images/ui/notifications/notification-progressbar_2x.png)
 
 ### Deep Linking
 **Android only**
