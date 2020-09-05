@@ -171,6 +171,7 @@ await BackgroundService.stop();
 | ----------- | ---------- | -------------------------------------------------------------- |
 | `max`       | `<number>` | **Required**. Maximum value.     |
 | `value`     | `<number>` |  **Required**. Current value.         |
+| `indeterminate`     | `<boolean>` |  Display the progress status as indeterminate.         |
 
 
 ### Deep Linking
