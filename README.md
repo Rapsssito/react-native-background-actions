@@ -151,20 +151,37 @@ await BackgroundService.stop();
 | `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
 | `color`  | `<string>` | Notification color. **Default**: `"#ffffff"`. |
 | `linkingURI`  | `<string>` | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
+| `progressBar`  | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar. |
 | `parameters` | `<any>` | Parameters to pass to the task. |
 
 #### taskIconOptions
+**Android only**
 | Property    | Type       | Description                                                    |
 | ----------- | ---------- | -------------------------------------------------------------- |
 | `name`  | `<string>` | **Required**. Icon name in res/ folder. Ex: `ic_launcher`.         |
 | `type` | `<string>` |  **Required**. Icon type in res/ folder. Ex: `mipmap`.              |
 | `package`  | `<string>` | Icon package where to search the icon. Ex: `com.example.package`. **It defaults to the app's package. It is higly recommended to leave like that.** |
 
+Example:
 
 ![photo5837026843969041365](https://user-images.githubusercontent.com/44206249/72532521-de49e280-3873-11ea-8bf6-00618bcb82ab.jpg)
 
+#### taskProgressBarOptions
+**Android only**
+| Property    | Type       | Description                                                    |
+| ----------- | ---------- | -------------------------------------------------------------- |
+| `max`       | `<number>` | **Required**. Maximum value.     |
+| `value`     | `<number>` |  **Required**. Current value.         |
+| `indeterminate`     | `<boolean>` |  Display the progress status as indeterminate.         |
+
+Example:
+
+![ProgressBar](https://developer.android.com/images/ui/notifications/notification-progressbar_2x.png)
+
 ### Deep Linking
-**Android only**. To handle incoming links when the notification is clicked by the user, first you need to modify your **`android/app/src/main/AndroidManifest.xml`** and add an `<intent-filter>` (fill `yourSchemeHere` with the name you prefer):
+**Android only**
+
+To handle incoming links when the notification is clicked by the user, first you need to modify your **`android/app/src/main/AndroidManifest.xml`** and add an `<intent-filter>` (fill `yourSchemeHere` with the name you prefer):
 ```xml
   <manifest ... >
       ...
