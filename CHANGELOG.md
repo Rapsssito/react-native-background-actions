@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.4.0...v2.5.0) (2020-09-06)
+
+
+### Features
+
+* **Android:** Add progress bar to notification ([#41](https://github.com/Rapsssito/react-native-background-actions/issues/41)) ([2ed041d](https://github.com/Rapsssito/react-native-background-actions/commit/2ed041dfb9d2b9a5419c5dd8330899b1e0123ac3))
+
 # [2.4.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.3.0...v2.4.0) (2020-09-04)
 
 

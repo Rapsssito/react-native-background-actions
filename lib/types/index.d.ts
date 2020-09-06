@@ -10,6 +10,11 @@ export type BackgroundTaskOptions = {
     };
     color?: string | undefined;
     linkingURI?: string | undefined;
+    progressBar?: {
+        max: number;
+        value: number;
+        indeterminate?: boolean | undefined;
+    } | undefined;
 };
 declare const backgroundServer: BackgroundServer;
 /**
@@ -18,12 +23,14 @@ declare const backgroundServer: BackgroundServer;
  *            taskDesc: string,
  *            taskIcon: {name: string, type: string, package?: string},
  *            color?: string
- *            linkingURI?: string}} BackgroundTaskOptions
+ *            linkingURI?: string,
+ *            progressBar?: {max: number, value: number, indeterminate?: boolean}
+ *            }} BackgroundTaskOptions
  */
 declare class BackgroundServer {
     /** @private */
     private _runnedTasks;
-    /** @private */
+    /** @private @type {(arg0?: any) => void} */
     private _stopTask;
     /** @private */
     private _isRunning;
@@ -40,7 +47,8 @@ declare class BackgroundServer {
      *          taskDesc?: string,
      *          taskIcon?: {name: string, type: string, package?: string},
      *          color?: string,
-     *          linkingURI?: string}} taskData
+     *          linkingURI?: string,
+     *          progressBar?: {max: number, value: number, indeterminate?: boolean}}} taskData
      */
     async updateNotification(taskData: {
         taskTitle?: string | undefined;
@@ -52,6 +60,11 @@ declare class BackgroundServer {
         } | undefined;
         color?: string | undefined;
         linkingURI?: string | undefined;
+        progressBar?: {
+            max: number;
+            value: number;
+            indeterminate?: boolean | undefined;
+        } | undefined;
     }): Promise<void>;
     /**
      * Returns if the current background task is running.
@@ -77,6 +90,11 @@ declare class BackgroundServer {
         };
         color?: string | undefined;
         linkingURI?: string | undefined;
+        progressBar?: {
+            max: number;
+            value: number;
+            indeterminate?: boolean | undefined;
+        } | undefined;
     } & {
         parameters?: any;
     }): Promise<void>;
