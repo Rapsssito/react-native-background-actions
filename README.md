@@ -109,7 +109,7 @@ import BackgroundService from 'react-native-background-actions';
 const veryIntensiveTask = async (taskDataArguments) => {
     // Example of an infinite loop task
     const { delay } = taskDataArguments;
-    await new Promise((resolve) => {
+    await new Promise( async (resolve) => {
         for (let i = 0; BackgroundService.isRunning(); i++) {
             console.log(i);
             await sleep(delay);
