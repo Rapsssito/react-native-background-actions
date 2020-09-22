@@ -37,6 +37,10 @@
     "type": "git",
     "url": "https://github.com/Rapsssito/react-native-background-actions.git"
   },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/Rapsssito"
+  },
   "author": {
     "name": "Rapsssito",
     "email": "contact@rodrigomartin.dev"
