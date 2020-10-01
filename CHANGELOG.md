@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/Rapsssito/react-native-background-actions/compare/v2.5.0...v2.5.1) (2020-10-01)
+
+
+### Bug Fixes
+
+* Fix Xcode 12 compatibility ([e80bc0e](https://github.com/Rapsssito/react-native-background-actions/commit/e80bc0e3a3721315bd1f44de2dfb2edac60f7138)), closes [facebook/react-native#29633](https://github.com/facebook/react-native/issues/29633)
+
 # [2.5.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.4.0...v2.5.0) (2020-09-06)
 
 
