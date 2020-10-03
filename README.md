@@ -1,17 +1,9 @@
 <div style="text-align:center">
-    <img style="width: 700px; height: auto;" src="https://i.imgur.com/X7j3aDw.png" />
+    <img style="width: 450px; height: auto;" src="https://i.imgur.com/X7j3aDw.png" />
     <br />
-    <div style="display:flex; flex-direction: row; justify-content: center;">
-        <div style="margin: 0px 10px" >
-            <img src="https://github.com/Rapsssito/react-native-background-actions/workflows/Release/badge.svg" />
-        </div>
-        <div style="margin: 0px 10px">
-            <img src="https://img.shields.io/npm/dw/react-native-background-actions" />
-        </div>
-        <div style="margin: 0px 10px">
-            <img src="https://img.shields.io/npm/v/react-native-background-actions?color=gr&label=npm%20version" />
-        </div>
-    </div>
+    <img src="https://github.com/Rapsssito/react-native-background-actions/workflows/Release/badge.svg" />
+    <img src="https://img.shields.io/npm/dw/react-native-background-actions" />
+    <img src="https://img.shields.io/npm/v/react-native-background-actions?color=gr&label=npm%20version" />
 </div>
 <br />
 
