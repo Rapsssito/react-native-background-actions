@@ -1,10 +1,10 @@
-<div style="text-align:center">
+<p align="center">
     <img src="https://i.imgur.com/G8BUzdZ.png" />
     <br />
     <img src="https://github.com/Rapsssito/react-native-background-actions/workflows/Release/badge.svg" />
     <img src="https://img.shields.io/npm/dw/react-native-background-actions" />
     <img src="https://img.shields.io/npm/v/react-native-background-actions?color=gr&label=npm%20version" />
-</div>
+</p>
 <br />
 
 React Native background service library for running **background tasks forever in Android & iOS**. Schedule a background job that will run your JavaScript when your app is in the background or foreground.

@@ -1,6 +1,6 @@
-<div style="text-align:center">
-    <img style="width: 700px; height: auto;" src="https://i.imgur.com/X7j3aDw.png" />
-</div>
+<p align="center">
+  <img src="https://i.imgur.com/G8BUzdZ.png" />
+</p>
 
 ## Usage
 - [Example Code](#Example-Code)
