@@ -1,5 +1,5 @@
 <div style="text-align:center">
-    <img style="width: 450px; height: auto;" src="https://i.imgur.com/X7j3aDw.png" />
+    <img src="https://i.imgur.com/G8BUzdZ.png" />
     <br />
     <img src="https://github.com/Rapsssito/react-native-background-actions/workflows/Release/badge.svg" />
     <img src="https://img.shields.io/npm/dw/react-native-background-actions" />
