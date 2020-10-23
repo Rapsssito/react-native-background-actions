@@ -50,7 +50,7 @@ declare class BackgroundServer {
      *          linkingURI?: string,
      *          progressBar?: {max: number, value: number, indeterminate?: boolean}}} taskData
      */
-    async updateNotification(taskData: {
+    updateNotification(taskData: {
         taskTitle?: string | undefined;
         taskDesc?: string | undefined;
         taskIcon?: {
@@ -79,7 +79,7 @@ declare class BackgroundServer {
      * @param {BackgroundTaskOptions & {parameters?: any}} options
      * @returns {Promise<void>}
      */
-    async start(task: (taskData: any) => Promise<void>, options: {
+    start(task: (taskData: any) => Promise<void>, options: {
         taskName: string;
         taskTitle: string;
         taskDesc: string;
@@ -114,5 +114,5 @@ declare class BackgroundServer {
      *
      * @returns {Promise<void>}
      */
-    async stop(): Promise<void>;
+    stop(): Promise<void>;
 }
