@@ -6,7 +6,7 @@ export type BackgroundTaskOptions = {
     taskIcon: {
         name: string;
         type: string;
-        package?: string | undefined;
+        package?: string;
     };
     color?: string | undefined;
     linkingURI?: string | undefined;
@@ -51,20 +51,20 @@ declare class BackgroundServer {
      *          progressBar?: {max: number, value: number, indeterminate?: boolean}}} taskData
      */
     updateNotification(taskData: {
-        taskTitle?: string | undefined;
-        taskDesc?: string | undefined;
+        taskTitle?: string;
+        taskDesc?: string;
         taskIcon?: {
             name: string;
             type: string;
-            package?: string | undefined;
-        } | undefined;
-        color?: string | undefined;
-        linkingURI?: string | undefined;
+            package?: string;
+        };
+        color?: string;
+        linkingURI?: string;
         progressBar?: {
             max: number;
             value: number;
-            indeterminate?: boolean | undefined;
-        } | undefined;
+            indeterminate?: boolean;
+        };
     }): Promise<void>;
     /**
      * Returns if the current background task is running.
@@ -79,23 +79,7 @@ declare class BackgroundServer {
      * @param {BackgroundTaskOptions & {parameters?: any}} options
      * @returns {Promise<void>}
      */
-    start(task: (taskData: any) => Promise<void>, options: {
-        taskName: string;
-        taskTitle: string;
-        taskDesc: string;
-        taskIcon: {
-            name: string;
-            type: string;
-            package?: string | undefined;
-        };
-        color?: string | undefined;
-        linkingURI?: string | undefined;
-        progressBar?: {
-            max: number;
-            value: number;
-            indeterminate?: boolean | undefined;
-        } | undefined;
-    } & {
+    start(task: (taskData: any) => Promise<void>, options: BackgroundTaskOptions & {
         parameters?: any;
     }): Promise<void>;
     /**
