@@ -7,6 +7,7 @@ const flushPromises = () => new Promise(setImmediate);
 
 Platform.OS = 'android';
 
+// @ts-ignore
 AppRegistry.registerHeadlessTask = jest.fn(async (taskName, task) => task()());
 
 const defaultOptions = {
@@ -33,9 +34,11 @@ test('stop-empty', async () => {
 test('start-android', async () => {
     let promiseFinish = () => {};
     const defaultTask = jest.fn(
+        // @ts-ignore
         async () => await new Promise((resolve) => (promiseFinish = resolve))
     );
     Platform.OS = 'android';
+    // @ts-ignore
     AppRegistry.registerHeadlessTask.mockClear();
     RNBackgroundActionsModule.start.mockClear();
     await BackgroundActions.start(defaultTask, defaultOptions);
@@ -52,8 +55,10 @@ test('start-android', async () => {
 test('start-ios', async () => {
     let promiseFinish = () => {};
     const defaultTask = jest.fn(
+        // @ts-ignore
         async () => await new Promise((resolve) => (promiseFinish = resolve))
     );
+    // @ts-ignore
     AppRegistry.registerHeadlessTask.mockClear();
     Platform.OS = 'ios';
     RNBackgroundActionsModule.start.mockClear();
@@ -71,6 +76,7 @@ test('start-ios', async () => {
 test('stop', async () => {
     let promiseFinish = () => {};
     const defaultTask = jest.fn(
+        // @ts-ignore
         async () => await new Promise((resolve) => (promiseFinish = resolve))
     );
     await BackgroundActions.start(defaultTask, defaultOptions);
@@ -85,6 +91,7 @@ test('updateNotification-ios', async () => {
     Platform.OS = 'ios';
     let promiseFinish = () => {};
     const defaultTask = jest.fn(
+        // @ts-ignore
         async () => await new Promise((resolve) => (promiseFinish = resolve))
     );
     await BackgroundActions.start(defaultTask, defaultOptions);
@@ -98,6 +105,7 @@ test('updateNotification-android', async () => {
     Platform.OS = 'android';
     let promiseFinish = () => {};
     const defaultTask = jest.fn(
+        // @ts-ignore
         async () => await new Promise((resolve) => (promiseFinish = resolve))
     );
     await BackgroundActions.start(defaultTask, defaultOptions);
