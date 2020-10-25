@@ -1,3 +1,10 @@
+## [2.5.2](https://github.com/Rapsssito/react-native-background-actions/compare/v2.5.1...v2.5.2) (2020-10-25)
+
+
+### Bug Fixes
+
+* Upgrade TypeScript declaration ([#53](https://github.com/Rapsssito/react-native-background-actions/issues/53)) ([c74ade7](https://github.com/Rapsssito/react-native-background-actions/commit/c74ade7eee3bac80a95a8c1fc223f2bdf1c48afa))
+
 ## [2.5.1](https://github.com/Rapsssito/react-native-background-actions/compare/v2.5.0...v2.5.1) (2020-10-01)
 
 

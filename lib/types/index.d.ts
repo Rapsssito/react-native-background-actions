@@ -6,7 +6,7 @@ export type BackgroundTaskOptions = {
     taskIcon: {
         name: string;
         type: string;
-        package?: string | undefined;
+        package?: string;
     };
     color?: string | undefined;
     linkingURI?: string | undefined;
@@ -50,21 +50,21 @@ declare class BackgroundServer {
      *          linkingURI?: string,
      *          progressBar?: {max: number, value: number, indeterminate?: boolean}}} taskData
      */
-    async updateNotification(taskData: {
-        taskTitle?: string | undefined;
-        taskDesc?: string | undefined;
+    updateNotification(taskData: {
+        taskTitle?: string;
+        taskDesc?: string;
         taskIcon?: {
             name: string;
             type: string;
-            package?: string | undefined;
-        } | undefined;
-        color?: string | undefined;
-        linkingURI?: string | undefined;
+            package?: string;
+        };
+        color?: string;
+        linkingURI?: string;
         progressBar?: {
             max: number;
             value: number;
-            indeterminate?: boolean | undefined;
-        } | undefined;
+            indeterminate?: boolean;
+        };
     }): Promise<void>;
     /**
      * Returns if the current background task is running.
@@ -79,23 +79,7 @@ declare class BackgroundServer {
      * @param {BackgroundTaskOptions & {parameters?: any}} options
      * @returns {Promise<void>}
      */
-    async start(task: (taskData: any) => Promise<void>, options: {
-        taskName: string;
-        taskTitle: string;
-        taskDesc: string;
-        taskIcon: {
-            name: string;
-            type: string;
-            package?: string | undefined;
-        };
-        color?: string | undefined;
-        linkingURI?: string | undefined;
-        progressBar?: {
-            max: number;
-            value: number;
-            indeterminate?: boolean | undefined;
-        } | undefined;
-    } & {
+    start(task: (taskData: any) => Promise<void>, options: BackgroundTaskOptions & {
         parameters?: any;
     }): Promise<void>;
     /**
@@ -114,5 +98,5 @@ declare class BackgroundServer {
      *
      * @returns {Promise<void>}
      */
-    async stop(): Promise<void>;
+    stop(): Promise<void>;
 }
