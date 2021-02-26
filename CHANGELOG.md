@@ -1,3 +1,10 @@
+## [2.5.3](https://github.com/Rapsssito/react-native-background-actions/compare/v2.5.2...v2.5.3) (2021-02-26)
+
+
+### Bug Fixes
+
+* Fix podspec version ([e41bb0e](https://github.com/Rapsssito/react-native-background-actions/commit/e41bb0e0f1fca864a46ccd77737e4ea69f1bb366))
+
 ## [2.5.2](https://github.com/Rapsssito/react-native-background-actions/compare/v2.5.1...v2.5.2) (2020-10-25)
 
 
