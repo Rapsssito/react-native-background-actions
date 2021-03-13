@@ -6,13 +6,16 @@
 }
 
 RCT_EXPORT_MODULE()
+- (NSArray<NSString *> *)supportedEvents
+{
+    return @[@"expiration"];
+}
 
 - (void) _start
 {
     [self _stop];
     bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"RNBackgroundActions" expirationHandler:^{
-        // Clean up any unfinished task business by marking where you
-        // stopped or ending the task outright.
+        [self onExpiration];
         [[UIApplication sharedApplication] endBackgroundTask: self->bgTask];
         self->bgTask = UIBackgroundTaskInvalid;
     }];
@@ -24,6 +27,12 @@ RCT_EXPORT_MODULE()
         [[UIApplication sharedApplication] endBackgroundTask:bgTask];
         bgTask = UIBackgroundTaskInvalid;
     }
+}
+
+- (void)onExpiration
+{
+    [self sendEventWithName:@"expiration"
+                       body:@{}];
 }
 
 RCT_EXPORT_METHOD(start:(NSDictionary *)options

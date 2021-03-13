@@ -1,6 +1,6 @@
 import { Platform, AppRegistry } from 'react-native';
 import BackgroundActions from '../src/index';
-import RNBackgroundActionsModule from '../src/RNBackgroundActionsModule';
+import { RNBackgroundActions as RNBackgroundActionsModule } from '../src/RNBackgroundActionsModule';
 
 // Flush promises
 const flushPromises = () => new Promise(setImmediate);

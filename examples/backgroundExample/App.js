@@ -24,6 +24,10 @@ import BackgroundJob from 'react-native-background-actions';
 
 const sleep = (time) => new Promise((resolve) => setTimeout(() => resolve(), time));
 
+BackgroundJob.on('expiration', () => {
+    console.log('iOS: I am being closed!');
+});
+
 const taskRandom = async (taskData) => {
     if (Platform.OS === 'ios') {
         console.warn(

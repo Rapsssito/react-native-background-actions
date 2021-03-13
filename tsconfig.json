@@ -5,6 +5,7 @@
         "noEmit": true,
         "strict": true,
         "skipLibCheck": true,
+        "esModuleInterop": true
     },
     "include": ["src/index.js", "__tests__/", "__mocks__/"],
 }
