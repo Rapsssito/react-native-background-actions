@@ -26,8 +26,9 @@ declare const backgroundServer: BackgroundServer;
  *            linkingURI?: string,
  *            progressBar?: {max: number, value: number, indeterminate?: boolean}
  *            }} BackgroundTaskOptions
+ * @extends EventEmitter<'expiration',any>
  */
-declare class BackgroundServer {
+declare class BackgroundServer extends EventEmitter<"expiration", any> {
     /** @private */
     private _runnedTasks;
     /** @private @type {(arg0?: any) => void} */
@@ -36,6 +37,10 @@ declare class BackgroundServer {
     private _isRunning;
     /** @private @type {BackgroundTaskOptions} */
     private _currentOptions;
+    /**
+     * @private
+     */
+    private _addListeners;
     /**
      * **ANDROID ONLY**
      *
@@ -75,17 +80,36 @@ declare class BackgroundServer {
      */
     isRunning(): boolean;
     /**
-     * @param {(taskData: any) => Promise<void>} task
-     * @param {BackgroundTaskOptions & {parameters?: any}} options
+     * @template T
+     *
+     * @param {(taskData?: T) => Promise<void>} task
+     * @param {BackgroundTaskOptions & {parameters?: T}} options
      * @returns {Promise<void>}
      */
-    start(task: (taskData: any) => Promise<void>, options: BackgroundTaskOptions & {
-        parameters?: any;
+    start<T>(task: (taskData?: T | undefined) => Promise<void>, options: {
+        taskName: string;
+        taskTitle: string;
+        taskDesc: string;
+        taskIcon: {
+            name: string;
+            type: string;
+            package?: string;
+        };
+        color?: string | undefined;
+        linkingURI?: string | undefined;
+        progressBar?: {
+            max: number;
+            value: number;
+            indeterminate?: boolean | undefined;
+        } | undefined;
+    } & {
+        parameters?: T | undefined;
     }): Promise<void>;
     /**
      * @private
-     * @param {(taskData: any) => Promise<void>} task
-     * @param {any} [parameters]
+     * @template T
+     * @param {(taskData?: T) => Promise<void>} task
+     * @param {T} [parameters]
      */
     private _generateTask;
     /**
@@ -100,3 +124,4 @@ declare class BackgroundServer {
      */
     stop(): Promise<void>;
 }
+import EventEmitter from "eventemitter3";

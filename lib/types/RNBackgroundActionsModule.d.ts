@@ -1,2 +1,2 @@
-export default RNBackgroundActions;
-declare const RNBackgroundActions: any;
+export const RNBackgroundActions: any;
+export const nativeEventEmitter: import("react-native").EventEmitter;

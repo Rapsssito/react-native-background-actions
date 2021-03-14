@@ -1,3 +1,10 @@
+# [2.6.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.5.3...v2.6.0) (2021-03-14)
+
+
+### Features
+
+* **iOS:** Add 'expiration' event ([#74](https://github.com/Rapsssito/react-native-background-actions/issues/74)) ([4b820ee](https://github.com/Rapsssito/react-native-background-actions/commit/4b820ee276cd8c6bba3604d69b37c85a7341a718))
+
 ## [2.5.3](https://github.com/Rapsssito/react-native-background-actions/compare/v2.5.2...v2.5.3) (2021-02-26)
 
 
