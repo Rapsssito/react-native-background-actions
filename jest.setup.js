@@ -1,5 +1,4 @@
 jest.mock('./src/RNBackgroundActionsModule.js', () => ({
-    start: jest.fn(),
-    stop: jest.fn(),
-    updateNotification: jest.fn(),
+    RNBackgroundActions: { start: jest.fn(), stop: jest.fn(), updateNotification: jest.fn() },
+    nativeEventEmitter: { addListener: jest.fn() }
 }));
