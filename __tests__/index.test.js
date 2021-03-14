@@ -1,6 +1,12 @@
 import { Platform, AppRegistry } from 'react-native';
 import BackgroundActions from '../src/index';
-import RNBackgroundActionsModule from '../src/RNBackgroundActionsModule';
+import {
+    RNBackgroundActions as RNBackgroundActionsModule,
+    nativeEventEmitter,
+} from '../src/RNBackgroundActionsModule';
+
+// @ts-ignore
+const mockedEventEmitter = /** @type {{ addListener: jest.Mock<any, any> }} */ (nativeEventEmitter);
 
 // Flush promises
 const flushPromises = () => new Promise(setImmediate);
@@ -122,4 +128,12 @@ test('updateNotification-android-notRunning', async () => {
     Platform.OS = 'android';
     const updatedOptions = { taskDesc: 'New Desc' };
     await expect(BackgroundActions.updateNotification(updatedOptions)).rejects.toBeDefined();
+});
+
+test('expiration-event', () => {
+    Platform.OS = 'ios';
+    return new Promise((done) => {
+        BackgroundActions.on('expiration', done);
+        mockedEventEmitter.addListener.mock.calls[0][1]();
+    });
 });

@@ -1,5 +1,6 @@
 import { Platform, AppRegistry } from 'react-native';
-import RNBackgroundActions from './RNBackgroundActionsModule';
+import { RNBackgroundActions, nativeEventEmitter } from './RNBackgroundActionsModule';
+import EventEmitter from 'eventemitter3';
 
 /**
  * @typedef {{taskName: string,
@@ -10,9 +11,11 @@ import RNBackgroundActions from './RNBackgroundActionsModule';
  *            linkingURI?: string,
  *            progressBar?: {max: number, value: number, indeterminate?: boolean}
  *            }} BackgroundTaskOptions
+ * @extends EventEmitter<'expiration',any>
  */
-class BackgroundServer {
+class BackgroundServer extends EventEmitter {
     constructor() {
+        super();
         /** @private */
         this._runnedTasks = 0;
         /** @private @type {(arg0?: any) => void} */
@@ -21,6 +24,14 @@ class BackgroundServer {
         this._isRunning = false;
         /** @private @type {BackgroundTaskOptions} */
         this._currentOptions;
+        this._addListeners();
+    }
+
+    /**
+     * @private
+     */
+    _addListeners() {
+        nativeEventEmitter.addListener('expiration', () => this.emit('expiration'));
     }
 
     /**
@@ -57,8 +68,10 @@ class BackgroundServer {
     }
 
     /**
-     * @param {(taskData: any) => Promise<void>} task
-     * @param {BackgroundTaskOptions & {parameters?: any}} options
+     * @template T
+     *
+     * @param {(taskData?: T) => Promise<void>} task
+     * @param {BackgroundTaskOptions & {parameters?: T}} options
      * @returns {Promise<void>}
      */
     async start(task, options) {
@@ -68,17 +81,19 @@ class BackgroundServer {
         if (Platform.OS === 'android') {
             AppRegistry.registerHeadlessTask(this._currentOptions.taskName, () => finalTask);
             await RNBackgroundActions.start(this._currentOptions);
+            this._isRunning = true;
         } else {
             await RNBackgroundActions.start(this._currentOptions);
+            this._isRunning = true;
             finalTask();
         }
-        this._isRunning = true;
     }
 
     /**
      * @private
-     * @param {(taskData: any) => Promise<void>} task
-     * @param {any} [parameters]
+     * @template T
+     * @param {(taskData?: T) => Promise<void>} task
+     * @param {T} [parameters]
      */
     _generateTask(task, parameters) {
         const self = this;

@@ -6,6 +6,7 @@
 - [Example Code](#Example-Code)
 - [Options](#options)
 - [Deep Linking](#deep-linking)
+- [Events](#events)
 
 ### Example Code
 
@@ -142,4 +143,18 @@ function handleOpenURL(evt) {
     console.log(evt.url);
     // do something
 }
+```
+
+### Events
+#### 'expiration'
+**iOS only**
+Listen for the iOS-only expiration handler that allows you to 'clean up' shortly before the app’s remaining background time reaches 0. Check the iOS [documentation](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask) for more info.
+
+```js
+BackgroundService.on('expiration', () => {
+    console.log('I am being closed :(');
+});
+
+await BackgroundService.start(veryIntensiveTask, options);
+
 ```

@@ -1,5 +1,7 @@
-import { NativeModules } from 'react-native';
+import { NativeEventEmitter, NativeModules } from 'react-native';
 
 const { RNBackgroundActions } = NativeModules;
 
-export default RNBackgroundActions;
+const nativeEventEmitter = new NativeEventEmitter(RNBackgroundActions);
+
+export { RNBackgroundActions, nativeEventEmitter };
