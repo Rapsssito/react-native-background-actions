@@ -31,6 +31,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         final int iconInt = bgOptions.getIconInt();
         final int color = bgOptions.getColor();
         final String linkingURI = bgOptions.getLinkingURI();
+        final Bundle actions = bgOptions.getActions();
         Intent notificationIntent;
         if (linkingURI != null) {
             notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkingURI));
@@ -46,6 +47,24 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
                 .setOngoing(true)
                 .setPriority(NotificationCompat.PRIORITY_MIN)
                 .setColor(color);
+
+        for (String key : actions.keySet()) {
+            final Bundle action = actions.getBundle(key);
+            final String title = action.getString("title");
+
+            if (title == null) break;
+
+            final String actionURI = action.getString("URI");
+            Intent actionIntent;
+            if (actionURI != null) {
+                actionIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(actionURI));
+            } else {
+                actionIntent = new Intent(context, context.getCurrentActivity().getClass());
+            }
+            final PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            builder.addAction(iconInt, title, pendingIntent);
+        }
 
         final Bundle progressBarBundle = bgOptions.getProgressBar();
         if (progressBarBundle != null) {

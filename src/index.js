@@ -9,6 +9,7 @@ import EventEmitter from 'eventemitter3';
  *            taskIcon: {name: string, type: string, package?: string},
  *            color?: string
  *            linkingURI?: string,
+ *            actions?: [{title: string, URI: string}],
  *            progressBar?: {max: number, value: number, indeterminate?: boolean}
  *            }} BackgroundTaskOptions
  * @extends EventEmitter<'expiration',any>
@@ -46,6 +47,7 @@ class BackgroundServer extends EventEmitter {
      *          taskIcon?: {name: string, type: string, package?: string},
      *          color?: string,
      *          linkingURI?: string,
+     *          actions?: [{title: string, URI: string}],
      *          progressBar?: {max: number, value: number, indeterminate?: boolean}}} taskData
      */
     async updateNotification(taskData) {
@@ -117,6 +119,7 @@ class BackgroundServer extends EventEmitter {
             taskIcon: { ...options.taskIcon },
             color: options.color || '#ffffff',
             linkingURI: options.linkingURI,
+            actions: options.actions,
             progressBar: options.progressBar,
         };
     }
