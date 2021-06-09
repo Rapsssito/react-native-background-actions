@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -24,7 +25,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
     private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
 
     @NonNull
-    public static Notification buildNotification(@NonNull final ReactContext context, @NonNull final BackgroundTaskOptions bgOptions) {
+    public static Notification buildNotification(@NonNull Context context, @NonNull final BackgroundTaskOptions bgOptions) {
         // Get info
         final String taskTitle = bgOptions.getTaskTitle();
         final String taskDesc = bgOptions.getTaskDesc();
@@ -35,7 +36,8 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         if (linkingURI != null) {
             notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkingURI));
         } else {
-            notificationIntent = new Intent(context, context.getCurrentActivity().getClass());
+            //as RN works on single activity architecture - we don't need to find current activity on behalf of react context
+            notificationIntent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
         }
         final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
@@ -54,7 +56,6 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
             final boolean progressIndeterminate = progressBarBundle.getBoolean("indeterminate");
             builder.setProgress(progressMax, progressCurrent, progressIndeterminate);
         }
-
         return builder.build();
     }
 
@@ -77,7 +78,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         final BackgroundTaskOptions bgOptions = new BackgroundTaskOptions(extras);
         createNotificationChannel(bgOptions.getTaskTitle(), bgOptions.getTaskDesc()); // Necessary creating channel for API 26+
         // Create the notification
-        final Notification notification = buildNotification(getReactNativeHost().getReactInstanceManager().getCurrentReactContext(), bgOptions);
+        final Notification notification = buildNotification(this, bgOptions);
         startForeground(SERVICE_NOTIFICATION_ID, notification);
         return super.onStartCommand(intent, flags, startId);
     }
