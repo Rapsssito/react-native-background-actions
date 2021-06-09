@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.0...v2.6.1) (2021-06-09)
+
+
+### Bug Fixes
+
+* Fix [#61](https://github.com/Rapsssito/react-native-background-actions/issues/61) when React context was null ([2efefaa](https://github.com/Rapsssito/react-native-background-actions/commit/2efefaa20ec601e4822bd83574594a55a85dc96e))
+
 # [2.6.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.5.3...v2.6.0) (2021-03-14)
 
 
