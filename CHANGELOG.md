@@ -1,3 +1,10 @@
+## [2.6.2](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.1...v2.6.2) (2021-06-30)
+
+
+### Bug Fixes
+
+* Fix IllegalStateException "Not allowed to start service Intent" ([1ba26c7](https://github.com/Rapsssito/react-native-background-actions/commit/1ba26c710f8044bd94ee6b3b90f53787cabf24b0))
+
 ## [2.6.1](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.0...v2.6.1) (2021-06-09)
 
 
