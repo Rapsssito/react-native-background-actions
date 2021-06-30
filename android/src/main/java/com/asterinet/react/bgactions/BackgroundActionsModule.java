@@ -37,21 +37,20 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
     @SuppressWarnings("unused")
     @ReactMethod
     public void start(@NonNull final ReadableMap options, @NonNull final Promise promise) {
-        // Stop any other intent
-        if (currentServiceIntent != null) reactContext.stopService(currentServiceIntent);
-        // Create the service
-        currentServiceIntent = new Intent(reactContext, RNBackgroundActionsTask.class);
-        // Get the task info from the options
         try {
+            // Stop any other intent
+            if (currentServiceIntent != null) reactContext.stopService(currentServiceIntent);
+            // Create the service
+            currentServiceIntent = new Intent(reactContext, RNBackgroundActionsTask.class);
+            // Get the task info from the options
             final BackgroundTaskOptions bgOptions = new BackgroundTaskOptions(reactContext, options);
             currentServiceIntent.putExtras(bgOptions.getExtras());
+            // Start the task
+            reactContext.startService(currentServiceIntent);
+            promise.resolve(null);
         } catch (Exception e) {
             promise.reject(e);
-            return;
         }
-        // Start the task
-        reactContext.startService(currentServiceIntent);
-        promise.resolve(null);
     }
 
     @SuppressWarnings("unused")
