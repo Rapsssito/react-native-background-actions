@@ -71,7 +71,7 @@ await BackgroundService.stop();
 | ----------- | ---------- | -------------------------------------------------------------- |
 | `name`  | `<string>` | **Required**. Icon name in res/ folder. Ex: `ic_launcher`.         |
 | `type` | `<string>` |  **Required**. Icon type in res/ folder. Ex: `mipmap`.              |
-| `package`  | `<string>` | Icon package where to search the icon. Ex: `com.example.package`. **It defaults to the app's package. It is higly recommended to leave like that.** |
+| `package`  | `<string>` | Icon package where to search the icon. Ex: `com.example.package`. **It defaults to the app's package. It is highly recommended to leave like that.** |
 
 Example:
 
