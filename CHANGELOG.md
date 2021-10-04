@@ -1,3 +1,10 @@
+## [2.6.4](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.3...v2.6.4) (2021-10-04)
+
+
+### Bug Fixes
+
+* **Android:** Fix Gradle 7 and Android S compatibility ([e7452ba](https://github.com/Rapsssito/react-native-background-actions/commit/e7452ba881ef01859bdd926186b8ff4d115d1ada)), closes [#88](https://github.com/Rapsssito/react-native-background-actions/issues/88) [#87](https://github.com/Rapsssito/react-native-background-actions/issues/87)
+
 ## [2.6.2](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.1...v2.6.2) (2021-06-30)
 
 
