@@ -1,3 +1,10 @@
+## [2.6.5](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.4...v2.6.5) (2021-10-15)
+
+
+### Bug Fixes
+
+* **Android:** Add RN 0.65 event emitter stubs ([83d4621](https://github.com/Rapsssito/react-native-background-actions/commit/83d4621f97d870fdde2229cf8bdc5803b0a891ea)), closes [#103](https://github.com/Rapsssito/react-native-background-actions/issues/103)
+
 ## [2.6.4](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.3...v2.6.4) (2021-10-04)
 
 
