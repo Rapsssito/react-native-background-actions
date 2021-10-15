@@ -76,4 +76,16 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
         }
         promise.resolve(null);
     }
+
+    @SuppressWarnings("unused")
+    @ReactMethod
+    public void addListener(String eventName) {
+        // Keep: Required for RN built in Event Emitter Calls.
+    }
+
+    @SuppressWarnings("unused")
+    @ReactMethod
+    public void removeListeners(Integer count) {
+        // Keep: Required for RN built in Event Emitter Calls.
+    }
 }
