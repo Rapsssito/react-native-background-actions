@@ -2,6 +2,9 @@ package com.asterinet.react.bgactions;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
+import android.widget.Button;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
@@ -10,7 +13,11 @@ import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public final class BackgroundTaskOptions {
     private final Bundle extras;
@@ -68,6 +75,25 @@ public final class BackgroundTaskOptions {
         } catch (Exception e) {
             extras.putInt("color", Color.parseColor("#ffffff"));
         }
+
+        // Get actions
+        try {
+            final ReadableArray acts = options.getArray("actions");
+            Bundle actions = new Bundle();
+            if(acts != null) {
+                for (int i = 0; i < acts.size(); i++) {
+                    ReadableMap map = acts.getMap(i);
+                    Bundle action = new Bundle();
+                    action.putString("title", map.getString("title"));
+                    action.putString("URI", map.getString("URI"));
+                    actions.putBundle(Integer.toString(i), action);
+                }
+            }
+            extras.putBundle("actions", actions);
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+
     }
 
     public Bundle getExtras() {
@@ -95,6 +121,11 @@ public final class BackgroundTaskOptions {
     @Nullable
     public String getLinkingURI() {
         return extras.getString("linkingURI");
+    }
+
+    @Nullable
+    public Bundle getActions() {
+        return extras.getBundle("actions");
     }
 
     @Nullable

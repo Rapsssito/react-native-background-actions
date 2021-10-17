@@ -10,6 +10,10 @@ export type BackgroundTaskOptions = {
     };
     color?: string | undefined;
     linkingURI?: string | undefined;
+    actions?: [{
+        title: string;
+        URI: string;
+    }] | undefined;
     progressBar?: {
         max: number;
         value: number;
@@ -24,6 +28,7 @@ declare const backgroundServer: BackgroundServer;
  *            taskIcon: {name: string, type: string, package?: string},
  *            color?: string
  *            linkingURI?: string,
+ *            actions?: [{title: string, URI: string}],
  *            progressBar?: {max: number, value: number, indeterminate?: boolean}
  *            }} BackgroundTaskOptions
  * @extends EventEmitter<'expiration',any>
@@ -53,6 +58,7 @@ declare class BackgroundServer extends EventEmitter<"expiration", any> {
      *          taskIcon?: {name: string, type: string, package?: string},
      *          color?: string,
      *          linkingURI?: string,
+     *          actions?: [{title: string, URI: string}],
      *          progressBar?: {max: number, value: number, indeterminate?: boolean}}} taskData
      */
     updateNotification(taskData: {
@@ -65,6 +71,10 @@ declare class BackgroundServer extends EventEmitter<"expiration", any> {
         };
         color?: string;
         linkingURI?: string;
+        actions?: [{
+            title: string;
+            URI: string;
+        }];
         progressBar?: {
             max: number;
             value: number;
@@ -97,6 +107,10 @@ declare class BackgroundServer extends EventEmitter<"expiration", any> {
         };
         color?: string | undefined;
         linkingURI?: string | undefined;
+        actions?: [{
+            title: string;
+            URI: string;
+        }] | undefined;
         progressBar?: {
             max: number;
             value: number;

@@ -38,6 +38,10 @@ const options = {
     },
     color: '#ff00ff',
     linkingURI: 'yourSchemeHere://chat/jane', // See Deep Linking for more info
+    actions:[
+        { title: 'Jane', URI: 'yourSchemeHere://chat/jane' },
+        { title: 'John', URI: 'yourSchemeHere://chat/john' }
+    ]
     parameters: {
         delay: 1000,
     },
@@ -62,6 +66,7 @@ await BackgroundService.stop();
 | `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
 | `color`  | `<string>` | Notification color. **Default**: `"#ffffff"`. |
 | `linkingURI`  | `<string>` | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
+| `actions`  | [`[<actionItem>]`](#actionItem) | List of notification action items. |
 | `progressBar`  | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar. |
 | `parameters` | `<any>` | Parameters to pass to the task. |
 
@@ -76,6 +81,14 @@ await BackgroundService.stop();
 Example:
 
 ![photo5837026843969041365](https://user-images.githubusercontent.com/44206249/72532521-de49e280-3873-11ea-8bf6-00618bcb82ab.jpg)
+
+#### actionItem
+**Android only**
+| Property    | Type       | Description                                                    |
+| ----------- | ---------- | -------------------------------------------------------------- |
+| `title`  | `<string>` | **Required**. Action title.         |
+| `URI` | `<string>` |  Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info.              |
+**It defaults to the app's package. It is higly recommended to leave like that.** |
 
 #### taskProgressBarOptions
 **Android only**
