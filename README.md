@@ -16,8 +16,16 @@ React Native background service library for running **background tasks forever i
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Install](#install)
 - [Usage](#usage)
+  - [Example Code](#example-code)
+  - [Options](#options)
+    - [taskIconOptions](#taskiconoptions)
+    - [taskProgressBarOptions](#taskprogressbaroptions)
+  - [Deep Linking](#deep-linking)
+  - [Events](#events)
+    - ['expiration'](#expiration)
 - [Maintainers](#maintainers)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
@@ -27,11 +35,6 @@ React Native background service library for running **background tasks forever i
 Go to [INSTALL.md](./INSTALL.md) to see the how to install, compatibility with RN and Linking process.
 
 ## Usage
-
-- [Example Code](#Example-Code)
-- [Options](#options)
-- [Deep Linking](#deep-linking)
-- [Events](#events)
 
 ### Example Code
 
