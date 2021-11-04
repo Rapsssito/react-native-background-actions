@@ -40,6 +40,8 @@ Go to [INSTALL.md](./INSTALL.md) to see the how to install, compatibility with R
 ```js
 import BackgroundService from 'react-native-background-actions';
 
+const sleep = (time) => new Promise((resolve) => setTimeout(() => resolve(), time));
+
 // You can do anything in your task such as network requests, timers and so on,
 // as long as it doesn't touch UI. Once your task completes (i.e. the promise is resolved),
 // React Native will go into "paused" mode (unless there are other tasks running,
