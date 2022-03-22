@@ -1,3 +1,10 @@
+## [2.6.6](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.5...v2.6.6) (2022-03-22)
+
+
+### Bug Fixes
+
+* Fix creation of multiple tasks ([#124](https://github.com/Rapsssito/react-native-background-actions/issues/124)) ([df268bd](https://github.com/Rapsssito/react-native-background-actions/commit/df268bd024c876b3d8499690417db341706bf5ec))
+
 ## [2.6.5](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.4...v2.6.5) (2021-10-15)
 
 
