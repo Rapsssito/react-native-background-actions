@@ -85,15 +85,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         final Notification notification = buildNotification(this, bgOptions);
 
         startForeground(SERVICE_NOTIFICATION_ID, notification);
-
-        HeadlessJsTaskConfig taskConfig = this.getTaskConfig(intent);
-
-        if (taskConfig != null) {
-            this.stopForeground(false);
-            this.startTask(taskConfig);
-        }
-
-        return START_NOT_STICKY;
+        return super.onStartCommand(intent, flags, startId);
     }
 
     private void createNotificationChannel(@NonNull final String taskTitle, @NonNull final String taskDesc) {
