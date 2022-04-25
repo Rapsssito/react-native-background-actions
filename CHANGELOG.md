@@ -1,3 +1,10 @@
+## [2.6.7](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.6...v2.6.7) (2022-04-25)
+
+
+### Bug Fixes
+
+* **Android:** Revert [#124](https://github.com/Rapsssito/react-native-background-actions/issues/124) ([#127](https://github.com/Rapsssito/react-native-background-actions/issues/127)) ([ba3bf29](https://github.com/Rapsssito/react-native-background-actions/commit/ba3bf2946d8f9ec880be53161faa581fb8466e7f)), closes [#126](https://github.com/Rapsssito/react-native-background-actions/issues/126)
+
 ## [2.6.6](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.5...v2.6.6) (2022-03-22)
 
 
