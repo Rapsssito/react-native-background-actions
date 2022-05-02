@@ -35,6 +35,15 @@ Linking the package manually is not required anymore with [Autolinking](https://
   The background support requires you to activate the background capability in Xcode.
   <img width="688" alt="screenBack" src="https://user-images.githubusercontent.com/44206249/72381524-d2490e00-3717-11ea-959c-f95d94e6ae26.png">
 
+  To support submitting the app to the App store you need to add the following to your `Info.plist`:
+
+  ```xml
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    </array>
+  ```
+
 - **Android Platform:**
 
   Modify your **`android/app/src/main/AndroidManifest.xml`** and add the following:
