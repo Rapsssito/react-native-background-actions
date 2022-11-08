@@ -23,6 +23,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
     public static final int SERVICE_NOTIFICATION_ID = 92901;
     private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
 
+    @SuppressLint("WrongConstant")
     @NonNull
     public static Notification buildNotification(@NonNull Context context, @NonNull final BackgroundTaskOptions bgOptions) {
         // Get info
