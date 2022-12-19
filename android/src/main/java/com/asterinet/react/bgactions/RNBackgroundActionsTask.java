@@ -1,5 +1,6 @@
 package com.asterinet.react.bgactions;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -23,6 +24,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
     public static final int SERVICE_NOTIFICATION_ID = 92901;
     private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
 
+    @SuppressLint("WrongConstant")
     @NonNull
     public static Notification buildNotification(@NonNull Context context, @NonNull final BackgroundTaskOptions bgOptions) {
         // Get info
@@ -40,7 +42,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         }
         final PendingIntent contentIntent;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+            contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
         } else {
             contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
