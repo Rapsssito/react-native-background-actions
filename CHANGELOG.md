@@ -1,3 +1,10 @@
+## [2.6.8](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.7...v2.6.8) (2022-12-19)
+
+
+### Bug Fixes
+
+* **Android:** Fix crash when targeting SDK 31+ ([4eee7e7](https://github.com/Rapsssito/react-native-background-actions/commit/4eee7e7abaa9460cea50558675cd47179c09a29e))
+
 ## [2.6.7](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.6...v2.6.7) (2022-04-25)
 
 
