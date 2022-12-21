@@ -1,3 +1,10 @@
+## [2.6.9](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.8...v2.6.9) (2022-12-21)
+
+
+### Bug Fixes
+
+* **Android:** Add backwards compatibility for SDK31+ fix ([#163](https://github.com/Rapsssito/react-native-background-actions/issues/163)) ([2c4b4af](https://github.com/Rapsssito/react-native-background-actions/commit/2c4b4af5a950f64b51787eb75443057476f72662))
+
 ## [2.6.8](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.7...v2.6.8) (2022-12-19)
 
 
