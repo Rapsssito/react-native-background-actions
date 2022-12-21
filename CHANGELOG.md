@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.7...v3.0.0) (2022-12-21)
+
+
+### Bug Fixes
+
+* **Android:** Fix crash when targeting SDK 31+ ([#165](https://github.com/Rapsssito/react-native-background-actions/issues/165)) ([c70554e](https://github.com/Rapsssito/react-native-background-actions/commit/c70554e974366e658746953e2d49867a9278e41b))
+
+
+### BREAKING CHANGES
+
+* **Android:** `targetSdkVersion` is now required to be 31+ for Android users.
+
 ## [2.6.7](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.6...v2.6.7) (2022-04-25)
 
 
