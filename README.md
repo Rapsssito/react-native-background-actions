@@ -16,6 +16,7 @@ React Native background service library for running **background tasks forever i
 
 ## Table of Contents <!-- omit in toc -->
 
+- [React Native / Android / iOS compatibility](#react-native--android--ios-compatibility)
 - [Install](#install)
 - [Usage](#usage)
   - [Example Code](#example-code)
@@ -28,6 +29,14 @@ React Native background service library for running **background tasks forever i
 - [Maintainers](#maintainers)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
+
+## React Native / Android / iOS compatibility
+To use this module you need to ensure you are using the correct version of React Native. If you are using an Android (targetSdkVersion) version lower than 31 (introduced in React Native 0.68.0) you will need to upgrade before attempting to use `react-native-background-actions`'s latest version.
+
+| Version | React Native version | Android (targetSdkVersion) version | iOS version  |
+| ------- | -------------------- | ---------------------------------- | ------------ |
+| `3.X.X` | `>= Unknown`         | `>= 31`                            | `>= Unknown` |
+| `2.6.7` | `>= Unknown`         | `>= Unknown`                       | `>= Unknown` |
 
 ## Install
 
@@ -83,24 +92,24 @@ await BackgroundService.stop();
 > If .start() is called on the backgound, it will not have any effect.
 
 ### Options
-| Property    | Type       | Description                                    |
-| ----------- | ---------- | ------------------------------------------------ |
-| `taskName`  | `<string>` | Task name for identification.                     |
-| `taskTitle` | `<string>` |  **Android Required**. Notification title.       |
-| `taskDesc`  | `<string>` | **Android Required**. Notification description. |
-| `taskIcon`  | [`<taskIconOptions>`](#taskIconOptions) | **Android Required**. Notification icon. |
-| `color`  | `<string>` | Notification color. **Default**: `"#ffffff"`. |
-| `linkingURI`  | `<string>` | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
-| `progressBar`  | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar. |
-| `parameters` | `<any>` | Parameters to pass to the task. |
+| Property      | Type                                                  | Description                                                                                                                                                                    |
+| ------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `taskName`    | `<string>`                                            | Task name for identification.                                                                                                                                                  |
+| `taskTitle`   | `<string>`                                            | **Android Required**. Notification title.                                                                                                                                      |
+| `taskDesc`    | `<string>`                                            | **Android Required**. Notification description.                                                                                                                                |
+| `taskIcon`    | [`<taskIconOptions>`](#taskIconOptions)               | **Android Required**. Notification icon.                                                                                                                                       |
+| `color`       | `<string>`                                            | Notification color. **Default**: `"#ffffff"`.                                                                                                                                  |
+| `linkingURI`  | `<string>`                                            | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
+| `progressBar` | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar.                                                                                                                                                     |
+| `parameters`  | `<any>`                                               | Parameters to pass to the task.                                                                                                                                                |
 
 #### taskIconOptions
 **Android only**
-| Property    | Type       | Description                                                    |
-| ----------- | ---------- | -------------------------------------------------------------- |
-| `name`  | `<string>` | **Required**. Icon name in res/ folder. Ex: `ic_launcher`.         |
-| `type` | `<string>` |  **Required**. Icon type in res/ folder. Ex: `mipmap`.              |
-| `package`  | `<string>` | Icon package where to search the icon. Ex: `com.example.package`. **It defaults to the app's package. It is highly recommended to leave like that.** |
+| Property  | Type       | Description                                                                                                                                          |
+| --------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`    | `<string>` | **Required**. Icon name in res/ folder. Ex: `ic_launcher`.                                                                                           |
+| `type`    | `<string>` | **Required**. Icon type in res/ folder. Ex: `mipmap`.                                                                                                |
+| `package` | `<string>` | Icon package where to search the icon. Ex: `com.example.package`. **It defaults to the app's package. It is highly recommended to leave like that.** |
 
 Example:
 
@@ -108,11 +117,11 @@ Example:
 
 #### taskProgressBarOptions
 **Android only**
-| Property    | Type       | Description                                                    |
-| ----------- | ---------- | -------------------------------------------------------------- |
-| `max`       | `<number>` | **Required**. Maximum value.     |
-| `value`     | `<number>` |  **Required**. Current value.         |
-| `indeterminate`     | `<boolean>` |  Display the progress status as indeterminate.         |
+| Property        | Type        | Description                                   |
+| --------------- | ----------- | --------------------------------------------- |
+| `max`           | `<number>`  | **Required**. Maximum value.                  |
+| `value`         | `<number>`  | **Required**. Current value.                  |
+| `indeterminate` | `<boolean>` | Display the progress status as indeterminate. |
 
 Example:
 
