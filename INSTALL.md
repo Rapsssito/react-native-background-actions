@@ -53,10 +53,6 @@ Linking the package manually is not required anymore with [Autolinking](https://
         <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
         <uses-permission android:name="android.permission.WAKE_LOCK" />
         ...
-        <application ... >
-            ...
-            <service android:name="com.asterinet.react.bgactions.RNBackgroundActionsTask" />
-        </application>
       </manifest>
   ```
   
