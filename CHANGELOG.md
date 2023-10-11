@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/Rapsssito/react-native-background-actions/compare/v3.0.0...v3.0.1) (2023-10-11)
+
+
+### Bug Fixes
+
+* **Android:** Register background service in package AndroidManifest.xml ([#184](https://github.com/Rapsssito/react-native-background-actions/issues/184)) ([32e9d20](https://github.com/Rapsssito/react-native-background-actions/commit/32e9d2063d4bbae6c675f700f7690a09d9d2b656))
+
 # [3.0.0](https://github.com/Rapsssito/react-native-background-actions/compare/v2.6.7...v3.0.0) (2022-12-21)
 
 
