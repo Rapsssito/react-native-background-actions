@@ -53,7 +53,20 @@ Linking the package manually is not required anymore with [Autolinking](https://
         <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
         <uses-permission android:name="android.permission.WAKE_LOCK" />
         ...
-      </manifest>
+    </manifest>
+  ```
+
+  Android 14+ requires the [`foregroundServiceType`](https://developer.android.com/about/versions/14/changes/fgs-types-required) must be set in your service tag:
+  ```xml
+    <manifest ... >
+      ...
+        <application ... >
+          ...
+          <service android:name="com.asterinet.react.bgactions.RNBackgroundActionsTask" android:foregroundServiceType="shortService"/>
+          ...
+        </application>
+      ...
+    </manifest>
   ```
   
   
