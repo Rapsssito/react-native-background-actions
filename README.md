@@ -35,6 +35,7 @@ To use this module you need to ensure you are using the correct version of React
 
 | Version | React Native version | Android (targetSdkVersion) version | iOS version  |
 | ------- | -------------------- | ---------------------------------- | ------------ |
+| `4.X.X` | `>= Unknown`         | `>= 34`                            | `>= Unknown` |
 | `3.X.X` | `>= Unknown`         | `>= 31`                            | `>= Unknown` |
 | `2.6.7` | `>= Unknown`         | `>= Unknown`                       | `>= Unknown` |
 
