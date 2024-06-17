@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/Rapsssito/react-native-background-actions/compare/v3.0.1...v4.0.0) (2024-06-17)
+
+
+### Bug Fixes
+
+* **Android:** Fix Android 14 crash with implicit intent ([#208](https://github.com/Rapsssito/react-native-background-actions/issues/208)) ([d30165f](https://github.com/Rapsssito/react-native-background-actions/commit/d30165fca1a1acb5837a7fd00361ff17f9169827))
+
+
+### BREAKING CHANGES
+
+* **Android:** `targetSdkVersion` is now required to be 34+ for Android users.
+
 ## [3.0.1](https://github.com/Rapsssito/react-native-background-actions/compare/v3.0.0...v3.0.1) (2023-10-11)
 
 
