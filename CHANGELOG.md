@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/Rapsssito/react-native-background-actions/compare/v4.0.0...v4.0.1) (2024-07-09)
+
+
+### Bug Fixes
+
+* **Android:** Fix RN 0.73 namespace requirement ([#229](https://github.com/Rapsssito/react-native-background-actions/issues/229)) ([d6f3135](https://github.com/Rapsssito/react-native-background-actions/commit/d6f31351ed745980d2d036d4d5c1c55884cea8d5))
+
 # [4.0.0](https://github.com/Rapsssito/react-native-background-actions/compare/v3.0.1...v4.0.0) (2024-06-17)
 
 
