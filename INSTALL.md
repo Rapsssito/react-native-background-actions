@@ -60,16 +60,32 @@ Linking the package manually is not required anymore with [Autolinking](https://
   ```xml
     <manifest ... >
       ...
+       <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"
+       />
         <application ... >
           ...
-          <service android:name="com.asterinet.react.bgactions.RNBackgroundActionsTask" android:foregroundServiceType="shortService"/>
+          <service 
+            android:name="com.asterinet.react.bgactions.RNBackgroundActionsTask"
+            android:foregroundServiceType="dataSync"
+          />
           ...
         </application>
       ...
     </manifest>
   ```
-  
-  
+  > **Important Notes**:
+  > - Service Tag for General Background Tasks:
+  >   - The example above works for general background tasks that require data synchronization.
+  > - Changing `foregroundServiceType` for Specific Functions:
+  >   - Depending on your use case, you may need to change the `foregroundServiceType` value. For example, for background location services, use `android:foregroundServiceType="location"` instead of `android:foregroundServiceType="dataSync"`. Add the following permissions to your AndroidManifest.xml:
+  >     - `android.permission.FOREGROUND_SERVICE_LOCATION`
+  >     - `android.permission.ACCESS_COARSE_LOCATION`
+  >     - `android.permission.ACCESS_FINE_LOCATION`
+  > - Additional Permissions:
+  >   - Some foregroundServiceType values may need additional permissions. For more information, refer to the [Android Documentation](https://developer.android.com/about/versions/14/changes/fgs-types-required).
+  > - Ensuring Compliance:
+  >   - By setting the `foregroundServiceType` relevant to your use case, you ensure that your foreground services comply with the latest Android 14 requirements, allowing your application to function properly and meet the required security standards.
 #### Using React Native < 0.60
 
 You then need to link the native parts of the library for the platforms you are using. The easiest way to link the library is using the CLI tool by running this command from the root of your project:
