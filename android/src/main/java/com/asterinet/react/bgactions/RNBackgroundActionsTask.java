@@ -5,7 +5,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,7 +12,6 @@ import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 
 import androidx.annotation.NonNull;
@@ -102,13 +100,12 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         createNotificationChannel(bgOptions.getTaskTitle(), bgOptions.getTaskDesc()); // Necessary creating channel for API 26+
         // Create the notification
         final Notification notification = buildNotification(this, bgOptions);
+        final int foregroundServiceType = bgOptions.getForegroundServiceType();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            // Android 10+ (API 29+): Check required permissions based on foregroundServiceType
-            // This prevents SecurityException when permissions are revoked while service is running
-            if (!hasRequiredPermissions()) {
-                Log.e("RNBackgroundActionsTask", "Required permissions not granted for foreground service! Stopping.");
-                stopSelf();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+                && (foregroundServiceType & ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION) != 0) {
+            if (!hasLocationPermissions()) {
+                stopSelf(startId);
                 return START_NOT_STICKY;
             }
         }
@@ -118,7 +115,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
                 this,
                 SERVICE_NOTIFICATION_ID,
                 notification,
-                bgOptions.getForegroundServiceType()
+                foregroundServiceType
             );
         } catch (RuntimeException e) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
@@ -155,19 +152,9 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
     }
 
     /**
-     * Check if required permissions are granted for location foreground service
-     * @return true if all required permissions are granted, false otherwise
+     * Check if location permissions are granted for a location foreground service.
      */
-    private boolean hasRequiredPermissions() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            return true; // No permission check needed for Android < 10
-        }
-
-        // Only check permissions if this is a location foreground service
-        if (!isLocationForegroundService()) {
-            return true; // Not a location service, no location permissions required
-        }
-
+    private boolean hasLocationPermissions() {
         // Check location permissions
         boolean hasFineLocation = ContextCompat.checkSelfPermission(this, 
             android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
@@ -176,40 +163,6 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         boolean hasBackgroundLocation = ContextCompat.checkSelfPermission(this, 
             android.Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
-        boolean allPermissionsGranted = hasFineLocation && hasCoarseLocation && hasBackgroundLocation;
-
-        return allPermissionsGranted;
-    }
-
-    /**
-     * Check if this service is configured as a location foreground service
-     * @return true if foregroundServiceType includes location, false otherwise
-     */
-    private boolean isLocationForegroundService() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            return false;
-        }
-
-        try {
-            PackageManager pm = getPackageManager();
-            ComponentName componentName = new ComponentName(this, this.getClass());
-            ServiceInfo serviceInfo = pm.getServiceInfo(componentName, PackageManager.GET_META_DATA);
-            
-            // Use reflection to access foregroundServiceType field (available from API 29+)
-            try {
-                int serviceType = (Integer) ServiceInfo.class.getField("foregroundServiceType").get(serviceInfo);
-                int FOREGROUND_SERVICE_TYPE_LOCATION = (Integer) ServiceInfo.class.getField("FOREGROUND_SERVICE_TYPE_LOCATION").get(null);
-                
-                boolean isLocation = (serviceType & FOREGROUND_SERVICE_TYPE_LOCATION) != 0;
-                Log.d("RNBackgroundActionsTask", "Service type check - isLocation: " + isLocation);
-                return isLocation;
-            } catch (Exception e) {
-                Log.w("RNBackgroundActionsTask", "Could not read foregroundServiceType field", e);
-                return false;
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.w("RNBackgroundActionsTask", "Could not find service info", e);
-            return false;
-        }
+        return hasFineLocation && hasCoarseLocation && hasBackgroundLocation;
     }
 }
