@@ -7,6 +7,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.ServiceCompat;
+import androidx.core.content.ContextCompat;
 
 import com.facebook.react.HeadlessJsTaskService;
 import com.facebook.react.bridge.Arguments;
@@ -96,13 +99,22 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         createNotificationChannel(bgOptions.getTaskTitle(), bgOptions.getTaskDesc()); // Necessary creating channel for API 26+
         // Create the notification
         final Notification notification = buildNotification(this, bgOptions);
+        final int foregroundServiceType = bgOptions.getForegroundServiceType();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+                && (foregroundServiceType & ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION) != 0) {
+            if (!hasLocationPermissions()) {
+                stopSelf(startId);
+                return START_NOT_STICKY;
+            }
+        }
 
         try {
             ServiceCompat.startForeground(
                 this,
                 SERVICE_NOTIFICATION_ID,
                 notification,
-                bgOptions.getForegroundServiceType()
+                foregroundServiceType
             );
         } catch (RuntimeException e) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
@@ -136,5 +148,20 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
             final NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    /**
+     * Check if location permissions are granted for a location foreground service.
+     */
+    private boolean hasLocationPermissions() {
+        // Check location permissions
+        boolean hasFineLocation = ContextCompat.checkSelfPermission(this, 
+            android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        boolean hasCoarseLocation = ContextCompat.checkSelfPermission(this, 
+            android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        boolean hasBackgroundLocation = ContextCompat.checkSelfPermission(this, 
+            android.Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+        return hasFineLocation && hasCoarseLocation && hasBackgroundLocation;
     }
 }
