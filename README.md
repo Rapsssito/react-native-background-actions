@@ -90,7 +90,7 @@ await BackgroundService.stop();
 ```
 > If you call stop() on background no new tasks will be able to be started!
 > Don't call .start() twice, as it will stop performing previous background tasks and start a new one. 
-> If .start() is called on the backgound, it will not have any effect.
+> If .start() is called on the background, it will not have any effect.
 
 ### Options
 | Property                | Type                                                  | Description                                                                                                                                                                    |
