@@ -39,7 +39,12 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
             notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkingURI));
         } else {
             //as RN works on single activity architecture - we don't need to find current activity on behalf of react context
-            notificationIntent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
+            notificationIntent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+            if (notificationIntent == null) {
+                notificationIntent = new Intent(Intent.ACTION_MAIN)
+                        .addCategory(Intent.CATEGORY_LAUNCHER)
+                        .setPackage(context.getPackageName());
+            }
         }
         final PendingIntent contentIntent;
         int pendingIntentFlags = PendingIntent.FLAG_UPDATE_CURRENT;
