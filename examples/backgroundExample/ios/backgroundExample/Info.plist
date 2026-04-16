@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CADisableMinimumFrameDurationOnPhone</key>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
@@ -28,14 +28,15 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-        <!-- Do not change NSAllowsArbitraryLoads to true, or you will risk app rejection! -->
-        <key>NSAllowsArbitraryLoads</key>
-    	<false/>
-    	<key>NSAllowsLocalNetworking</key>
-    	<true/>
-    </dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>RCTNewArchEnabled</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>processing</string>
@@ -47,17 +48,17 @@
 		<string>arm64</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
-    <array>
-    	<string>UIInterfaceOrientationPortrait</string>
-    </array>
-    <key>UISupportedInterfaceOrientations~ipad</key>
-    <array>
-    	<string>UIInterfaceOrientationLandscapeLeft</string>
-    	<string>UIInterfaceOrientationLandscapeRight</string>
-    	<string>UIInterfaceOrientationPortrait</string>
-    	<string>UIInterfaceOrientationPortraitUpsideDown</string>
-    </array>
-    <key>UIViewControllerBasedStatusBarAppearance</key>
-    <false/>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
