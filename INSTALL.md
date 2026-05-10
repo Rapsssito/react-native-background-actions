@@ -86,6 +86,31 @@ Linking the package manually is not required anymore with [Autolinking](https://
   >   - Some foregroundServiceType values may need additional permissions. For more information, refer to the [Android Documentation](https://developer.android.com/about/versions/14/changes/fgs-types-required).
   > - Ensuring Compliance:
   >   - By setting the `foregroundServiceType` relevant to your use case, you ensure that your foreground services comply with the latest Android 14 requirements, allowing your application to function properly and meet the required security standards.
+
+#### Using Expo (managed / prebuild workflow)
+
+If you're using Expo Prebuild (the standard managed workflow with `app.json` / `app.config.js`), editing `AndroidManifest.xml` manually doesn't survive `expo prebuild`. This package ships with an Expo config plugin that adds the required permissions and the `android:foregroundServiceType` attribute to the service entry for you.
+
+Add the plugin to your Expo config:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      ["react-native-background-actions", { "foregroundServiceType": "dataSync" }]
+    ]
+  }
+}
+```
+
+The plugin accepts a single string or an array of strings. The values must match the `foregroundServiceType` array you pass to `BackgroundService.start()`:
+
+```json
+["react-native-background-actions", { "foregroundServiceType": ["dataSync", "location"] }]
+```
+
+If the plugin is added without props, it defaults to `"dataSync"`. The corresponding `FOREGROUND_SERVICE_*` permission is added automatically for each type.
+
 #### Using React Native < 0.60
 
 You then need to link the native parts of the library for the platforms you are using. The easiest way to link the library is using the CLI tool by running this command from the root of your project:

@@ -18,6 +18,8 @@
     "/windows",
     "/src",
     "/lib",
+    "/plugin/build",
+    "/app.plugin.js",
     "/*.podspec",
     "/jest"
   ],
