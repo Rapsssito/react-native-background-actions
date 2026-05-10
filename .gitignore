@@ -50,3 +50,7 @@ buck-out/
 
 # Tests
 coverage
+
+# Expo config plugin (transpiled output ships with the package)
+!plugin/build/
+!plugin/build/**
