@@ -1,5 +1,5 @@
 import XCTest
-import React
+@preconcurrency import React
 
 class backgroundExampleTests: XCTestCase {
 

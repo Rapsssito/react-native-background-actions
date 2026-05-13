@@ -35,5 +35,15 @@ target 'backgroundExample' do
       :mac_catalyst_enabled => false
       # :ccache_enabled => true
     )
+    installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_STRICT_CONCURRENCY'] = 'minimal'
+      config.build_settings['GCC_TREAT_WARNINGS_AS_ERRORS'] = 'NO'
+      config.build_settings['CLANG_TREAT_WARNINGS_AS_ERRORS'] = 'NO'
+      config.build_settings['OTHER_CFLAGS'] = '$(inherited) -Wno-error'
+      config.build_settings['OTHER_SWIFT_FLAGS'] = '-Xfrontend -warn-concurrency'
+    end
+  end
   end
 end
+
