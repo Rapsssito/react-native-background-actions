@@ -3,12 +3,9 @@
  * https://github.com/facebook/react-native
  *
  * @format
- * @flow
  */
-
-import React from 'react';
+import { useState, useEffect } from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
@@ -17,12 +14,12 @@ import {
   TouchableOpacity,
   Platform,
   Linking,
+  PermissionsAndroid,
 } from 'react-native';
-import { Header, Colors } from 'react-native/Libraries/NewAppScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import BackgroundJob, { BackgroundTaskOptions } from 'react-native-background-actions';
 
-import BackgroundJob from 'react-native-background-actions';
-
-const sleep = (time: any) => new Promise<void>((resolve) => setTimeout(() => resolve(), time));
+const sleep = (time: number) => new Promise<void>((resolve) => setTimeout(resolve, time));
 
 BackgroundJob.on('expiration', () => {
   console.log('iOS: I am being closed!');
@@ -32,13 +29,12 @@ const taskRandom = async (taskData: any) => {
   if (Platform.OS === 'ios') {
     console.warn(
       'This task will not keep your app alive in the background by itself, use other library like react-native-track-player that use audio,',
-      'geolocalization, etc. to keep your app alive in the background while you excute the JS from this library.'
+      'geolocalization, etc. to keep your app alive in the background while you execute the JS from this library.'
     );
   }
-  await new Promise(async (resolve) => {
-    // For loop with a delay
+  await new Promise<void>(async () => {
     const { delay } = taskData;
-    console.log(BackgroundJob.isRunning(), delay)
+    console.log(BackgroundJob.isRunning(), delay);
     for (let i = 0; BackgroundJob.isRunning(); i++) {
       console.log('Runned -> ', i);
       await BackgroundJob.updateNotification({ taskDesc: 'Runned -> ' + i });
@@ -47,7 +43,7 @@ const taskRandom = async (taskData: any) => {
   });
 };
 
-const options = {
+const options: BackgroundTaskOptions & {parameters: {delay: number}} = {
   taskName: 'Example',
   taskTitle: 'ExampleTask title',
   taskDesc: 'ExampleTask desc',
@@ -57,61 +53,56 @@ const options = {
   },
   color: '#ff00ff',
   linkingURI: 'exampleScheme://chat/jane',
+  foregroundServiceType: ['dataSync'],
   parameters: {
     delay: 1000,
   },
 };
 
-function handleOpenURL(evt: any) {
-  console.log(evt.url);
-  // do something with the url
-}
+export function App() {
+  const [playing, setPlaying] = useState(BackgroundJob.isRunning());
 
-Linking.addEventListener('url', handleOpenURL);
+  useEffect(() => {
+    if (Platform.OS === 'android' && Platform.Version >= 33) {
+      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS).catch();
+    }
+    const subscription = Linking.addEventListener('url', (evt) => {
+      console.log(evt.url);
+    });
+    return () => subscription.remove();
+  }, []);
 
-
-
-
-export default App = () => {
-  const usingHermes = typeof HermesInternal === 'object' && HermesInternal !== null;
-
-  let playing = BackgroundJob.isRunning();
-
-  /**
-   * Toggles the background task
-   */
   const toggleBackground = async () => {
-    playing = !playing;
     if (playing) {
+      console.log('Stop background service');
+      await BackgroundJob.stop();
+      setPlaying(false);
+    } else {
       try {
         console.log('Trying to start background service');
         await BackgroundJob.start(taskRandom, options);
         console.log('Successful start!');
+        setPlaying(true);
       } catch (e) {
         console.log('Error', e);
       }
-    } else {
-      console.log('Stop background service');
-      await BackgroundJob.stop();
     }
   };
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {!usingHermes ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
+      <SafeAreaView style={styles.container}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <View style={styles.header}>
+            <Text style={styles.title}>Background Actions</Text>
+          </View>
           <View style={styles.body}>
             <TouchableOpacity
-              style={{ height: 100, width: 100, backgroundColor: 'red' }}
-              onPress={toggleBackground}></TouchableOpacity>
+              style={[styles.button, playing ? styles.buttonStop : styles.buttonStart]}
+              onPress={toggleBackground}>
+              <Text style={styles.buttonText}>{playing ? 'Stop' : 'Start'}</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -120,22 +111,45 @@ export default App = () => {
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  container: {
+    flex: 1,
+    backgroundColor: '#f3f3f3',
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  header: {
+    backgroundColor: '#fff',
+    padding: 24,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#ddd',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#333',
   },
   body: {
-    backgroundColor: Colors.white,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 32,
   },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  button: {
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonStart: {
+    backgroundColor: '#4CAF50',
+  },
+  buttonStop: {
+    backgroundColor: '#f44336',
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 16,
   },
 });
+
+export default App;
