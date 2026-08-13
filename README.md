@@ -103,6 +103,7 @@ await BackgroundService.stop();
 | `linkingURI`            | `<string>`                                                 | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
 | `progressBar`           | [`<taskProgressBarOptions>`](#taskProgressBarOptions)      | Notification progress bar.                                                                                                                                                     |
 | `foregroundServiceType` | Array[`<foregroundServiceType>`](#foregroundservicetype)   | **Android only**. Array of foreground service types to combine. Must match `android:foregroundServiceType` in `AndroidManifest.xml`.                                           |
+| `actions`               | Array[`<taskActionOptions>`](#taskactionoptions)           | **Android only**. Buttons to show on the notification. See [Notification actions](#notification-actions).                                                                       |
 | `parameters`            | `<any>`                                                    | Parameters to pass to the task.                                                                                                                                                |
 
 #### taskIconOptions
@@ -128,6 +129,15 @@ Example:
 Example:
 
 ![ProgressBar](https://developer.android.com/images/ui/notifications/notification-progressbar_2x.png)
+
+#### taskActionOptions
+**Android only**
+| Property | Type       | Description                                                             |
+| -------- | ---------- | ----------------------------------------------------------------------- |
+| `id`     | `<string>` | **Required**. Identifies the button in the `notificationAction` event.  |
+| `title`  | `<string>` | **Required**. Button label.                                             |
+
+See [Notification actions](#notification-actions) for how to react to a press.
 
 #### foregroundServiceType
 **Android only** (API 29+ / Android 10+)
@@ -157,6 +167,36 @@ Examples:
 foregroundServiceType: ['location'],
 foregroundServiceType: ['location', 'microphone'],
 ```
+
+### Notification actions
+**Android only**
+
+Pass `actions` to add buttons to the notification. They survive
+`updateNotification()`, so a task that reports progress keeps its buttons.
+
+```js
+await BackgroundService.start(veryIntensiveTask, {
+    ...options,
+    actions: [
+        { id: 'pause', title: 'Pause' },
+        { id: 'cancel', title: 'Cancel' },
+    ],
+});
+```
+
+A press emits `notificationAction` with the `id` of the button that was pressed:
+
+```js
+BackgroundService.on('notificationAction', ({ id }) => {
+    if (id === 'pause') pauseMyTask();
+});
+```
+
+Swap the buttons as the task changes state by passing a new `actions` array to
+`updateNotification()` — for example replacing `pause` with `resume`.
+
+The event is only delivered while the app process is alive, which is the case
+whenever the foreground service — and therefore the notification — exists.
 
 ### Deep Linking
 **Android only**

@@ -106,6 +106,32 @@ public final class BackgroundTaskOptions {
         return extras.getBundle("progressBar");
     }
 
+    /**
+     * The notification's buttons, each a Bundle of {@code id} and {@code title}.
+     * <p>
+     * {@link Arguments#toBundle} stores an array of objects as a serialized
+     * ArrayList of Bundles, so it cannot be read back with
+     * {@code getParcelableArrayList} — same reason
+     * {@code foregroundServiceType} is read as a plain ArrayList above.
+     */
+    @NonNull
+    public ArrayList<Bundle> getActions() {
+        final ArrayList<Bundle> actions = new ArrayList<>();
+        final Object raw = extras.getSerializable("actions");
+
+        if (!(raw instanceof ArrayList)) {
+            return actions;
+        }
+
+        for (final Object entry : (ArrayList<?>) raw) {
+            if (entry instanceof Bundle) {
+                actions.add((Bundle) entry);
+            }
+        }
+
+        return actions;
+    }
+
     public int getForegroundServiceType() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             return 0;

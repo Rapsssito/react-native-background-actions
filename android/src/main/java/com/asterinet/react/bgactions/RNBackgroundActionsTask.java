@@ -20,10 +20,19 @@ import com.facebook.react.HeadlessJsTaskService;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 
+import java.util.ArrayList;
+
 final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
     public static final int SERVICE_NOTIFICATION_ID = 92901;
     private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
+
+    /** Broadcast by a notification button, received by the module. */
+    public static final String ACTION_BUTTON_INTENT = "com.asterinet.react.bgactions.NOTIFICATION_ACTION";
+    public static final String EXTRA_ACTION_ID = "actionId";
+
+    /** Offset so an action's PendingIntent never collides with the content one. */
+    private static final int ACTION_REQUEST_CODE_BASE = 100;
 
     @SuppressLint("UnspecifiedImmutableFlag")
     @NonNull
@@ -62,6 +71,8 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
                 .setPriority(NotificationCompat.PRIORITY_MIN)
                 .setColor(color);
 
+        addActions(context, builder, bgOptions.getActions(), pendingIntentFlags);
+
         final Bundle progressBarBundle = bgOptions.getProgressBar();
         if (progressBarBundle != null) {
             final int progressMax = (int) Math.floor(progressBarBundle.getDouble("max"));
@@ -70,6 +81,45 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
             builder.setProgress(progressMax, progressCurrent, progressIndeterminate);
         }
         return builder.build();
+    }
+
+    /**
+     * Adds a button per entry of {@code actions}. Each one broadcasts
+     * {@link #ACTION_BUTTON_INTENT} carrying its own id, which the module turns into
+     * a JS event.
+     */
+    private static void addActions(
+            @NonNull final Context context,
+            @NonNull final NotificationCompat.Builder builder,
+            @NonNull final ArrayList<Bundle> actions,
+            final int pendingIntentFlags
+    ) {
+        for (int index = 0; index < actions.size(); index++) {
+            final Bundle action = actions.get(index);
+            final String id = action.getString("id");
+            final String title = action.getString("title");
+
+            if (id == null || id.isEmpty() || title == null || title.isEmpty()) {
+                continue;
+            }
+
+            // Explicit package: an implicit broadcast would not be delivered.
+            final Intent actionIntent = new Intent(ACTION_BUTTON_INTENT)
+                    .setPackage(context.getPackageName())
+                    .putExtra(EXTRA_ACTION_ID, id);
+
+            // A request code per action. Sharing one makes every button deliver
+            // whichever intent was registered first.
+            final PendingIntent actionPendingIntent = PendingIntent.getBroadcast(
+                    context,
+                    ACTION_REQUEST_CODE_BASE + index,
+                    actionIntent,
+                    pendingIntentFlags
+            );
+
+            // Icon 0: the buttons are text-only, as the platform allows since 24.
+            builder.addAction(0, title, actionPendingIntent);
+        }
     }
 
     @Override

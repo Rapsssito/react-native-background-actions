@@ -184,10 +184,72 @@ test('foregroundServiceType-undefined', async () => {
     await flushPromises();
 });
 
+test('actions-passed-through', async () => {
+    expect.hasAssertions();
+    let promiseFinish = () => {};
+    const defaultTask = jest.fn(
+        // @ts-ignore
+        async () => await new Promise((resolve) => (promiseFinish = resolve))
+    );
+    Platform.OS = 'android';
+    RNBackgroundActionsModule.start.mockClear();
+    const actions = [{ id: 'pause', title: 'Pause' }];
+    const options = { ...defaultOptions, actions };
+    await BackgroundActions.start(defaultTask, options);
+    const passedOptions = RNBackgroundActionsModule.start.mock.calls[0][0];
+    expect(passedOptions.actions).toEqual([{ id: 'pause', title: 'Pause' }]);
+    promiseFinish();
+    await flushPromises();
+});
+
+test('actions-kept-on-update', async () => {
+    expect.hasAssertions();
+    let promiseFinish = () => {};
+    const defaultTask = jest.fn(
+        // @ts-ignore
+        async () => await new Promise((resolve) => (promiseFinish = resolve))
+    );
+    Platform.OS = 'android';
+    RNBackgroundActionsModule.updateNotification.mockClear();
+    const actions = [{ id: 'pause', title: 'Pause' }];
+    await BackgroundActions.start(defaultTask, { ...defaultOptions, actions });
+    // The options are re-normalized on every update, so a progress update must
+    // not drop the buttons the notification was started with.
+    await BackgroundActions.updateNotification({ taskDesc: 'New Desc' });
+    const passedOptions = RNBackgroundActionsModule.updateNotification.mock.calls[0][0];
+    expect(passedOptions.actions).toEqual([{ id: 'pause', title: 'Pause' }]);
+    promiseFinish();
+    await flushPromises();
+});
+
+test('actions-undefined', async () => {
+    expect.hasAssertions();
+    let promiseFinish = () => {};
+    const defaultTask = jest.fn(
+        // @ts-ignore
+        async () => await new Promise((resolve) => (promiseFinish = resolve))
+    );
+    Platform.OS = 'android';
+    RNBackgroundActionsModule.start.mockClear();
+    await BackgroundActions.start(defaultTask, defaultOptions);
+    const passedOptions = RNBackgroundActionsModule.start.mock.calls[0][0];
+    expect(passedOptions.actions).toBeUndefined();
+    promiseFinish();
+    await flushPromises();
+});
+
 test('expiration-event', () => {
     Platform.OS = 'ios';
     const expirationHandler = jest.fn();
     BackgroundActions.on('expiration', expirationHandler);
     mockedEventEmitter.addListener.mock.calls[0][1]();
     expect(expirationHandler).toHaveBeenCalledTimes(1);
+});
+
+test('notificationAction-event', () => {
+    Platform.OS = 'android';
+    const actionHandler = jest.fn();
+    BackgroundActions.on('notificationAction', actionHandler);
+    mockedEventEmitter.addListener.mock.calls[1][1]({ id: 'pause' });
+    expect(actionHandler).toHaveBeenCalledWith({ id: 'pause' });
 });
