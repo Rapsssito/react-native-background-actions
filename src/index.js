@@ -10,9 +10,10 @@ import EventEmitter from 'eventemitter3';
  *            color?: string
  *            linkingURI?: string,
  *            progressBar?: {max: number, value: number, indeterminate?: boolean},
- *            foregroundServiceType?: Array<'dataSync'|'mediaPlayback'|'phoneCall'|'location'|'connectedDevice'|'mediaProjection'|'camera'|'microphone'|'health'|'remoteMessaging'|'systemExempted'|'shortService'|'specialUse'>
+ *            foregroundServiceType?: Array<'dataSync'|'mediaPlayback'|'phoneCall'|'location'|'connectedDevice'|'mediaProjection'|'camera'|'microphone'|'health'|'remoteMessaging'|'systemExempted'|'shortService'|'specialUse'>,
+ *            actions?: Array<{id: string, title: string}>
  *            }} BackgroundTaskOptions
- * @extends EventEmitter<'expiration',any>
+ * @extends EventEmitter<'expiration'|'notificationAction',any>
  */
 class BackgroundServer extends EventEmitter {
     constructor() {
@@ -33,6 +34,13 @@ class BackgroundServer extends EventEmitter {
      */
     _addListeners() {
         nativeEventEmitter.addListener('expiration', () => this.emit('expiration'));
+        // The notification, and so the buttons, only exist on Android. The iOS
+        // module declares `expiration` as its only supported event, and
+        // RCTEventEmitter logs an error for an addListener on anything else.
+        if (Platform.OS === 'android')
+            nativeEventEmitter.addListener('notificationAction', (data) =>
+                this.emit('notificationAction', data)
+            );
     }
 
     /**
@@ -120,6 +128,7 @@ class BackgroundServer extends EventEmitter {
             linkingURI: options.linkingURI,
             progressBar: options.progressBar,
             foregroundServiceType: options.foregroundServiceType,
+            actions: options.actions,
         };
     }
 

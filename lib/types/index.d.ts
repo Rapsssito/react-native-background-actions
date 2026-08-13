@@ -16,6 +16,10 @@ export type BackgroundTaskOptions = {
         indeterminate?: boolean | undefined;
     } | undefined;
     foregroundServiceType?: ("dataSync" | "mediaPlayback" | "phoneCall" | "location" | "connectedDevice" | "mediaProjection" | "camera" | "microphone" | "health" | "remoteMessaging" | "systemExempted" | "shortService" | "specialUse")[] | undefined;
+    actions?: {
+        id: string;
+        title: string;
+    }[] | undefined;
 };
 declare const backgroundServer: BackgroundServer;
 /**
@@ -26,11 +30,12 @@ declare const backgroundServer: BackgroundServer;
  *            color?: string
  *            linkingURI?: string,
  *            progressBar?: {max: number, value: number, indeterminate?: boolean},
- *            foregroundServiceType?: Array<'dataSync'|'mediaPlayback'|'phoneCall'|'location'|'connectedDevice'|'mediaProjection'|'camera'|'microphone'|'health'|'remoteMessaging'|'systemExempted'|'shortService'|'specialUse'>
+ *            foregroundServiceType?: Array<'dataSync'|'mediaPlayback'|'phoneCall'|'location'|'connectedDevice'|'mediaProjection'|'camera'|'microphone'|'health'|'remoteMessaging'|'systemExempted'|'shortService'|'specialUse'>,
+ *            actions?: Array<{id: string, title: string}>
  *            }} BackgroundTaskOptions
- * @extends EventEmitter<'expiration',any>
+ * @extends EventEmitter<'expiration'|'notificationAction',any>
  */
-declare class BackgroundServer extends EventEmitter<"expiration", any> {
+declare class BackgroundServer extends EventEmitter<"expiration" | "notificationAction", any> {
     /** @private */
     private _runnedTasks;
     /** @private @type {(arg0?: any) => void} */
@@ -105,6 +110,10 @@ declare class BackgroundServer extends EventEmitter<"expiration", any> {
             indeterminate?: boolean | undefined;
         } | undefined;
         foregroundServiceType?: ("dataSync" | "mediaPlayback" | "phoneCall" | "location" | "connectedDevice" | "mediaProjection" | "camera" | "microphone" | "health" | "remoteMessaging" | "systemExempted" | "shortService" | "specialUse")[] | undefined;
+        actions?: {
+            id: string;
+            title: string;
+        }[] | undefined;
     } & {
         parameters?: T | undefined;
     }): Promise<void>;

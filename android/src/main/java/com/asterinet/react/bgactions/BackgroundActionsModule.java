@@ -2,18 +2,23 @@ package com.asterinet.react.bgactions;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 @SuppressWarnings("WeakerAccess")
 public class BackgroundActionsModule extends ReactContextBaseJavaModule {
@@ -24,9 +29,60 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
 
     private Intent currentServiceIntent;
 
+    /** Emitted to JS when a notification button is pressed. */
+    private static final String ACTION_EVENT_NAME = "notificationAction";
+
+    /**
+     * Registered at runtime rather than in the manifest: the notification only
+     * exists while the service — and therefore the process — is alive, so there is
+     * never a press to receive with no receiver registered, and a manifest receiver
+     * would have to be exported.
+     */
+    private final BroadcastReceiver actionReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String actionId = intent.getStringExtra(RNBackgroundActionsTask.EXTRA_ACTION_ID);
+            if (actionId == null) {
+                return;
+            }
+
+            final WritableMap params = Arguments.createMap();
+            params.putString("id", actionId);
+
+            reactContext
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                    .emit(ACTION_EVENT_NAME, params);
+        }
+    };
+
+    private boolean isReceiverRegistered = false;
+
     public BackgroundActionsModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+
+        // NOT_EXPORTED is mandatory from API 34; without the flag this throws.
+        ContextCompat.registerReceiver(
+                reactContext,
+                actionReceiver,
+                new IntentFilter(RNBackgroundActionsTask.ACTION_BUTTON_INTENT),
+                ContextCompat.RECEIVER_NOT_EXPORTED
+        );
+        isReceiverRegistered = true;
+    }
+
+    /** A JS reload builds a new module; without this each one leaks a receiver. */
+    @Override
+    public void invalidate() {
+        if (isReceiverRegistered) {
+            try {
+                reactContext.unregisterReceiver(actionReceiver);
+            } catch (IllegalArgumentException e) {
+                // Already gone with the context.
+            }
+            isReceiverRegistered = false;
+        }
+        super.invalidate();
     }
 
     @NonNull
