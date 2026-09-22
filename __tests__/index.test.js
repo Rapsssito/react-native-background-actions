@@ -191,3 +191,54 @@ test('expiration-event', () => {
     mockedEventEmitter.addListener.mock.calls[0][1]();
     expect(expirationHandler).toHaveBeenCalledTimes(1);
 });
+
+test('expiration-event-marks-not-running', async () => {
+    Platform.OS = 'android';
+    let promiseFinish = () => {};
+    const defaultTask = jest.fn(
+        // @ts-ignore
+        async () => await new Promise((resolve) => (promiseFinish = resolve))
+    );
+    await BackgroundActions.start(defaultTask, defaultOptions);
+    expect(BackgroundActions.isRunning()).toBe(true);
+    // Simulate the OS killing the background task (e.g. Android onTimeout) without
+    // the JS side ever calling stop().
+    mockedEventEmitter.addListener.mock.calls[0][1]();
+    expect(BackgroundActions.isRunning()).toBe(false);
+    promiseFinish(); // Clear the promise
+});
+
+test('stale-task-does-not-stop-newer-session', async () => {
+    Platform.OS = 'android';
+    let promiseFinish1 = () => {};
+    const task1 = jest.fn(
+        // @ts-ignore
+        async () => await new Promise((resolve) => (promiseFinish1 = resolve))
+    );
+    let promiseFinish2 = () => {};
+    const task2 = jest.fn(
+        // @ts-ignore
+        async () => await new Promise((resolve) => (promiseFinish2 = resolve))
+    );
+
+    await BackgroundActions.start(task1, defaultOptions);
+    expect(BackgroundActions.isRunning()).toBe(true);
+
+    // Restart (e.g. from within an 'expiration' handler) while task1 is still pending.
+    await BackgroundActions.start(task2, defaultOptions);
+    expect(BackgroundActions.isRunning()).toBe(true);
+
+    RNBackgroundActionsModule.stop.mockClear();
+    // The stale task1 finally settles naturally, after being superseded.
+    promiseFinish1();
+    await flushPromises();
+
+    // It must not have torn down the newer, still-running session.
+    expect(RNBackgroundActionsModule.stop).toHaveBeenCalledTimes(0);
+    expect(BackgroundActions.isRunning()).toBe(true);
+
+    promiseFinish2();
+    await flushPromises();
+    expect(RNBackgroundActionsModule.stop).toHaveBeenCalledTimes(1);
+    expect(BackgroundActions.isRunning()).toBe(false);
+});
