@@ -31,6 +31,8 @@ Linking the package manually is not required anymore with [Autolinking](https://
 - **iOS Platform:**
 
   `$ cd ios && pod install && cd ..` # CocoaPods on iOS needs this extra step
+
+  **Swift Package Manager (experimental, React Native >= 0.87):** the library ships an `ios/Package.swift` (SwiftPM name `RNBackgroundActions`), so it is picked up by React Native's SwiftPM autolinking without `npx react-native spm scaffold` or `patch-package`. Run `cd ios && npx react-native spm` instead of `pod install` (see the [React Native 0.87 release notes](https://reactnative.dev/blog/2026/08/11/react-native-0.87)). Only the default local XCFrameworks setup is supported, not the remote React Native package mode.
   
   The background support requires you to activate the background capability in Xcode.
   <img width="688" alt="screenBack" src="https://user-images.githubusercontent.com/44206249/72381524-d2490e00-3717-11ea-959c-f95d94e6ae26.png">
