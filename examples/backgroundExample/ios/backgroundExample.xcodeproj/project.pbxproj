@@ -12,10 +12,10 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		6C4809552BAC952D60B5518F /* libPods-backgroundExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA785C9FEA7D4BA0B221039 /* libPods-backgroundExample.a */; };
 		7E2BE4662F8FE63E00F3224E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE4652F8FE63E00F3224E /* AppDelegate.swift */; };
-		7E2BE4712F8FE63E00F3224E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE4702F8FE63E00F3224E /* SceneDelegate.swift */; };
 		7E2BE4672F8FE63E00F3224E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE4652F8FE63E00F3224E /* AppDelegate.swift */; };
 		7E2BE46B2F8FE74C00F3224E /* backgroundExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE46A2F8FE74C00F3224E /* backgroundExampleTests.swift */; };
 		7E2BE46C2F8FE74C00F3224E /* backgroundExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE46A2F8FE74C00F3224E /* backgroundExampleTests.swift */; };
+		7E2BE4712F8FE63E00F3224E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE4702F8FE63E00F3224E /* SceneDelegate.swift */; };
 		9B8380EBCAC9EB19C166C4C7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4A142ED06B04C5D95A9053B7 /* PrivacyInfo.xcprivacy */; };
 		D234AE785C04BCF2532CBCBA /* libPods-backgroundExample-backgroundExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A93660D6A89CE35452FB7AA /* libPods-backgroundExample-backgroundExampleTests.a */; };
 		EBE4178C56E1E50C5DAB3A22 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4A142ED06B04C5D95A9053B7 /* PrivacyInfo.xcprivacy */; };
@@ -52,12 +52,12 @@
 		52609A12321AFB5C90A10B97 /* Pods-backgroundExample-backgroundExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-backgroundExample-backgroundExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-backgroundExample-backgroundExampleTests/Pods-backgroundExample-backgroundExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		68505F78D1AE775DFAB97B94 /* Pods-backgroundExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-backgroundExampleTests.release.xcconfig"; path = "Target Support Files/Pods-backgroundExampleTests/Pods-backgroundExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		7E2BE4652F8FE63E00F3224E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = backgroundExample/AppDelegate.swift; sourceTree = "<group>"; };
-		7E2BE4702F8FE63E00F3224E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = backgroundExample/SceneDelegate.swift; sourceTree = "<group>"; };
 		7E2BE4682F8FE64300F3224E /* backgroundExample-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "backgroundExample-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E2BE4692F8FE64300F3224E /* backgroundExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "backgroundExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E2BE46A2F8FE74C00F3224E /* backgroundExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backgroundExampleTests.swift; sourceTree = "<group>"; };
 		7E2BE46D2F8FE74F00F3224E /* backgroundExampleTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "backgroundExampleTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E2BE46E2F8FE74F00F3224E /* backgroundExample-tvOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "backgroundExample-tvOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		7E2BE4702F8FE63E00F3224E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = backgroundExample/SceneDelegate.swift; sourceTree = "<group>"; };
 		87EEB3B9ED9D029B6CFBF79E /* Pods-backgroundExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-backgroundExample.debug.xcconfig"; path = "Target Support Files/Pods-backgroundExample/Pods-backgroundExample.debug.xcconfig"; sourceTree = "<group>"; };
 		9A93660D6A89CE35452FB7AA /* libPods-backgroundExample-backgroundExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-backgroundExample-backgroundExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73DF12E331F9F91BD92E131 /* Pods-backgroundExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-backgroundExample.release.xcconfig"; path = "Target Support Files/Pods-backgroundExample/Pods-backgroundExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -407,13 +407,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-backgroundExample/Pods-backgroundExample-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/React-Core_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact/React-cxxreact_privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-timing/React-timing_privacy.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-Core_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-cxxreact_privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-timing_privacy.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -463,13 +463,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-backgroundExample-backgroundExampleTests/Pods-backgroundExample-backgroundExampleTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/React-Core_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact/React-cxxreact_privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-timing/React-timing_privacy.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-Core_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-cxxreact_privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-timing_privacy.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -633,7 +633,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = backgroundExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -657,7 +657,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = backgroundExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -681,6 +681,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = backgroundExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -704,6 +705,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = backgroundExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -745,7 +747,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 15.1;
 			};
 			name = Debug;
 		};
@@ -775,7 +777,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "backgroundExample-tvOS-Bridging-Header.h";
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 15.1;
 			};
 			name = Release;
 		};
@@ -805,7 +807,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/backgroundExample-tvOS.app/backgroundExample-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 10.1;
+				TVOS_DEPLOYMENT_TARGET = 15.1;
 			};
 			name = Debug;
 		};
@@ -834,7 +836,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "backgroundExampleTests/backgroundExample-tvOSTests-Bridging-Header.h";
 				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/backgroundExample-tvOS.app/backgroundExample-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 10.1;
+				TVOS_DEPLOYMENT_TARGET = 15.1;
 			};
 			name = Release;
 		};
@@ -895,6 +897,7 @@
 					"$(inherited)",
 					"-DRCT_REMOVE_LEGACY_ARCH=1",
 				);
+				PODFILE_DIR = "$(SRCROOT)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -952,6 +955,7 @@
 					"$(inherited)",
 					"-DRCT_REMOVE_LEGACY_ARCH=1",
 				);
+				PODFILE_DIR = "$(SRCROOT)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
