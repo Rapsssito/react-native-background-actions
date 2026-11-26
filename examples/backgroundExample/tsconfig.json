@@ -1,8 +1,6 @@
 {
     "extends": "@react-native/typescript-config",
     "compilerOptions": {
-        "baseUrl": ".",
-        "types": ["jest"],
         "paths": {
             "react-native-background-actions": ["../../"]
         }

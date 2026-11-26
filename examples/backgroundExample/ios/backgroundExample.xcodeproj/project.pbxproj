@@ -12,6 +12,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		6C4809552BAC952D60B5518F /* libPods-backgroundExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA785C9FEA7D4BA0B221039 /* libPods-backgroundExample.a */; };
 		7E2BE4662F8FE63E00F3224E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE4652F8FE63E00F3224E /* AppDelegate.swift */; };
+		7E2BE4712F8FE63E00F3224E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE4702F8FE63E00F3224E /* SceneDelegate.swift */; };
 		7E2BE4672F8FE63E00F3224E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE4652F8FE63E00F3224E /* AppDelegate.swift */; };
 		7E2BE46B2F8FE74C00F3224E /* backgroundExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE46A2F8FE74C00F3224E /* backgroundExampleTests.swift */; };
 		7E2BE46C2F8FE74C00F3224E /* backgroundExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BE46A2F8FE74C00F3224E /* backgroundExampleTests.swift */; };
@@ -51,6 +52,7 @@
 		52609A12321AFB5C90A10B97 /* Pods-backgroundExample-backgroundExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-backgroundExample-backgroundExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-backgroundExample-backgroundExampleTests/Pods-backgroundExample-backgroundExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		68505F78D1AE775DFAB97B94 /* Pods-backgroundExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-backgroundExampleTests.release.xcconfig"; path = "Target Support Files/Pods-backgroundExampleTests/Pods-backgroundExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		7E2BE4652F8FE63E00F3224E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = backgroundExample/AppDelegate.swift; sourceTree = "<group>"; };
+		7E2BE4702F8FE63E00F3224E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = backgroundExample/SceneDelegate.swift; sourceTree = "<group>"; };
 		7E2BE4682F8FE64300F3224E /* backgroundExample-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "backgroundExample-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E2BE4692F8FE64300F3224E /* backgroundExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "backgroundExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E2BE46A2F8FE74C00F3224E /* backgroundExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backgroundExampleTests.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				7E2BE4652F8FE63E00F3224E /* AppDelegate.swift */,
+				7E2BE4702F8FE63E00F3224E /* SceneDelegate.swift */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -571,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E2BE4662F8FE63E00F3224E /* AppDelegate.swift in Sources */,
+				7E2BE4712F8FE63E00F3224E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
