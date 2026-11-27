@@ -1,7 +1,6 @@
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 const fs = require('fs');
 const path = require('path');
-const blacklist = require('metro-config/src/defaults/blacklist');
-const escape = require('escape-string-regexp');
 
 const root = path.resolve(__dirname, '../..');
 const pak = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
@@ -14,22 +13,20 @@ const modules = [
     }),
 ];
 
-module.exports = {
+const escapeRegExp = (s) => s.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
+
+const defaultConfig = getDefaultConfig(__dirname);
+
+const config = {
     projectRoot: __dirname,
     watchFolders: [root],
     resolver: {
-        blacklistRE: blacklist([new RegExp(`^${escape(path.join(root, 'node_modules'))}\\/.*$`)]),
+        blockList: new RegExp(`^${escapeRegExp(path.join(root, 'node_modules'))}\\/.*$`),
         extraNodeModules: modules.reduce((acc, name) => {
             acc[name] = path.join(__dirname, 'node_modules', name);
             return acc;
         }, {}),
     },
-    transformer: {
-        getTransformOptions: async () => ({
-            transform: {
-                experimentalImportSupport: false,
-                inlineRequires: false,
-            },
-        }),
-    },
 };
+
+module.exports = mergeConfig(defaultConfig, config);

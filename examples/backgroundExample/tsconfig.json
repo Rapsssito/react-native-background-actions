@@ -1,0 +1,10 @@
+{
+    "extends": "@react-native/typescript-config",
+    "compilerOptions": {
+        "paths": {
+            "react-native-background-actions": ["../../"]
+        }
+    },
+    "include": ["**/*.ts", "**/*.tsx"],
+    "exclude": ["**/node_modules", "**/Pods"]
+}
