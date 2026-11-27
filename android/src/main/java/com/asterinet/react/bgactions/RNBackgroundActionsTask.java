@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -97,12 +98,18 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         // Create the notification
         final Notification notification = buildNotification(this, bgOptions);
 
+        int foregroundServiceType = bgOptions.getForegroundServiceType();
+        if (foregroundServiceType == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // No type passed from JS: use the types declared in AndroidManifest.xml (4.0.x behavior).
+            // Passing FOREGROUND_SERVICE_TYPE_NONE crashes on Android 14+ and drops the manifest type on Android 10-13.
+            foregroundServiceType = ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST;
+        }
         try {
             ServiceCompat.startForeground(
                 this,
                 SERVICE_NOTIFICATION_ID,
                 notification,
-                bgOptions.getForegroundServiceType()
+                foregroundServiceType
             );
         } catch (RuntimeException e) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
