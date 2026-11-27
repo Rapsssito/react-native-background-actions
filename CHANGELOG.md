@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/Rapsssito/react-native-background-actions/compare/v4.1.0...v4.1.1) (2026-11-27)
+
+### Bug Fixes
+
+* **Android:** fall back to manifest foregroundServiceType when option is omitted ([#276](https://github.com/Rapsssito/react-native-background-actions/issues/276)) ([44dd6cf](https://github.com/Rapsssito/react-native-background-actions/commit/44dd6cf0158da3060d1be907b98a613b825b1563))
+* **Android:** stop service gracefully on SecurityException and missing extras ([#277](https://github.com/Rapsssito/react-native-background-actions/issues/277)) ([47431cc](https://github.com/Rapsssito/react-native-background-actions/commit/47431ccf532813fa4ea58f543ae8103eaf70d50f))
+
 # [4.1.0](https://github.com/Rapsssito/react-native-background-actions/compare/v4.0.1...v4.1.0) (2026-04-07)
 
 
