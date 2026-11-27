@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,8 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 
 final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
+
+    private static final String TAG = "RNBackgroundActions";
 
     public static final int SERVICE_NOTIFICATION_ID = 92901;
     private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
@@ -90,7 +93,10 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         }
         final Bundle extras = intent.getExtras();
         if (extras == null) {
-            throw new IllegalArgumentException("Extras cannot be null");
+            // Nothing to run without task options: stop instead of crashing the app
+            Log.w(TAG, "onStartCommand: intent has no extras, stopping service");
+            stopSelf(startId);
+            return START_NOT_STICKY;
         }
         final BackgroundTaskOptions bgOptions = new BackgroundTaskOptions(extras);
         createNotificationChannel(bgOptions.getTaskTitle(), bgOptions.getTaskDesc()); // Necessary creating channel for API 26+
@@ -105,9 +111,13 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
                 bgOptions.getForegroundServiceType()
             );
         } catch (RuntimeException e) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-                    && e instanceof android.app.ForegroundServiceStartNotAllowedException) {
-                // Android 12+: not allowed to start foreground service from background
+            final boolean startNotAllowed = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+                    && e instanceof android.app.ForegroundServiceStartNotAllowedException;
+            // Android 12+: not allowed to start foreground service from background.
+            // Android 14+: SecurityException when the runtime permission required by the
+            // foreground service type (e.g. location) is missing or was revoked.
+            if (startNotAllowed || e instanceof SecurityException) {
+                Log.w(TAG, "startForeground failed, stopping service", e);
                 stopSelf(startId);
                 return START_NOT_STICKY;
             }
