@@ -23,6 +23,12 @@ DerivedData
 *.xcworkspace
 /ios/Pods/
 
+# Swift Package Manager
+#
+.build/
+.swiftpm/
+/ios/Package.resolved
+
 # Android/IntelliJ
 #
 build/

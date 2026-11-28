@@ -15,12 +15,18 @@
     "/android/build.gradle",
     "/ios",
     "!Podfile*",
+    "!/ios/.build",
+    "!/ios/.swiftpm",
+    "!/ios/Package.resolved",
     "/windows",
     "/src",
     "/lib",
     "/*.podspec",
     "/jest"
   ],
+  "swiftpmConfig": {
+    "name": "RNBackgroundActions"
+  },
   "types": "lib/types/index.d.ts",
   "main": "src/index.js",
   "scripts": {
