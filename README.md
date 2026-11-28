@@ -216,8 +216,9 @@ function handleOpenURL(evt) {
 
 ### Events
 #### 'expiration'
-**iOS only**
-Listen for the iOS-only expiration handler that allows you to 'clean up' shortly before the app’s remaining background time reaches 0. Check the iOS [documentation](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask) for more info.
+Listen for the OS forcibly stopping the background task, so you can 'clean up' or react to it. By the time this event fires, `isRunning()` already returns `false`, even though `stop()` was never called from JS.
+- **iOS**: fired shortly before the app's remaining background time reaches 0. Check the iOS [documentation](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask) for more info.
+- **Android**: fired when the OS kills the foreground service because it exceeded its type-specific time limit ([`Service.onTimeout`](https://developer.android.com/reference/android/app/Service#onTimeout(int)), API 34+). On older Android versions there is no such time limit, so this event is never fired.
 
 ```js
 BackgroundService.on('expiration', () => {

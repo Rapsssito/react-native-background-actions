@@ -20,7 +20,9 @@ import androidx.core.app.ServiceCompat;
 
 import com.facebook.react.HeadlessJsTaskService;
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.jstasks.HeadlessJsTaskConfig;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
@@ -28,6 +30,12 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
     public static final int SERVICE_NOTIFICATION_ID = 92901;
     private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
+    private static final String TAG = "RNBackgroundActionsTask";
+
+    // Guards against Service#callOnTimeout(), which calls both onTimeout(int) and
+    // onTimeout(int, int) for a single OS timeout on 'shortService'-typed tasks (API 34+),
+    // so the 'expiration' event isn't emitted twice for one real timeout.
+    private boolean hasTimedOut = false;
 
     @SuppressLint("UnspecifiedImmutableFlag")
     @NonNull
@@ -88,6 +96,10 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        // A new start command means this service instance is (re)beginning a task, so any
+        // previous timeout no longer applies (the instance may have been reused across a
+        // stop/restart race instead of being destroyed).
+        hasTimedOut = false;
         if (intent == null) {
             stopSelf(startId);
             return START_NOT_STICKY;
@@ -136,13 +148,42 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
     @Override
     public void onTimeout(int startId) {
         super.onTimeout(startId);
-        stopSelf(startId);
+        onOsTimeout(startId);
     }
 
     @Override
     public void onTimeout(int startId, int fgsType) {
         super.onTimeout(startId, fgsType);
+        onOsTimeout(startId);
+    }
+
+    /**
+     * Called when the OS forcibly stops this foreground service because it ran longer than the
+     * type-specific time limit (API 34+). The JS side has no other way to learn that the service
+     * was killed, so it must be notified before the service actually stops.
+     */
+    private void onOsTimeout(int startId) {
+        if (!hasTimedOut) {
+            hasTimedOut = true;
+            emitExpirationEvent();
+        }
         stopSelf(startId);
+    }
+
+    private void emitExpirationEvent() {
+        try {
+            final ReactContext reactContext = getReactNativeHost().getReactInstanceManager().getCurrentReactContext();
+            if (reactContext != null) {
+                reactContext
+                        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                        .emit("expiration", null);
+            }
+        } catch (RuntimeException e) {
+            // The React instance can be mid-teardown when the OS forces this timeout (e.g. the
+            // catalyst instance being destroyed, or a New Architecture host that doesn't support
+            // ReactNativeHost). Failing to notify JS must never prevent stopSelf() below.
+            Log.w(TAG, "Failed to notify JS about the foreground service timeout", e);
+        }
     }
 
     private void createNotificationChannel(@NonNull final String taskTitle, @NonNull final String taskDesc) {

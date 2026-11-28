@@ -32,7 +32,13 @@ class BackgroundServer extends EventEmitter {
      * @private
      */
     _addListeners() {
-        nativeEventEmitter.addListener('expiration', () => this.emit('expiration'));
+        nativeEventEmitter.addListener('expiration', () => {
+            // The OS has forcibly ended the background task (iOS background time running out,
+            // Android foreground service timeout, ...), so isRunning() must reflect that even
+            // though stop() was never called from JS.
+            this._isRunning = false;
+            this.emit('expiration');
+        });
     }
 
     /**
@@ -63,6 +69,8 @@ class BackgroundServer extends EventEmitter {
      * It returns `true` if `start()` has been called and the task has not finished.
      *
      * It returns `false` if `stop()` has been called, **even if the task has not finished**.
+     * It also returns `false` after an `'expiration'` event, since that means the OS has
+     * already force-stopped the task.
      */
     isRunning() {
         return this._isRunning;
@@ -98,10 +106,16 @@ class BackgroundServer extends EventEmitter {
      */
     _generateTask(task, parameters) {
         const self = this;
+        const taskGeneration = this._runnedTasks;
         return async () => {
             await new Promise((resolve) => {
                 self._stopTask = resolve;
-                task(parameters).then(() => self.stop());
+                task(parameters).then(() => {
+                    // A newer start() may have superseded this task while it was still
+                    // running (e.g. restarted from an 'expiration' handler). Only the
+                    // generation that is still current is allowed to stop the service.
+                    if (self._runnedTasks === taskGeneration) self.stop();
+                });
             });
         };
     }
