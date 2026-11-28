@@ -99,6 +99,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
             stopSelf(startId);
             return START_NOT_STICKY;
         }
+        final long runId = extras.getLong(ServiceStartGuard.EXTRA_RUN_ID, ServiceStartGuard.NO_RUN_ID);
         final BackgroundTaskOptions bgOptions = new BackgroundTaskOptions(extras);
         createNotificationChannel(bgOptions.getTaskTitle(), bgOptions.getTaskDesc()); // Necessary creating channel for API 26+
         // Create the notification
@@ -125,10 +126,18 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
             // foreground service type (e.g. location) is missing or was revoked.
             if (startNotAllowed || e instanceof SecurityException) {
                 Log.w(TAG, "startForeground failed, stopping service", e);
+                ServiceStartGuard.onStartHandled(runId);
                 stopSelf(startId);
                 return START_NOT_STICKY;
             }
+            ServiceStartGuard.onStartHandled(runId);
             throw e;
+        }
+        if (ServiceStartGuard.onStartHandled(runId)) {
+            // stop() was called before the service reached the foreground state. startForeground()
+            // has now been called, so the service can stop without crashing the app.
+            stopSelf(startId);
+            return START_NOT_STICKY;
         }
         return super.onStartCommand(intent, flags, startId);
     }
