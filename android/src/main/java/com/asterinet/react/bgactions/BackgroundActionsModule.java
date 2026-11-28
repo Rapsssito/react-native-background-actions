@@ -38,21 +38,28 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
     @SuppressWarnings("unused")
     @ReactMethod
     public void start(@NonNull final ReadableMap options, @NonNull final Promise promise) {
+        long runId = ServiceStartGuard.NO_RUN_ID;
         try {
             // Stop any other intent
             if (currentServiceIntent != null) {
-                reactContext.stopService(currentServiceIntent);
+                stopCurrentService();
             }
             // Create the service
             currentServiceIntent = new Intent(reactContext, RNBackgroundActionsTask.class);
             // Get the task info from the options
             final BackgroundTaskOptions bgOptions = new BackgroundTaskOptions(reactContext, options);
             currentServiceIntent.putExtras(bgOptions.getExtras());
+            runId = ServiceStartGuard.registerStart();
+            currentServiceIntent.putExtra(ServiceStartGuard.EXTRA_RUN_ID, runId);
             // Start the task
             // startForegroundService on Android 8+ (API 26+), startService below
             ContextCompat.startForegroundService(reactContext, currentServiceIntent);
             promise.resolve(null);
         } catch (Exception e) {
+            if (runId != ServiceStartGuard.NO_RUN_ID) {
+                ServiceStartGuard.onStartHandled(runId);
+            }
+            currentServiceIntent = null;
             promise.reject(e);
         }
     }
@@ -61,10 +68,19 @@ public class BackgroundActionsModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void stop(@NonNull final Promise promise) {
         if (currentServiceIntent != null) {
-            reactContext.stopService(currentServiceIntent);
+            stopCurrentService();
             currentServiceIntent = null;
         }
         promise.resolve(null);
+    }
+
+    private void stopCurrentService() {
+        final long runId = currentServiceIntent.getLongExtra(ServiceStartGuard.EXTRA_RUN_ID, ServiceStartGuard.NO_RUN_ID);
+        // If the service has not called startForeground() yet, stopping it now would crash the app
+        // (ForegroundServiceDidNotStartInTimeException). It stops itself right after startForeground().
+        if (ServiceStartGuard.requestStop(runId)) {
+            reactContext.stopService(currentServiceIntent);
+        }
     }
 
     @SuppressWarnings("unused")
